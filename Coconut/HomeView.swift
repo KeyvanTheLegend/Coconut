@@ -13,10 +13,9 @@ struct HomeView: View {
             NavigationView {
                 ScrollView {
                     VStack{
-                        Text("Hello, world!")
-                            .padding()
                     }
                     .frame(width: geometry.size.width )
+                    .navigationTitle("Home")
                 }
                 .fixFlickering { scrollView in
                     scrollView.background(Color.background)

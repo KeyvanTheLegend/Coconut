@@ -146,12 +146,42 @@ struct HomeView: View {
                                 
                                 
                             }).listRowBackground(Color.background)
+                            HStack(content: {
+                                Image("profile5")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 70, height: 70, alignment: .center)
+                                    .cornerRadius(12)
+                                    .padding([.trailing],16)
+                                    .padding([.bottom,.top],8)
+                                    .clipped()
+                                
+                                VStack (alignment: .leading, spacing: 6, content: {
+                                    Text("Mehdi Falahati")
+                                        .foregroundColor(.white)
+                                        .font(.title3.weight(.medium))
+                                    HStack{
+                                        HStack {
+                                        }
+                                        .frame(width: 180, height:6, alignment: .center)
+                                        .background(Color.primery)
+                                        .cornerRadius(3)
+                                        .padding([.trailing],4)
+
+                                    Text("95% Match")
+                                        .font(.caption)
+                                        .foregroundColor(Color.primery)
+                                    }
+                                })
+                                
+                                
+                            }).listRowBackground(Color.background)
                             
                         }
                         .hasScrollEnabled(false)
                         .padding(0)
                         .background(Color.red)
-                        .frame(width: geometry.size.width, height: 165, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: geometry.size.width, height: 275, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Home")

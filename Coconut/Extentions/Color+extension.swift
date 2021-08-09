@@ -9,6 +9,7 @@ extension Color {
     
     static let background = Color("BackgroundColor")
     static let white = Color("WhiteColor")
+    static let black = Color("BackgroundColor")
     static let primery = Color("PrimeryColor")
     static let secondary = Color("SecondaryColor")
 

@@ -24,6 +24,31 @@ struct HomeView: View {
                                    height: 100)
                         TitleView(title: "Chat requests")
                             .padding([.all],16)
+                        List {
+                            HStack(content: {
+                                Image("profile")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 70, height: 70, alignment: .center)
+                                    .cornerRadius(12)
+                                    .padding([.trailing],16)
+                                    .padding([.bottom,.top],0)
+                                    .clipped()
+                                
+                                VStack (alignment: .leading, spacing: 6, content: {
+                                    Text("Keyvan Yaghoubian")
+                                        .foregroundColor(.white)
+                                        .font(.title3.weight(.medium))
+                                    Text("25 years old")
+                                        .font(.caption)
+                                        .foregroundColor(Color.white)
+                                })
+                                
+                            }).listRowBackground(Color.background)
+                        }
+                        .padding(0)
+                        .background(Color.red)
+                        .frame(width: geometry.size.width, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Home")

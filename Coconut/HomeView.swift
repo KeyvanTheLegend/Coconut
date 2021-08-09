@@ -81,12 +81,6 @@ struct HomeView: View {
                         .padding(0)
                         .background(Color.red)
                         .frame(width: geometry.size.width, height: 165, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        Button(action: {}, label: {
-                            Text("See More")
-                        })
-                        .frame(width: geometry.size.width - 32, height: 60, alignment: .leading)
-                        .background(Color.background)
-                        .cornerRadius(12)
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Home")
@@ -128,6 +122,9 @@ struct TitleView : View {
                 .font(.title2.weight(.medium))
                 .foregroundColor(color)
             Spacer()
+            Button(action: {}, label: {
+                Text("See More")
+            })
         }
         
     }

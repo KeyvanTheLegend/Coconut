@@ -9,9 +9,11 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        NavigationView {
-            Text("Hello, world!")
-                .padding()
+        GeometryReader { geometry in
+            NavigationView {
+                Text("Hello, world!")
+                    .padding()
+            }
         }
     }
 }

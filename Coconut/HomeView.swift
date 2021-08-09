@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    init() {
+        setNavBarAppearence(to: .defualt)
+    }
     var body: some View {
         GeometryReader { geometry in
             NavigationView {

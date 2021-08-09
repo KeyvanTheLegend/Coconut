@@ -24,6 +24,7 @@ struct HomeView: View {
                             .padding([.top],16)
                             .font(.title3.italic().weight(.semibold))
                             .foregroundColor(Color.background)
+                            .shadow(color: .primery, radius: 5, x: 0, y: 0.0)
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Home")

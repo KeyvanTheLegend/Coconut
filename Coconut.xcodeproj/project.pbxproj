@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
-		C0DDC56026C0674700535A06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* ContentView.swift */; };
+		C0DDC56026C0674700535A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* HomeView.swift */; };
 		C0DDC56226C0674900535A06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DDC56126C0674900535A06 /* Assets.xcassets */; };
 		C0DDC56526C0674900535A06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DDC56426C0674900535A06 /* Preview Assets.xcassets */; };
 		C0DDC57026C0674900535A06 /* CoconutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC56F26C0674900535A06 /* CoconutTests.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC55D26C0674700535A06 /* CoconutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutApp.swift; sourceTree = "<group>"; };
-		C0DDC55F26C0674700535A06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C0DDC55F26C0674700535A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C0DDC56126C0674900535A06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0DDC56426C0674900535A06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C0DDC56626C0674900535A06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 			children = (
 				C0E7B33726C171DB00D70C7D /* Extentions */,
 				C0DDC55D26C0674700535A06 /* CoconutApp.swift */,
-				C0DDC55F26C0674700535A06 /* ContentView.swift */,
+				C0DDC55F26C0674700535A06 /* HomeView.swift */,
 				C0DDC56126C0674900535A06 /* Assets.xcassets */,
 				C0DDC56626C0674900535A06 /* Info.plist */,
 				C0DDC56326C0674900535A06 /* Preview Content */,
@@ -270,7 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0DDC56026C0674700535A06 /* ContentView.swift in Sources */,
+				C0DDC56026C0674700535A06 /* HomeView.swift in Sources */,
 				C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
 			);

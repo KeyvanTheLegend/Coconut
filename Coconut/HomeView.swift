@@ -22,6 +22,8 @@ struct HomeView: View {
                             .padding([.top],16)
                             .frame(width: abs(geometry.size.width),
                                    height: 100)
+                        TitleView(title: "Chat requests")
+                            .padding([.all],16)
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Home")

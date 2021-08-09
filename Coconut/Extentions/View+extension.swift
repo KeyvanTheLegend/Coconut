@@ -22,7 +22,7 @@ extension View {
         case .defualt:
             appearence.configureWithTransparentBackground()
             appearence.backgroundEffect = UIBlurEffect(style: .dark)
-            appearence.backgroundColor = UIColor(named: "BackgroundColor")?.withAlphaComponent(0.8)
+            appearence.backgroundColor = UIColor(named: "NavigationBackgroundColor")?.withAlphaComponent(0.8)
             /// Title Text Color
             appearence.titleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
             appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]

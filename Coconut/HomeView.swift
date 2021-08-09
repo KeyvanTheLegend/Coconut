@@ -16,6 +16,10 @@ struct HomeView: View {
                         Text("Hello, world!")
                             .padding()
                     }
+                    .frame(width: geometry.size.width )
+                }
+                .fixFlickering { scrollView in
+                    scrollView.background(Color.background)
                 }
             }
         }

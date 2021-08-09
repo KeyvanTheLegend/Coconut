@@ -16,15 +16,12 @@ struct HomeView: View {
         GeometryReader { geometry in
             NavigationView {
                 ScrollView {
-                    VStack{
-                        Text("START CHAT WITH STRANGER")
-                            .frame(width: abs(geometry.size.width - 32), height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .background(Color.primery)
-                            .cornerRadius(12)
+                    VStack(alignment: .center) {
+                        StartChatWithStrangerView()
+                            .padding([.horizontal],16)
                             .padding([.top],16)
-                            .font(.title3.italic().weight(.semibold))
-                            .foregroundColor(Color.background)
-                            .shadow(color: .primery, radius: 5, x: 0, y: 0.0)
+                            .frame(width: abs(geometry.size.width),
+                                   height: 100)
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Home")
@@ -40,5 +37,33 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+struct StartChatWithStrangerView : View {
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Text("START CHAT WITH STRANGER")
+                .frame(width: abs(geometry.size.width), height: abs(geometry.size.height), alignment: .center)
+                .background(Color.primery)
+                .cornerRadius(12)
+                .font(.title3.italic().weight(.semibold))
+                .foregroundColor(Color.background)
+                .shadow(color: .primery, radius: 5, x: 0, y: 0.0)
+        }
+    }
+}
+struct TitleView : View {
+    var title : String = ""
+    var color : Color = Color.white
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.title2.weight(.medium))
+                .foregroundColor(color)
+            Spacer()
+        }
+        
     }
 }

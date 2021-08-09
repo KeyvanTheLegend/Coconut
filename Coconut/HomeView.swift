@@ -17,8 +17,15 @@ struct HomeView: View {
             NavigationView {
                 ScrollView {
                     VStack{
+                        Text("START CHAT WITH STRANGER")
+                            .frame(width: abs(geometry.size.width - 32), height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .background(Color.primery)
+                            .cornerRadius(12)
+                            .padding([.top],16)
+                            .font(.title3.italic().weight(.semibold))
+                            .foregroundColor(Color.background)
                     }
-                    .frame(width: geometry.size.width )
+                    .frame(width: geometry.size.width)
                     .navigationTitle("Home")
                 }
                 .fixFlickering { scrollView in

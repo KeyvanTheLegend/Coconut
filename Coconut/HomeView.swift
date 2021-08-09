@@ -11,8 +11,12 @@ struct HomeView: View {
     var body: some View {
         GeometryReader { geometry in
             NavigationView {
-                Text("Hello, world!")
-                    .padding()
+                ScrollView {
+                    VStack{
+                        Text("Hello, world!")
+                            .padding()
+                    }
+                }
             }
         }
     }

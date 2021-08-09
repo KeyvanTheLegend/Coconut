@@ -39,9 +39,14 @@ struct HomeView: View {
                                     Text("Keyvan Yaghoubian")
                                         .foregroundColor(.white)
                                         .font(.title3.weight(.medium))
-                                    Text("25 years old")
+                                    HStack{
+                                        Circle()
+                                            .frame(width: 10, height:10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                            .foregroundColor(.primery)
+                                    Text("Online")
                                         .font(.caption)
                                         .foregroundColor(Color.white)
+                                    }
                                 })
                                 
                             }).listRowBackground(Color.background)
@@ -49,6 +54,12 @@ struct HomeView: View {
                         .padding(0)
                         .background(Color.red)
                         .frame(width: geometry.size.width, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        Button(action: {}, label: {
+                            Text("See More")
+                        })
+                        .frame(width: geometry.size.width - 32, height: 60, alignment: .leading)
+                        .background(Color.background)
+                        .cornerRadius(12)
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Home")

@@ -81,6 +81,77 @@ struct HomeView: View {
                         .padding(0)
                         .background(Color.red)
                         .frame(width: geometry.size.width, height: 165, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .hasScrollEnabled(false)
+                        TitleView(title: "Must Meets")
+                            .padding([.leading,.trailing,.top],16)
+                        List {
+                            HStack(content: {
+                                Image("profile3")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 70, height: 70, alignment: .center)
+                                    .cornerRadius(12)
+                                    .padding([.trailing],16)
+                                    .padding([.bottom,.top],0)
+                                    .clipped()
+                                
+                                VStack (alignment: .leading, spacing: 6, content: {
+                                    Text("Fati Ghasemi")
+                                        .foregroundColor(.white)
+                                        .font(.title3.weight(.medium))
+                                    HStack{
+                                        HStack {
+                                        }
+                                        .frame(width: 170, height:6, alignment: .center)
+                                        .background(Color.primery)
+                                        .cornerRadius(3)
+                                        .padding([.trailing],4)
+
+
+                                    Text("85% Match")
+                                        .font(.caption)
+                                        .foregroundColor(Color.primery)
+                                    }
+                                })
+                                
+                                
+                            }).listRowBackground(Color.background)
+                            HStack(content: {
+                                Image("profile4")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 70, height: 70, alignment: .center)
+                                    .cornerRadius(12)
+                                    .padding([.trailing],16)
+                                    .padding([.bottom,.top],8)
+                                    .clipped()
+                                
+                                VStack (alignment: .leading, spacing: 6, content: {
+                                    Text("Sina Rahimzadeh")
+                                        .foregroundColor(.white)
+                                        .font(.title3.weight(.medium))
+                                    HStack{
+                                        HStack {
+                                        }
+                                        .frame(width: 140, height:6, alignment: .center)
+                                        .background(Color.primery)
+                                        .cornerRadius(3)
+                                        .padding([.trailing],4)
+
+                                    Text("55% Match")
+                                        .font(.caption)
+                                        .foregroundColor(Color.primery)
+                                    }
+                                })
+                                
+                                
+                            }).listRowBackground(Color.background)
+                            
+                        }
+                        .hasScrollEnabled(false)
+                        .padding(0)
+                        .background(Color.red)
+                        .frame(width: geometry.size.width, height: 165, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Home")

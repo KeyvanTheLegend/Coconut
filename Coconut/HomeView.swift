@@ -23,7 +23,7 @@ struct HomeView: View {
                             .frame(width: abs(geometry.size.width),
                                    height: 100)
                         TitleView(title: "Chat requests")
-                            .padding([.all],16)
+                            .padding([.leading,.trailing,.top],16)
                         List {
                             HStack(content: {
                                 Image("profile")
@@ -49,11 +49,38 @@ struct HomeView: View {
                                     }
                                 })
                                 
+                                
+                            }).listRowBackground(Color.background)
+                            HStack(content: {
+                                Image("profile2")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 70, height: 70, alignment: .center)
+                                    .cornerRadius(12)
+                                    .padding([.trailing],16)
+                                    .padding([.bottom,.top],8)
+                                    .clipped()
+                                
+                                VStack (alignment: .leading, spacing: 6, content: {
+                                    Text("Tara Asghari")
+                                        .foregroundColor(.white)
+                                        .font(.title3.weight(.medium))
+                                    HStack{
+                                        Circle()
+                                            .frame(width: 10, height:10, alignment: .center)
+                                            .foregroundColor(.gray)
+                                    Text("Offline")
+                                        .font(.caption)
+                                        .foregroundColor(Color.white)
+                                    }
+                                })
+                                
+                                
                             }).listRowBackground(Color.background)
                         }
                         .padding(0)
                         .background(Color.red)
-                        .frame(width: geometry.size.width, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .frame(width: geometry.size.width, height: 165, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         Button(action: {}, label: {
                             Text("See More")
                         })

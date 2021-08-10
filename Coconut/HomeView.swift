@@ -20,12 +20,14 @@ struct HomeView: View {
     
     var body: some View {
         TabView(selection : $selection) {
+            
             Text("HI")
                 .tabItem {
                     Image(systemName: "message.fill")
                     Text("messages")
                 }
                 .tag(0)
+            
             GeometryReader { geometry in
                 NavigationView {
                     ScrollView {
@@ -38,65 +40,30 @@ struct HomeView: View {
                             TitleView(title: "Chat requests")
                                 .padding([.leading,.trailing,.top],16)
                             List {
-                                HStack(content: {
-                                    Image("profile")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 70, height: 70, alignment: .center)
-                                        .cornerRadius(12)
-                                        .padding([.trailing],16)
-                                        .padding([.bottom,.top],0)
-                                        .clipped()
-                                    
-                                    VStack (alignment: .leading, spacing: 6, content: {
-                                        Text("Keyvan Yaghoubian")
-                                            .foregroundColor(.white)
-                                            .font(.title3.weight(.medium))
-                                        HStack{
-                                            Circle()
-                                                .frame(width: 10, height:10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                                                .foregroundColor(.primery)
-                                            Text("Online")
-                                                .font(.caption)
-                                                .foregroundColor(Color.white)
-                                        }
-                                    })
-                                    
-                                    
-                                }).listRowBackground(Color.background)
-                                HStack(content: {
-                                    Image("profile2")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 70, height: 70, alignment: .center)
-                                        .cornerRadius(12)
-                                        .padding([.trailing],16)
-                                        .padding([.bottom,.top],8)
-                                        .clipped()
-                                    
-                                    VStack (alignment: .leading, spacing: 6, content: {
-                                        Text("Tara Asghari")
-                                            .foregroundColor(.white)
-                                            .font(.title3.weight(.medium))
-                                        HStack{
-                                            Circle()
-                                                .frame(width: 10, height:10, alignment: .center)
-                                                .foregroundColor(.gray)
-                                            Text("Offline")
-                                                .font(.caption)
-                                                .foregroundColor(Color.white)
-                                        }
-                                    })
-                                    
-                                    
-                                }).listRowBackground(Color.background)
+                                
+                                ChatRequestContentView(profileImage: "profile", name: "Keyvan Yaghoubian", isOnline: true)
+                                    .frame(width: geometry.size.width,
+                                           height: 70,
+                                           alignment: .leading)
+                                    .listRowBackground(Color.background)
+
+                                ChatRequestContentView(profileImage: "profile2", name: "Tara Asghari", isOnline: true)
+                                    .frame(width: geometry.size.width,
+                                           height: 70 + 16 ,
+                                           alignment: .leading)
+                                    .listRowBackground(Color.background)
+                                
                             }
                             .padding(0)
                             .background(Color.red)
-                            .frame(width: geometry.size.width, height: 165, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: geometry.size.width, height: 180, alignment: .top)
                             .hasScrollEnabled(false)
+                            
                             TitleView(title: "Must Meets")
-                                .padding([.leading,.trailing,.top],16)
+                                .padding([.leading,
+                                          .trailing,
+                                          .top],16)
+                            
                             List {
                                 
                                 MustMeetsContentView(profileImage: "profile3", name: "Fati Ghasemi", matchPercentage: CGFloat(0.85))
@@ -121,10 +88,12 @@ struct HomeView: View {
                             .hasScrollEnabled(false)
                             .padding(0)
                             .background(Color.red)
-                            .frame(width: geometry.size.width, height: 275, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: geometry.size.width, height: 290, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            
                         }
                         .frame(width: geometry.size.width)
                         .navigationTitle("Home")
+                        
                     }
                     .fixFlickering { scrollView in
                         scrollView.background(Color.background)
@@ -137,6 +106,7 @@ struct HomeView: View {
                 Text("Home")
             }
             .tag(1)
+            
             Text("setting")
                 .tabItem {
                     Image(systemName: "gearshape.fill")

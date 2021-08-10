@@ -99,19 +99,19 @@ struct HomeView: View {
                                 .padding([.leading,.trailing,.top],16)
                             List {
                                 
-                                MustMeetsContentView()
+                                MustMeetsContentView(profileImage: "profile3", name: "Fati Ghasemi", matchPercentage: CGFloat(0.85))
                                     .listRowBackground(Color.background)
                                     .frame(width: geometry.size.width,
                                            height: 70 + 16,
                                            alignment: .leading)
                                 
-                                MustMeetsContentView()
+                                MustMeetsContentView(profileImage: "profile4", name: "Sina Rahim", matchPercentage: CGFloat(0.7))
                                     .listRowBackground(Color.background)
                                     .frame(width: geometry.size.width,
                                            height: 70 + 16,
                                            alignment: .leading)
                                 
-                                MustMeetsContentView()
+                                MustMeetsContentView(profileImage: "profile5", name: "Mehdi Falahati", matchPercentage: CGFloat(1))
                                     .listRowBackground(Color.background)
                                     .frame(width: geometry.size.width,
                                            height: 70 + 16,
@@ -181,43 +181,5 @@ struct TitleView : View {
             })
         }
         
-    }
-}
-struct MustMeetsContentView : View {
-    
-    var body: some View {
-        GeometryReader { geometry in
-            HStack(content: {
-                Image("profile3")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 70, height: 70, alignment: .center)
-                    .cornerRadius(12)
-                    .padding([.trailing],16)
-                    .padding([.bottom,.top],0)
-                    .clipped()
-                
-                VStack (alignment: .leading, spacing: 6, content: {
-                    
-                    Text("Fati Ghasemi")
-                        .foregroundColor(.white)
-                        .font(.title3.weight(.medium))
-                    
-                    HStack{
-                        HStack{}
-                            .frame(width: 170, height:6, alignment: .center)
-                            .background(Color.primery)
-                            .cornerRadius(3)
-                            .padding([.trailing],4)
-                        
-                        Text("85% Match")
-                            .font(.caption)
-                            .foregroundColor(Color.primery)
-                        
-                    }
-                })
-                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
-            })
-        }
     }
 }

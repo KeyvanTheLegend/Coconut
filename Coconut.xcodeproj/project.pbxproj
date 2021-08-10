@@ -16,6 +16,7 @@
 		C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33526C1714C00D70C7D /* Color+extension.swift */; };
 		C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */; };
 		C0E7B33B26C178F200D70C7D /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33A26C178F200D70C7D /* View+extension.swift */; };
+		C0F08BF226C2E074003F7236 /* MustMeetsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */; };
 		C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEFDAC26C1A3E9008F362B /* List+extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		C0E7B33526C1714C00D70C7D /* Color+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33A26C178F200D70C7D /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
+		C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MustMeetsContentView.swift; sourceTree = "<group>"; };
 		C0FEFDAC26C1A3E9008F362B /* List+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +156,7 @@
 		C0F08BF026C2D4D4003F7236 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
 				C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */,
 				C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */,
+				C0F08BF226C2E074003F7236 /* MustMeetsContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,8 +15,17 @@ struct HomeView: View {
         UITabBar.appearance().barTintColor = UIColor(named: "BackgroundColor")
         UITabBar.appearance().backgroundColor = UIColor(named: "BackgroundColor")
     }
+    
+    @State private var selection = 1
+    
     var body: some View {
-        TabView {
+        TabView(selection : $selection) {
+            Text("HI")
+                .tabItem {
+                    Image(systemName: "message.fill")
+                    Text("messages")
+                }
+                .tag(0)
             GeometryReader { geometry in
                 NavigationView {
                     ScrollView {
@@ -200,6 +209,13 @@ struct HomeView: View {
                 Image(systemName: "house.fill")
                 Text("Home")
             }
+            .tag(1)
+            Text("setting")
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text("setting")
+                }
+                .tag(2)
         }
     }
 }

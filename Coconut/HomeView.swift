@@ -21,7 +21,7 @@ struct HomeView: View {
                             .padding([.horizontal],16)
                             .padding([.top],16)
                             .frame(width: abs(geometry.size.width),
-                                   height: 100)
+                                   height: 90)
                         TitleView(title: "Chat requests")
                             .padding([.leading,.trailing,.top],16)
                         List {

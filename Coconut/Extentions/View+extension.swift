@@ -12,6 +12,9 @@ enum NavigationBarStyle {
     case light
     case dark
 }
+enum TabBarStyle {
+    case defualt
+}
 
 extension View {
     
@@ -39,6 +42,17 @@ extension View {
         UINavigationBar.appearance().scrollEdgeAppearance = appearence
         UINavigationBar.appearance().compactAppearance = appearence
         UINavigationBar.appearance().isTranslucent = true
+    }
+    func setTabBarAppearence(to style : TabBarStyle) {
+        switch style {
+        case .defualt:
+            UITabBar.appearance().backgroundImage = UIImage()
+            UITabBar.appearance().barTintColor = UIColor(named: "BackgroundColor")
+            UITabBar.appearance().backgroundColor = UIColor(named: "BackgroundColor")
+            break
+        default:
+            break
+        }
     }
     
 }

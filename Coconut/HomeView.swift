@@ -11,9 +11,7 @@ struct HomeView: View {
     
     init() {
         setNavBarAppearence(to: .defualt)
-        UITabBar.appearance().backgroundImage = UIImage()
-        UITabBar.appearance().barTintColor = UIColor(named: "BackgroundColor")
-        UITabBar.appearance().backgroundColor = UIColor(named: "BackgroundColor")
+        setTabBarAppearence(to: .defualt)
     }
     
     @State private var selection = 1

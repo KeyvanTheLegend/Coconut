@@ -103,6 +103,7 @@
 		C0DDC55C26C0674700535A06 /* Coconut */ = {
 			isa = PBXGroup;
 			children = (
+				C0F08BF026C2D4D4003F7236 /* View */,
 				C0E7B33726C171DB00D70C7D /* Extentions */,
 				C0DDC55D26C0674700535A06 /* CoconutApp.swift */,
 				C0DDC55F26C0674700535A06 /* HomeView.swift */,
@@ -148,6 +149,13 @@
 				C0FEFDAC26C1A3E9008F362B /* List+extension.swift */,
 			);
 			path = Extentions;
+			sourceTree = "<group>";
+		};
+		C0F08BF026C2D4D4003F7236 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

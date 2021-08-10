@@ -41,13 +41,17 @@ struct HomeView: View {
                                 .padding([.leading,.trailing,.top],16)
                             List {
                                 
-                                ChatRequestContentView(profileImage: "profile", name: "Keyvan Yaghoubian", isOnline: true)
+                                ChatRequestContentView(profileImage: "profile",
+                                                       name: "Keyvan Yaghoubian",
+                                                       isOnline: true)
                                     .frame(width: geometry.size.width,
                                            height: 70,
                                            alignment: .leading)
                                     .listRowBackground(Color.background)
 
-                                ChatRequestContentView(profileImage: "profile2", name: "Tara Asghari", isOnline: true)
+                                ChatRequestContentView(profileImage: "profile2",
+                                                       name: "Tara Asghari",
+                                                       isOnline: true)
                                     .frame(width: geometry.size.width,
                                            height: 70 + 16 ,
                                            alignment: .leading)
@@ -66,19 +70,25 @@ struct HomeView: View {
                             
                             List {
                                 
-                                MustMeetsContentView(profileImage: "profile3", name: "Fati Ghasemi", matchPercentage: CGFloat(0.85))
+                                MustMeetsContentView(profileImage: "profile3",
+                                                     name: "Fati Ghasemi",
+                                                     matchPercentage: CGFloat(0.85))
                                     .listRowBackground(Color.background)
                                     .frame(width: geometry.size.width,
                                            height: 70 + 16,
                                            alignment: .leading)
                                 
-                                MustMeetsContentView(profileImage: "profile4", name: "Sina Rahim", matchPercentage: CGFloat(0.7))
+                                MustMeetsContentView(profileImage: "profile4",
+                                                     name: "Sina Rahim",
+                                                     matchPercentage: CGFloat(0.7))
                                     .listRowBackground(Color.background)
                                     .frame(width: geometry.size.width,
                                            height: 70 + 16,
                                            alignment: .leading)
                                 
-                                MustMeetsContentView(profileImage: "profile5", name: "Mehdi Falahati", matchPercentage: CGFloat(1))
+                                MustMeetsContentView(profileImage: "profile5",
+                                                     name: "Mehdi Falahati",
+                                                     matchPercentage: CGFloat(1))
                                     .listRowBackground(Color.background)
                                     .frame(width: geometry.size.width,
                                            height: 70 + 16,

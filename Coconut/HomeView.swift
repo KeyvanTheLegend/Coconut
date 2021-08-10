@@ -236,7 +236,7 @@ struct StartChatWithStrangerView : View {
                 .cornerRadius(12)
                 .font(.title3.italic().weight(.semibold))
                 .foregroundColor(Color.background)
-                .shadow(color: .primery, radius: 5, x: 0, y: 0.0)
+                .shadow(color: .primery, radius: 2, x: 0, y: 0.0)
         }
     }
 }

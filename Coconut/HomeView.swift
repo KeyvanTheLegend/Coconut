@@ -43,7 +43,7 @@ struct HomeView: View {
                                                        name: "Keyvan Yaghoubian",
                                                        isOnline: true)
                                     .frame(width: geometry.size.width,
-                                           height: 70,
+                                           height: 70 + 16,
                                            alignment: .leading)
                                     .listRowBackground(Color.background)
 

@@ -49,7 +49,7 @@ struct HomeView: View {
 
                                 ChatRequestContentView(profileImage: "profile2",
                                                        name: "Tara Asghari",
-                                                       isOnline: true)
+                                                       isOnline: false)
                                     .frame(width: geometry.size.width,
                                            height: 70 + 16 ,
                                            alignment: .leading)

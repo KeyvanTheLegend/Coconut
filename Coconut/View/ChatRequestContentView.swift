@@ -40,9 +40,9 @@ struct ChatRequestContentView : View {
                         
                         Circle()
                             .frame(width: 10, height:10, alignment: .center)
-                            .foregroundColor(.primery)
+                            .foregroundColor(isOnline ? .primery : .gray)
                         
-                        Text("Online")
+                        Text(isOnline ? "Online" : "Offline")
                             .font(.caption)
                             .foregroundColor(Color.white)
                     }

@@ -44,7 +44,7 @@ struct ChatRequestContentView : View {
                         
                         Text(isOnline ? "Online" : "Offline")
                             .font(.caption)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color.gray)
                     }
                 })
                 .frame(width: geometry.size.width,

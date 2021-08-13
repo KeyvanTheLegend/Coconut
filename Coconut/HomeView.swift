@@ -19,17 +19,17 @@ struct HomeView: View {
     var body: some View {
         TabView(selection : $selection) {
             
-            Text("HI")
+            MessageView()
                 .tabItem {
                     Image(systemName: "message.fill")
-                    Text("messages")
+                    Text("chat")
                 }
                 .tag(0)
             
             GeometryReader { geometry in
                 NavigationView {
                     ScrollView {
-                        VStack(alignment: .center) {
+                        VStack(alignment: .center , spacing: 4) {
                             StartChatWithStrangerView()
                                 .padding([.horizontal],16)
                                 .padding([.top],16)
@@ -58,7 +58,9 @@ struct HomeView: View {
                             }
                             .padding(0)
                             .background(Color.red)
-                            .frame(width: geometry.size.width, height: 180, alignment: .top)
+                            .frame(width: geometry.size.width,
+                                   height: 180,
+                                   alignment: .top)
                             .hasScrollEnabled(false)
                             
                             TitleView(title: "Must Meets")

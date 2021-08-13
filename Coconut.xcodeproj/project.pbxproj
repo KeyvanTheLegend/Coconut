@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0A77C8B26C43EE9006B364D /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A77C8A26C43EE9006B364D /* MessageView.swift */; };
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
 		C0DDC56026C0674700535A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* HomeView.swift */; };
 		C0DDC56226C0674900535A06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DDC56126C0674900535A06 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C0A77C8A26C43EE9006B364D /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC55D26C0674700535A06 /* CoconutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutApp.swift; sourceTree = "<group>"; };
 		C0DDC55F26C0674700535A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				C0E7B33726C171DB00D70C7D /* Extentions */,
 				C0DDC55D26C0674700535A06 /* CoconutApp.swift */,
 				C0DDC55F26C0674700535A06 /* HomeView.swift */,
+				C0A77C8A26C43EE9006B364D /* MessageView.swift */,
 				C0DDC56126C0674900535A06 /* Assets.xcassets */,
 				C0DDC56626C0674900535A06 /* Info.plist */,
 				C0DDC56326C0674900535A06 /* Preview Content */,
@@ -296,6 +299,7 @@
 				C0E7B33B26C178F200D70C7D /* View+extension.swift in Sources */,
 				C0DDC56026C0674700535A06 /* HomeView.swift in Sources */,
 				C0F08BF426C2E107003F7236 /* ChatRequestContentView.swift in Sources */,
+				C0A77C8B26C43EE9006B364D /* MessageView.swift in Sources */,
 				C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
 				C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */,

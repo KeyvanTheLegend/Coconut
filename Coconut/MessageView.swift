@@ -29,10 +29,7 @@ struct MessageView: View {
                                 .listRowBackground(Color.background)
                         }
                         .frame(width: geometry.size.width, height: 132, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        //                        Text("")
-                        //                            .padding([.leading,.top],0)
-                        //                            .foregroundColor(Color.white)
-                        //                            .font(.title3.bold())
+
                         List{
                             if !isClosed {
                                 withAnimation {
@@ -249,128 +246,6 @@ struct MissedMessageRequestInMessagesListContentView : View {
                        height: geometry.size.height,
                        alignment: .leading)
                 
-            })
-        }
-    }
-}
-
-struct LiveChatSessionContentView : View {
-    @State private var scaleValue : CGFloat = 1
-    
-    var profileImage : String
-    var name : String
-    var message : String
-    var messageNumber : Int
-    
-    var body: some View {
-        
-        GeometryReader { geometry in
-            VStack(alignment: .leading, spacing: 16, content: {
-                HStack(alignment : .top ,content: {
-                    
-                    Image(profileImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 70,
-                               height: 70,
-                               alignment: .center)
-                        .cornerRadius(12)
-                        .padding([.trailing],16)
-                        .padding([.bottom,.top],0)
-                        .clipped()
-                    
-                    VStack (alignment: .leading, spacing: 8, content: {
-                        
-                        Text(name)
-                            .foregroundColor(.white)
-                            .font(.title3.weight(.medium))
-                        Text(message)
-                            .foregroundColor(.gray)
-                            .font(.caption)
-                            .lineLimit(2)
-                        Spacer()
-                        
-                    })
-                    .frame(width: abs(geometry.size.width - (70 + 60 + 64)),
-                           height: geometry.size.height,
-                           alignment: .leading)
-                    ZStack{
-                        
-                        Rectangle()
-                            .foregroundColor(.primery)
-                            .frame(width: 50, height:30, alignment: .center)
-                            .cornerRadius(8)
-                        
-                        Text("LIVE")
-                            .font(.caption.weight(.semibold))
-                            .foregroundColor(Color.black)
-                    }
-                    .frame(width: 60, height:80, alignment: .center)
-                    .shadow(color: .primery, radius: 2, x: 0, y: 0.0)
-                    .scaleEffect(scaleValue)
-                    .animation(
-                        Animation.easeIn.delay(0)
-                            .repeatForever(autoreverses: true)
-                    )
-                    .onAppear(perform: {
-                        scaleValue = 0.9
-                    })
-                })
-                .frame(width: geometry.size.width - 32, height:70, alignment: .top)
-                
-                HStack(alignment : .center , spacing : 8){
-                    HStack {
-                        Image(systemName: "clock")
-                            .resizable()
-                            .frame(width: 20, height:20, alignment: .top)
-                            .foregroundColor(Color.primery)
-                        Text("00:14")
-                            .font(.body)
-                            .foregroundColor(.whiteColor)
-                    }
-                    
-                    .frame(maxWidth: .infinity , alignment: .leading)
-                    Divider()
-                    HStack {
-                        Image(systemName: "message")
-                            .resizable()
-                            .frame(width: 20, height:20, alignment: .top)
-                            .foregroundColor(Color.primery)
-                        Text("15992")
-                            .font(.body)
-                            .foregroundColor(.whiteColor)
-                    }
-                    .frame(maxWidth: .infinity , alignment: .center)
-                    Divider()
-                    HStack {
-                        Image(systemName: "smiley")                        .resizable()
-                            .frame(width: 20, height:20, alignment: .top)
-                            .foregroundColor(Color.primery)
-                        Text("85 times")
-                            .font(.body)
-                            .foregroundColor(.whiteColor)
-                    }
-                    .frame(maxWidth: .infinity , alignment: .trailing)
-                    //
-                    //                    Image(systemName: "smiley")
-                    //                        .resizable()
-                    //                        .frame(width: 20, height:20, alignment: .top)
-                    //                        .foregroundColor(Color.primery)
-                    //                    Text("75 times")
-                    //                        .font(.caption)
-                    //                        .foregroundColor(.gray)
-                    //                        .frame(maxWidth: .infinity , alignment: .leading)
-                    //
-                    //                    Image(systemName: "message")
-                    //                        .frame(width: 20, height:20, alignment: .top)
-                    //                        .foregroundColor(Color.primery)
-                    //                    Text("1000 msg")
-                    //                        .font(.caption)
-                    //                        .foregroundColor(.gray)
-                    //                        .frame(maxWidth: .infinity , alignment: .leading)
-                    
-                }
-                .frame(width: geometry.size.width - 32, height: 28, alignment: .leading)
             })
         }
     }

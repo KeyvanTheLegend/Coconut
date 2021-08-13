@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */; };
+		C09F0D2826C6C5E8006BC57B /* LiveChatSessionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2726C6C5E8006BC57B /* LiveChatSessionContentView.swift */; };
+		C09F0D2A26C6C8D7006BC57B /* PersonImageNameStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2926C6C8D7006BC57B /* PersonImageNameStatusView.swift */; };
 		C0A77C8B26C43EE9006B364D /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A77C8A26C43EE9006B364D /* MessageView.swift */; };
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
 		C0DDC56026C0674700535A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* HomeView.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryView.swift; sourceTree = "<group>"; };
+		C09F0D2726C6C5E8006BC57B /* LiveChatSessionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionContentView.swift; sourceTree = "<group>"; };
+		C09F0D2926C6C8D7006BC57B /* PersonImageNameStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameStatusView.swift; sourceTree = "<group>"; };
 		C0A77C8A26C43EE9006B364D /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC55D26C0674700535A06 /* CoconutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutApp.swift; sourceTree = "<group>"; };
@@ -86,6 +92,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C0198A2826C6D22400AF1FC8 /*  Chat Tab */ = {
+			isa = PBXGroup;
+			children = (
+				C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */,
+				C09F0D2726C6C5E8006BC57B /* LiveChatSessionContentView.swift */,
+			);
+			path = " Chat Tab";
+			sourceTree = "<group>";
+		};
+		C0198A2926C6D23C00AF1FC8 /* Home Tab */ = {
+			isa = PBXGroup;
+			children = (
+				C0F08BF326C2E107003F7236 /* ChatRequestContentView.swift */,
+				C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */,
+			);
+			path = "Home Tab";
+			sourceTree = "<group>";
+		};
 		C0DDC55126C0674700535A06 = {
 			isa = PBXGroup;
 			children = (
@@ -161,8 +185,9 @@
 		C0F08BF026C2D4D4003F7236 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C0F08BF326C2E107003F7236 /* ChatRequestContentView.swift */,
-				C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */,
+				C0198A2926C6D23C00AF1FC8 /* Home Tab */,
+				C0198A2826C6D22400AF1FC8 /*  Chat Tab */,
+				C09F0D2926C6C8D7006BC57B /* PersonImageNameStatusView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,9 +326,12 @@
 				C0F08BF426C2E107003F7236 /* ChatRequestContentView.swift in Sources */,
 				C0A77C8B26C43EE9006B364D /* MessageView.swift in Sources */,
 				C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */,
+				C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
+				C09F0D2A26C6C8D7006BC57B /* PersonImageNameStatusView.swift in Sources */,
 				C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */,
 				C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */,
+				C09F0D2826C6C5E8006BC57B /* LiveChatSessionContentView.swift in Sources */,
 				C0F08BF226C2E074003F7236 /* MustMeetsContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

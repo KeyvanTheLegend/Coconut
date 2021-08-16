@@ -150,9 +150,17 @@
 		C0850D7626CB2588003E782E /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				C0850D7726CB25B8003E782E /* PersonInfo.swift */,
+				C0850D7926CB270F003E782E /* Model */,
 			);
 			path = Global;
+			sourceTree = "<group>";
+		};
+		C0850D7926CB270F003E782E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0850D7726CB25B8003E782E /* PersonInfo.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C0DDC55126C0674700535A06 = {

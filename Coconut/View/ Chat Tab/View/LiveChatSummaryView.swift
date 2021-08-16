@@ -32,7 +32,7 @@ struct LiveChatSummaryView : View {
                     .resizable()
                     .frame(width: 20, height:20, alignment: .top)
                     .foregroundColor(Color.primery)
-                Text("\(viewModel.duration)")
+                Text(viewModel.messagesCountText)
                     .font(.body)
                     .foregroundColor(.whiteColor)
             }

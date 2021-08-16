@@ -28,7 +28,7 @@ class LiveChatSessionViewModel : ObservableObject  {
     }
 
     func fetch() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
            let model = LiveChatSessionModel(name: "Keyv", lastMessage: "JOON Mame hato bokhoram", startTime: 10)
             self.liveChatSessionModel = model
             self.summaryViewModel.setStartTime(startTime: model.startTime)

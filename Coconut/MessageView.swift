@@ -72,7 +72,7 @@ struct MessageView: View {
                     scrollView.background(Color.background)
                 }
                 .onAppear(perform: {
-                    DispatchQueue.main.asyncAfter(deadline: .now() ) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
                             isClosed = false
                             listShoudAnimate = true

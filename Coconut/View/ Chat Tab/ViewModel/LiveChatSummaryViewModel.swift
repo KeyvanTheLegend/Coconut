@@ -12,7 +12,7 @@ class LiveChatSummaryViewModel : ObservableObject{
     /// - Parameter duration : Chat duration text
     @Published var duration : String = ""
     /// - Parameter messagesCount : How many messages sent or received since the beginning of the chat
-    @Published var messagesCount : Int = 0
+    @Published var messagesCountText : String = ""
     /// - Parameter smilesCount : How many smiles sent or received since the beginning of the chat
     @Published var smilesCount : Int = 0
     private var startTime = 0
@@ -24,12 +24,20 @@ class LiveChatSummaryViewModel : ObservableObject{
         let sec = durationInSeconds%60
         return "\(String(format: "%02d", min)):\(String(format: "%02d", sec))"
     }
+    private var messagesCount : Int = 0
+    private var messagesCountFormattedText : String {
+        return "\(messagesCount)"
+    }
     
     init(){
         duration = durationFormattedText
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ [weak self] timer in
             self?.durationInSeconds += 1
             self?.duration = self?.durationFormattedText ?? ""
+        }
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true){ [weak self] timer in
+            self?.messagesCount += 1
+            self?.messagesCountText = self?.messagesCountFormattedText ?? ""
         }
         fetchPrivateData()
     }

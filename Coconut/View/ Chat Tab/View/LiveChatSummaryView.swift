@@ -2,13 +2,15 @@
 //  LiveChatSummaryView.swift
 //  Coconut
 //
-//  Created by sh on 8/13/21.
+//  Created by Keyvan Yaghoubian on 8/13/21.
 //
 
 import SwiftUI
 
 struct LiveChatSummaryView : View {
-    
+    /// - Dependency Injection
+    @ObservedObject var viewModel: LiveChatSummaryViewModel
+
     var body: some View {
         
         HStack(alignment : .center , spacing : 8){
@@ -18,7 +20,7 @@ struct LiveChatSummaryView : View {
                     .resizable()
                     .frame(width: 20, height:20, alignment: .top)
                     .foregroundColor(Color.primery)
-                Text("00:14")
+                Text(viewModel.duration)
                     .font(.body)
                     .foregroundColor(.whiteColor)
             }
@@ -30,21 +32,22 @@ struct LiveChatSummaryView : View {
                     .resizable()
                     .frame(width: 20, height:20, alignment: .top)
                     .foregroundColor(Color.primery)
-                Text("15992")
+                Text("\(viewModel.duration)")
                     .font(.body)
                     .foregroundColor(.whiteColor)
             }
             .frame(maxWidth: .infinity , alignment: .center)
-            Divider()
+            Divider()	
             HStack {
                 Image(systemName: "smiley")                        .resizable()
                     .frame(width: 20, height:20, alignment: .top)
                     .foregroundColor(Color.primery)
-                Text("85 times")
+                Text("\(viewModel.smilesCount)")
                     .font(.body)
                     .foregroundColor(.whiteColor)
             }
             .frame(maxWidth: .infinity , alignment: .trailing)
+
         }
     }
 }

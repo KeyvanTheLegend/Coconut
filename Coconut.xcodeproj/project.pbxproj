@@ -8,9 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */; };
+		C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */; };
+		C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */; };
+		C024F8E226C8408B0054A8B3 /* LiveChatSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */; };
 		C09F0D2826C6C5E8006BC57B /* LiveChatSessionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2726C6C5E8006BC57B /* LiveChatSessionContentView.swift */; };
 		C09F0D2A26C6C8D7006BC57B /* PersonImageNameStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2926C6C8D7006BC57B /* PersonImageNameStatusView.swift */; };
 		C0A77C8B26C43EE9006B364D /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A77C8A26C43EE9006B364D /* MessageView.swift */; };
+		C0BF24D526CAC08000CFCC35 /* ChatTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */; };
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
 		C0DDC56026C0674700535A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* HomeView.swift */; };
 		C0DDC56226C0674900535A06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DDC56126C0674900535A06 /* Assets.xcassets */; };
@@ -20,6 +24,8 @@
 		C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33526C1714C00D70C7D /* Color+extension.swift */; };
 		C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */; };
 		C0E7B33B26C178F200D70C7D /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33A26C178F200D70C7D /* View+extension.swift */; };
+		C0E90CCE26CAA2680074734C /* LiveChatSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E90CCD26CAA2680074734C /* LiveChatSessionModel.swift */; };
+		C0E90CD026CAACD40074734C /* PersonImageNameStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */; };
 		C0F08BF226C2E074003F7236 /* MustMeetsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */; };
 		C0F08BF426C2E107003F7236 /* ChatRequestContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F08BF326C2E107003F7236 /* ChatRequestContentView.swift */; };
 		C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEFDAC26C1A3E9008F362B /* List+extension.swift */; };
@@ -44,9 +50,13 @@
 
 /* Begin PBXFileReference section */
 		C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryView.swift; sourceTree = "<group>"; };
+		C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryViewModel.swift; sourceTree = "<group>"; };
+		C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryModel.swift; sourceTree = "<group>"; };
+		C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionViewModel.swift; sourceTree = "<group>"; };
 		C09F0D2726C6C5E8006BC57B /* LiveChatSessionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionContentView.swift; sourceTree = "<group>"; };
 		C09F0D2926C6C8D7006BC57B /* PersonImageNameStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameStatusView.swift; sourceTree = "<group>"; };
 		C0A77C8A26C43EE9006B364D /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabViewModel.swift; sourceTree = "<group>"; };
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC55D26C0674700535A06 /* CoconutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutApp.swift; sourceTree = "<group>"; };
 		C0DDC55F26C0674700535A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -62,6 +72,8 @@
 		C0E7B33526C1714C00D70C7D /* Color+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33A26C178F200D70C7D /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
+		C0E90CCD26CAA2680074734C /* LiveChatSessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionModel.swift; sourceTree = "<group>"; };
+		C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameStatusViewModel.swift; sourceTree = "<group>"; };
 		C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MustMeetsContentView.swift; sourceTree = "<group>"; };
 		C0F08BF326C2E107003F7236 /* ChatRequestContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestContentView.swift; sourceTree = "<group>"; };
 		C0FEFDAC26C1A3E9008F362B /* List+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+extension.swift"; sourceTree = "<group>"; };
@@ -95,8 +107,9 @@
 		C0198A2826C6D22400AF1FC8 /*  Chat Tab */ = {
 			isa = PBXGroup;
 			children = (
-				C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */,
-				C09F0D2726C6C5E8006BC57B /* LiveChatSessionContentView.swift */,
+				C0E90CCC26CAA2220074734C /* Model */,
+				C0E90CCB26CAA21B0074734C /* ViewModel */,
+				C0E90CCA26CAA2140074734C /* View */,
 			);
 			path = " Chat Tab";
 			sourceTree = "<group>";
@@ -136,8 +149,9 @@
 				C0F08BF026C2D4D4003F7236 /* View */,
 				C0E7B33726C171DB00D70C7D /* Extentions */,
 				C0DDC55D26C0674700535A06 /* CoconutApp.swift */,
-				C0DDC55F26C0674700535A06 /* HomeView.swift */,
 				C0A77C8A26C43EE9006B364D /* MessageView.swift */,
+				C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */,
+				C0DDC55F26C0674700535A06 /* HomeView.swift */,
 				C0DDC56126C0674900535A06 /* Assets.xcassets */,
 				C0DDC56626C0674900535A06 /* Info.plist */,
 				C0DDC56326C0674900535A06 /* Preview Content */,
@@ -182,12 +196,40 @@
 			path = Extentions;
 			sourceTree = "<group>";
 		};
+		C0E90CCA26CAA2140074734C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C09F0D2926C6C8D7006BC57B /* PersonImageNameStatusView.swift */,
+				C09F0D2726C6C5E8006BC57B /* LiveChatSessionContentView.swift */,
+				C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C0E90CCB26CAA21B0074734C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */,
+				C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */,
+				C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C0E90CCC26CAA2220074734C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0E90CCD26CAA2680074734C /* LiveChatSessionModel.swift */,
+				C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C0F08BF026C2D4D4003F7236 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				C0198A2926C6D23C00AF1FC8 /* Home Tab */,
 				C0198A2826C6D22400AF1FC8 /*  Chat Tab */,
-				C09F0D2926C6C8D7006BC57B /* PersonImageNameStatusView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,14 +364,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0E7B33B26C178F200D70C7D /* View+extension.swift in Sources */,
+				C024F8E226C8408B0054A8B3 /* LiveChatSessionViewModel.swift in Sources */,
 				C0DDC56026C0674700535A06 /* HomeView.swift in Sources */,
 				C0F08BF426C2E107003F7236 /* ChatRequestContentView.swift in Sources */,
+				C0E90CCE26CAA2680074734C /* LiveChatSessionModel.swift in Sources */,
+				C0E90CD026CAACD40074734C /* PersonImageNameStatusViewModel.swift in Sources */,
+				C0BF24D526CAC08000CFCC35 /* ChatTabViewModel.swift in Sources */,
 				C0A77C8B26C43EE9006B364D /* MessageView.swift in Sources */,
 				C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */,
 				C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
 				C09F0D2A26C6C8D7006BC57B /* PersonImageNameStatusView.swift in Sources */,
 				C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */,
+				C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */,
+				C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */,
 				C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */,
 				C09F0D2826C6C5E8006BC57B /* LiveChatSessionContentView.swift in Sources */,
 				C0F08BF226C2E074003F7236 /* MustMeetsContentView.swift in Sources */,

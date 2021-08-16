@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct PersonImageNameStatusView: View {
+    /// - Dependency Injection
+    @ObservedObject var viewModel: PersonImageNameStatusViewModel
+    
     var body: some View {
         HStack(alignment : .top ,content: {
-            Image("profile2")
+            Image(viewModel.profileImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 70,
                        height: 70,
                        alignment: .center)
+                .background(Color.primery.opacity(0.1))
                 .cornerRadius(12)
                 .padding([.trailing],16)
                 .padding([.bottom,.top],0)
@@ -23,10 +27,10 @@ struct PersonImageNameStatusView: View {
             
             VStack (alignment: .leading, spacing: 8, content: {
                 
-                Text("name")
+                Text(viewModel.name)
                     .foregroundColor(.white)
                     .font(.title3.weight(.medium))
-                Text("message")
+                Text(viewModel.statusMessage)
                     .foregroundColor(.gray)
                     .font(.caption)
                     .lineLimit(2)

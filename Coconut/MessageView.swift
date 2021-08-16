@@ -12,8 +12,9 @@ struct MessageView: View {
     init(){
         UITableView.appearance().backgroundColor = UIColor(named: "BackgroundColor")
     }
-    
+    @StateObject var viewModel = ChatTabViewModel()
     @State var isClosed :Bool = true
+    @State var hasLiveChatSession = false
     @State var listShoudAnimate : Bool = false
     
     var body: some View {
@@ -24,13 +25,17 @@ struct MessageView: View {
                     
                     VStack(alignment: .leading , spacing: 0){
                         List{
-                            LiveChatSessionContentView(profileImage: "profile2", name: "Tara Asghari", message: "Hi Keyvan, I want to talk with you 👅", messageNumber: 12)
-                                .frame(width: geometry.size.width, height: 120, alignment: .center)
-                                .listRowBackground(Color.background)
-                        }
-                        .frame(width: geometry.size.width, height: 132, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+       
+                            if hasLiveChatSession{
+                                withAnimation(Animation.easeInOut(duration: 10)) {
+                                    LiveChatSessionContentView(viewModel: viewModel.liveChatSessionViewModel)
+                                        .frame(width: geometry.size.width, height: 120, alignment: .center)
+                                        .listRowBackground(Color.background)
+                                }
 
-                        List{
+                                
+                            }
+                            
                             if !isClosed {
                                 withAnimation {
                                     MessageInMessagesListContentView(profileImage: "profile3", name: "Faati Ghasemi" , message: "Keyvan Tara karet dare" , messageNumber: 10, isClosed: $isClosed)
@@ -51,7 +56,14 @@ struct MessageView: View {
                                 .frame(width: geometry.size.width, height: 88, alignment: .center)
                             
                         }
-                        .frame(width: geometry.size.width, height: 400 , alignment: .top)
+                        .frame(width: geometry.size.width, height: 800 , alignment: .top)
+                        .onChange(of: viewModel.hasLiveSesssion) { newValue in
+                            withAnimation {
+                                print("HI NEW VALUE \(newValue)")
+                                hasLiveChatSession = newValue
+
+                            }
+                        }
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Chat")
@@ -60,7 +72,7 @@ struct MessageView: View {
                     scrollView.background(Color.background)
                 }
                 .onAppear(perform: {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() ) {
                         withAnimation {
                             isClosed = false
                             listShoudAnimate = true
@@ -93,7 +105,7 @@ struct MessageInMessagesListContentView : View {
     var body: some View {
         
         GeometryReader { geometry in
-            
+
             VStack(alignment: .leading, spacing: 8, content: {
                 
                 HStack(content: {

@@ -19,7 +19,7 @@ struct HomeView: View {
     var body: some View {
         TabView(selection : $selection) {
             
-            MessageView()
+            ChatTabView()
                 .tabItem {
                     Image(systemName: "message.fill")
                     Text("chat")

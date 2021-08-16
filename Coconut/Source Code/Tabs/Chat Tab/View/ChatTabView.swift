@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MessageView: View {
+struct ChatTabView: View {
     
     init(){
         UITableView.appearance().backgroundColor = UIColor(named: "BackgroundColor")
@@ -28,7 +28,7 @@ struct MessageView: View {
        
                             if hasLiveChatSession{
                                 withAnimation(Animation.easeInOut(duration: 10)) {
-                                    LiveChatSessionContentView(viewModel: viewModel.liveChatSessionViewModel)
+                                    LiveChatSessionView(viewModel: viewModel.liveChatSessionViewModel)
                                         .frame(width: geometry.size.width, height: 120, alignment: .center)
                                         .listRowBackground(Color.background)
                                 }
@@ -86,7 +86,7 @@ struct MessageView: View {
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageView()
+        ChatTabView()
     }
 }
 struct MessageInMessagesListContentView : View {

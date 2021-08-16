@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PersonImageNameStatusView: View {
+struct PersonImageNameLastMessageView: View {
     /// - Dependency Injection
     @ObservedObject var viewModel: PersonImageNameStatusViewModel
     

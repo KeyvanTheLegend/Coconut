@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct LiveChatSessionContentView : View {
+struct LiveChatSessionView : View {
     
     @ObservedObject var viewModel = LiveChatSessionViewModel()
     @State var contentViewOffset :CGFloat = 400
@@ -21,7 +21,7 @@ struct LiveChatSessionContentView : View {
             
             HStack(alignment : .top ,content: {
                 
-                PersonImageNameStatusView(viewModel: viewModel.personImageNameStatusViewModel)
+                PersonImageNameLastMessageView(viewModel: viewModel.personImageNameStatusViewModel)
                     .frame(maxWidth : .infinity)
                 
                 ZStack{

@@ -16,7 +16,7 @@ struct ChatTabView: View {
     @State var isClosed :Bool = true
     @State var hasLiveChatSession = false
     @State var listShoudAnimate : Bool = false
-    
+    @State var navigateToChatView = false
     var body: some View {
         
         GeometryReader { geometry in
@@ -49,6 +49,11 @@ struct ChatTabView: View {
                             MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
                                 .listRowBackground(Color.background)
                                 .frame(width: geometry.size.width, height: 88, alignment: .center)
+                                .onTapGesture {
+                                    withAnimation {
+                                        navigateToChatView = true
+                                    }
+                                }
                             
                             
                             MessageViewContentView(profileImage: "profile5", name: "Mehdi Falahati", isOnline: false)
@@ -67,11 +72,22 @@ struct ChatTabView: View {
                     }
                     .frame(width: geometry.size.width)
                     .navigationTitle("Chat")
+                    Group{
+                        /// - NavigationLinks
+                        NavigationLink(
+                            destination: ChatView(),
+                            isActive: $navigateToChatView,
+                            label: {
+                                EmptyView()
+                            })
+                    }
                 }
                 .fixFlickering { scrollView in
                     scrollView.background(Color.background)
                 }
                 .onAppear(perform: {
+                    UINavigationBar.appearance().prefersLargeTitles = true
+                    UINavigationBar.appearance().backgroundColor = .red
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
                             isClosed = false

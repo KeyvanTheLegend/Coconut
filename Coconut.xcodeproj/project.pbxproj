@@ -165,6 +165,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C0850D7C26CB8FFF003E782E /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		C0DDC55126C0674700535A06 = {
 			isa = PBXGroup;
 			children = (
@@ -236,11 +243,12 @@
 		C0E90CCA26CAA2140074734C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C0850D7C26CB8FFF003E782E /* Navigation */,
 				C0A77C8A26C43EE9006B364D /* ChatTabView.swift */,
-				C0850D7A26CB2C12003E782E /* ChatView.swift */,
 				C09F0D2726C6C5E8006BC57B /* LiveChatSessionView.swift */,
 				C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */,
 				C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */,
+				C0850D7A26CB2C12003E782E /* ChatView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

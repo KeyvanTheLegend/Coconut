@@ -19,20 +19,20 @@ struct ChatTabView: View {
     @State var navigateToChatView = false
     var body: some View {
         
-        GeometryReader { geometry in
-            NavigationView {
-                ScrollView {
+        NavigationView {
+            ScrollView {
+                GeometryReader { geometry in
                     
                     VStack(alignment: .leading , spacing: 0){
                         List{
-       
+                            
                             if hasLiveChatSession{
                                 withAnimation(Animation.easeInOut(duration: 10)) {
                                     LiveChatSessionView(viewModel: viewModel.liveChatSessionViewModel)
                                         .frame(width: geometry.size.width, height: 120, alignment: .center)
                                         .listRowBackground(Color.background)
                                 }
-
+                                
                                 
                             }
                             
@@ -66,36 +66,39 @@ struct ChatTabView: View {
                             withAnimation {
                                 print("HI NEW VALUE \(newValue)")
                                 hasLiveChatSession = newValue
-
+                                
                             }
                         }
-                    }
-                    .frame(width: geometry.size.width)
-                    .navigationTitle("Chat")
-                    Group{
-                        /// - NavigationLinks
-                        NavigationLink(
-                            destination: ChatView(),
-                            isActive: $navigateToChatView,
-                            label: {
-                                EmptyView()
-                            })
-                    }
-                }
-                .fixFlickering { scrollView in
-                    scrollView.background(Color.background)
-                }
-                .onAppear(perform: {
-                    UINavigationBar.appearance().prefersLargeTitles = true
-                    UINavigationBar.appearance().backgroundColor = .red
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        withAnimation {
-                            isClosed = false
-                            listShoudAnimate = true
+                        Group{
+                            /// - NavigationLinks
+                            NavigationLink(
+                                destination:
+                                    ChatView()
+                                    .navigationBarTitleDisplayMode(.inline),
+                                isActive: $navigateToChatView,
+                                label: {
+                                    EmptyView()
+                                })
                         }
+                        
                     }
-                })
+                    .frame(width: geometry.size.width,height : 800)
+                    .onAppear(perform: {
+                        UINavigationBar.appearance().prefersLargeTitles = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                isClosed = false
+                                listShoudAnimate = true
+                            }
+                        }
+                    })
+                    .navigationTitle("Chat")
+                }.frame(height : 800)
+                
+                
             }
+            .background(Color.background
+                            .ignoresSafeArea())
         }
     }
 }
@@ -121,7 +124,7 @@ struct MessageInMessagesListContentView : View {
     var body: some View {
         
         GeometryReader { geometry in
-
+            
             VStack(alignment: .leading, spacing: 8, content: {
                 
                 HStack(content: {

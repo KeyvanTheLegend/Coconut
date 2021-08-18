@@ -18,19 +18,23 @@ struct ChatTabView: View {
     @State var listShoudAnimate : Bool = false
     @State var navigateToChatView = false
     var body: some View {
-        
+
         NavigationView {
-            ScrollView {
-                GeometryReader { geometry in
-                    
-                    VStack(alignment: .leading , spacing: 0){
+//            VStack(alignment: .leading , spacing: 0){
+//            ScrollView {
+//
+//                    VStack(alignment: .leading , spacing: 0){
                         List{
                             
                             if hasLiveChatSession{
                                 withAnimation(Animation.easeInOut(duration: 10)) {
                                     LiveChatSessionView(viewModel: viewModel.liveChatSessionViewModel)
-                                        .frame(width: geometry.size.width, height: 120, alignment: .center)
+                                        .frame(height: 130, alignment: .center)
                                         .listRowBackground(Color.background)
+                                        .listRowInsets(.init(top: 0,
+                                                             leading: 16,
+                                                             bottom: 0,
+                                                             trailing: -16))
                                 }
                                 
                                 
@@ -39,29 +43,115 @@ struct ChatTabView: View {
                             if !isClosed {
                                 withAnimation {
                                     MessageInMessagesListContentView(profileImage: "profile3", name: "Faati Ghasemi" , message: "Keyvan Tara karet dare" , messageNumber: 10, isClosed: $isClosed)
-                                        .frame(width: geometry.size.width, height: 88, alignment: .center)
+                                        .frame(height: 88, alignment: .center)
                                         .listRowBackground(Color.background)
+                                        .listRowInsets(.init(top: 4,
+                                                             leading: 16,
+                                                             bottom: 4,
+                                                             trailing: -16))
+                                    
                                 }
                             }
                             //                            MissedMessageRequestInMessagesListContentView(profileImage: "profile5", name: "Mehdi", messageNumber: 2)
                             //                                .frame(width: geometry.size.width, height: 88, alignment: .center)
                             //                                .listRowBackground(Color.background)
+                            ZStack{
+                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
+                                .frame(height: 88, alignment: .center)
+                                .onTapGesture {
+                                    withAnimation {
+                                        print("TAPPED")
+                                        navigateToChatView = true
+                                    }
+                                }
+                                NavigationLink(
+                                    destination:
+                                        ChatView()
+                                        .navigationBarTitleDisplayMode(.inline),
+                                    isActive: $navigateToChatView
+                                    ){
+                                        EmptyView()
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                    .frame(width:0)
+                                    .opacity(0)
+                            }
+                            .listRowBackground(Color.background)
+                            .listRowInsets(.init(top: 0,
+                                                 leading: 16,
+                                                 bottom: 0,
+                                                 trailing: 16))
                             MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
                                 .listRowBackground(Color.background)
-                                .frame(width: geometry.size.width, height: 88, alignment: .center)
+                                .listRowInsets(.init(top: 0,
+                                                     leading: 16,
+                                                     bottom: 0,
+                                                     trailing: 0))
+                                .frame(height: 88, alignment: .center)
+                                .onTapGesture {
+                                    withAnimation {
+                                        navigateToChatView = true
+                                    }
+                                }
+                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
+                                .listRowBackground(Color.background)
+                                .listRowInsets(.init(top: 0,
+                                                     leading: 16,
+                                                     bottom: 0,
+                                                     trailing: 0))
+                                .frame(height: 88, alignment: .center)
+                                .onTapGesture {
+                                    withAnimation {
+                                        navigateToChatView = true
+                                    }
+                                }
+                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
+                                .listRowBackground(Color.background)
+                                .listRowInsets(.init(top: 0,
+                                                     leading: 16,
+                                                     bottom: 0,
+                                                     trailing: 0))
+                                .frame(height: 88, alignment: .center)
+                                .onTapGesture {
+                                    withAnimation {
+                                        navigateToChatView = true
+                                    }
+                                }
+                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
+                                .listRowBackground(Color.background)
+                                .listRowInsets(.init(top: 0,
+                                                     leading: 16,
+                                                     bottom: 0,
+                                                     trailing: 0))
+                                .frame(height: 88, alignment: .center)
+                                .onTapGesture {
+                                    withAnimation {
+                                        navigateToChatView = true
+                                    }
+                                }
+                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
+                                .listRowBackground(Color.background)
+                                .listRowInsets(.init(top: 0,
+                                                     leading: 16,
+                                                     bottom: 0,
+                                                     trailing: 0))
+                                .frame(height: 88, alignment: .center)
                                 .onTapGesture {
                                     withAnimation {
                                         navigateToChatView = true
                                     }
                                 }
                             
-                            
                             MessageViewContentView(profileImage: "profile5", name: "Mehdi Falahati", isOnline: false)
                                 .listRowBackground(Color.background)
-                                .frame(width: geometry.size.width, height: 88, alignment: .center)
+                                .listRowInsets(.init(top: 0,
+                                                     leading: 16,
+                                                     bottom: 0,
+                                                     trailing: 0))
+                                .frame(height: 88, alignment: .center)
                             
                         }
-                        .frame(width: geometry.size.width, height: 800 , alignment: .top)
+                        .frame(alignment: .top)
                         .onChange(of: viewModel.hasLiveSesssion) { newValue in
                             withAnimation {
                                 print("HI NEW VALUE \(newValue)")
@@ -69,20 +159,13 @@ struct ChatTabView: View {
                                 
                             }
                         }
-                        Group{
-                            /// - NavigationLinks
-                            NavigationLink(
-                                destination:
-                                    ChatView()
-                                    .navigationBarTitleDisplayMode(.inline),
-                                isActive: $navigateToChatView,
-                                label: {
-                                    EmptyView()
-                                })
-                        }
+            
+//                        Group{
+//                            /// - NavigationLinks
+
+//                        }
                         
-                    }
-                    .frame(width: geometry.size.width,height : 800)
+//                    }
                     .onAppear(perform: {
                         UINavigationBar.appearance().prefersLargeTitles = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -93,13 +176,16 @@ struct ChatTabView: View {
                         }
                     })
                     .navigationTitle("Chat")
-                }.frame(height : 800)
-                
-                
-            }
-            .background(Color.background
-                            .ignoresSafeArea())
+//
+//
+//            }
+//            .background(Color.background
+//                            .ignoresSafeArea())
+
         }
+        .hasScrollEnabled(true)
+        .background(Color.background)
+
     }
 }
 

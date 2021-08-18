@@ -33,7 +33,7 @@ struct ChatTabView: View {
                                         .listRowBackground(Color.background)
                                         .listRowInsets(.init(top: 0,
                                                              leading: 16,
-                                                             bottom: 0,
+                                                             bottom: 8,
                                                              trailing: -16))
                                 }
                                 
@@ -81,67 +81,7 @@ struct ChatTabView: View {
                                                  leading: 16,
                                                  bottom: 0,
                                                  trailing: 16))
-                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
-                                .listRowBackground(Color.background)
-                                .listRowInsets(.init(top: 0,
-                                                     leading: 16,
-                                                     bottom: 0,
-                                                     trailing: 0))
-                                .frame(height: 88, alignment: .center)
-                                .onTapGesture {
-                                    withAnimation {
-                                        navigateToChatView = true
-                                    }
-                                }
-                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
-                                .listRowBackground(Color.background)
-                                .listRowInsets(.init(top: 0,
-                                                     leading: 16,
-                                                     bottom: 0,
-                                                     trailing: 0))
-                                .frame(height: 88, alignment: .center)
-                                .onTapGesture {
-                                    withAnimation {
-                                        navigateToChatView = true
-                                    }
-                                }
-                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
-                                .listRowBackground(Color.background)
-                                .listRowInsets(.init(top: 0,
-                                                     leading: 16,
-                                                     bottom: 0,
-                                                     trailing: 0))
-                                .frame(height: 88, alignment: .center)
-                                .onTapGesture {
-                                    withAnimation {
-                                        navigateToChatView = true
-                                    }
-                                }
-                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
-                                .listRowBackground(Color.background)
-                                .listRowInsets(.init(top: 0,
-                                                     leading: 16,
-                                                     bottom: 0,
-                                                     trailing: 0))
-                                .frame(height: 88, alignment: .center)
-                                .onTapGesture {
-                                    withAnimation {
-                                        navigateToChatView = true
-                                    }
-                                }
-                            MessageViewContentView(profileImage: "profile4", name: "Sina Rahimzade", isOnline: true)
-                                .listRowBackground(Color.background)
-                                .listRowInsets(.init(top: 0,
-                                                     leading: 16,
-                                                     bottom: 0,
-                                                     trailing: 0))
-                                .frame(height: 88, alignment: .center)
-                                .onTapGesture {
-                                    withAnimation {
-                                        navigateToChatView = true
-                                    }
-                                }
-                            
+
                             MessageViewContentView(profileImage: "profile5", name: "Mehdi Falahati", isOnline: false)
                                 .listRowBackground(Color.background)
                                 .listRowInsets(.init(top: 0,

@@ -29,9 +29,9 @@ struct ChatTabView: View {
                             if hasLiveChatSession{
                                 withAnimation(Animation.easeInOut(duration: 10)) {
                                     LiveChatSessionView(viewModel: viewModel.liveChatSessionViewModel)
-                                        .frame(height: 130, alignment: .center)
+                                        .frame(height: 120, alignment: .center)
                                         .listRowBackground(Color.background)
-                                        .listRowInsets(.init(top: 0,
+                                        .listRowInsets(.init(top: 8,
                                                              leading: 16,
                                                              bottom: 8,
                                                              trailing: -16))

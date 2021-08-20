@@ -16,6 +16,7 @@
 		C0850D7B26CB2C12003E782E /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0850D7A26CB2C12003E782E /* ChatView.swift */; };
 		C09F0D2826C6C5E8006BC57B /* LiveChatSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2726C6C5E8006BC57B /* LiveChatSessionView.swift */; };
 		C09F0D2A26C6C8D7006BC57B /* PersonImageNameLastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */; };
+		C0A41F6926CFC88C008C273B /* TextField+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A41F6826CFC88C008C273B /* TextField+extension.swift */; };
 		C0A77C8B26C43EE9006B364D /* ChatTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A77C8A26C43EE9006B364D /* ChatTabView.swift */; };
 		C0BF24D526CAC08000CFCC35 /* ChatTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */; };
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
@@ -61,6 +62,7 @@
 		C0850D7A26CB2C12003E782E /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		C09F0D2726C6C5E8006BC57B /* LiveChatSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionView.swift; sourceTree = "<group>"; };
 		C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameLastMessageView.swift; sourceTree = "<group>"; };
+		C0A41F6826CFC88C008C273B /* TextField+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+extension.swift"; sourceTree = "<group>"; };
 		C0A77C8A26C43EE9006B364D /* ChatTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabView.swift; sourceTree = "<group>"; };
 		C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabViewModel.swift; sourceTree = "<group>"; };
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,6 +235,7 @@
 		C0E7B33726C171DB00D70C7D /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				C0A41F6826CFC88C008C273B /* TextField+extension.swift */,
 				C0E7B33526C1714C00D70C7D /* Color+extension.swift */,
 				C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */,
 				C0E7B33A26C178F200D70C7D /* View+extension.swift */,
@@ -430,6 +433,7 @@
 				C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
 				C09F0D2A26C6C8D7006BC57B /* PersonImageNameLastMessageView.swift in Sources */,
+				C0A41F6926CFC88C008C273B /* TextField+extension.swift in Sources */,
 				C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */,
 				C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */,
 				C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */,
@@ -522,7 +526,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -577,7 +581,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -597,7 +601,7 @@
 				DEVELOPMENT_TEAM = P7PPJZH7GM;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Coconut/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -619,7 +623,7 @@
 				DEVELOPMENT_TEAM = P7PPJZH7GM;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Coconut/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

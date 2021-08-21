@@ -114,6 +114,7 @@ struct ChatTabView: View {
                             }
                         }
                     })
+                        .showTabBar()
                     .navigationTitle("Chat")
 //
 //

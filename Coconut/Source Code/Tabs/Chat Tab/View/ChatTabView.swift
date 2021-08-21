@@ -38,8 +38,7 @@ struct ChatTabView: View {
                                 }
                                 
                                 
-                            }
-                            
+                            }                            
                             if !isClosed {
                                 withAnimation {
                                     MessageInMessagesListContentView(profileImage: "profile3", name: "Faati Ghasemi" , message: "Keyvan Tara karet dare" , messageNumber: 10, isClosed: $isClosed)
@@ -125,6 +124,7 @@ struct ChatTabView: View {
         }
         .hasScrollEnabled(true)
         .background(Color.background)
+        .ignoresSafeArea(.keyboard)
 
     }
 }

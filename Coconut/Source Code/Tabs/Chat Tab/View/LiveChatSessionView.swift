@@ -33,7 +33,7 @@ struct LiveChatSessionView : View {
                     
                     Text("LIVE")
                         .font(.caption.weight(.semibold))
-                        .foregroundColor(.whiteColor)
+                        .foregroundColor(.blackColor)
                     
                 }
                 .frame(width: 60, height:80, alignment: .center)

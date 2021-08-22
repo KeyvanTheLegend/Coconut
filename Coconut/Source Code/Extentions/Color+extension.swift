@@ -11,6 +11,6 @@ extension Color {
     static let whiteColor = Color("WhiteColor")
     static let blackColor = Color("BackgroundColor")
     static let primery = Color("PrimeryColor")
-    static let secondary = Color("SecondaryColor")
+    static let secondaryColor = Color("SecondaryColor")
 
 }

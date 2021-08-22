@@ -115,9 +115,6 @@
 		C0198A2826C6D22400AF1FC8 /* Chat Tab */ = {
 			isa = PBXGroup;
 			children = (
-				C0E90CCC26CAA2220074734C /* Model */,
-				C0E90CCA26CAA2140074734C /* View */,
-				C0E90CCB26CAA21B0074734C /* ViewModel */,
 			);
 			path = "Chat Tab";
 			sourceTree = "<group>";
@@ -132,11 +129,67 @@
 			path = "Home Tab";
 			sourceTree = "<group>";
 		};
+		C02ADF1A26D2750D00905E3A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C02ADF1D26D2756200905E3A /* Chat Tab */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C02ADF1B26D2751400905E3A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C02ADF1E26D2756E00905E3A /* Chat Tab */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C02ADF1C26D2752000905E3A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0850D7626CB2588003E782E /* Global */,
+				C02ADF1F26D2757F00905E3A /* Chat Tab */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C02ADF1D26D2756200905E3A /* Chat Tab */ = {
+			isa = PBXGroup;
+			children = (
+				C0E90CCA26CAA2140074734C /* View */,
+			);
+			path = "Chat Tab";
+			sourceTree = "<group>";
+		};
+		C02ADF1E26D2756E00905E3A /* Chat Tab */ = {
+			isa = PBXGroup;
+			children = (
+				C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */,
+				C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */,
+				C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */,
+				C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */,
+			);
+			path = "Chat Tab";
+			sourceTree = "<group>";
+		};
+		C02ADF1F26D2757F00905E3A /* Chat Tab */ = {
+			isa = PBXGroup;
+			children = (
+				C0E90CCD26CAA2680074734C /* LiveChatSessionModel.swift */,
+				C0850D7426CB243A003E782E /* LiveChatSessionPersonInfoModel.swift */,
+				C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */,
+			);
+			path = "Chat Tab";
+			sourceTree = "<group>";
+		};
 		C0850D7226CB21F5003E782E /* Source Code */ = {
 			isa = PBXGroup;
 			children = (
+				C02ADF1C26D2752000905E3A /* Model */,
+				C02ADF1A26D2750D00905E3A /* View */,
+				C02ADF1B26D2751400905E3A /* ViewModel */,
 				C0DDC55D26C0674700535A06 /* CoconutApp.swift */,
-				C0850D7626CB2588003E782E /* Global */,
 				C0F08BF026C2D4D4003F7236 /* Tabs */,
 				C0E7B33726C171DB00D70C7D /* Extentions */,
 			);
@@ -154,17 +207,9 @@
 		C0850D7626CB2588003E782E /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				C0850D7926CB270F003E782E /* Model */,
-			);
-			path = Global;
-			sourceTree = "<group>";
-		};
-		C0850D7926CB270F003E782E /* Model */ = {
-			isa = PBXGroup;
-			children = (
 				C0850D7726CB25B8003E782E /* PersonInfo.swift */,
 			);
-			path = Model;
+			path = Global;
 			sourceTree = "<group>";
 		};
 		C0850D7C26CB8FFF003E782E /* Navigation */ = {
@@ -254,27 +299,6 @@
 				C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		C0E90CCB26CAA21B0074734C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */,
-				C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */,
-				C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */,
-				C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C0E90CCC26CAA2220074734C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C0E90CCD26CAA2680074734C /* LiveChatSessionModel.swift */,
-				C0850D7426CB243A003E782E /* LiveChatSessionPersonInfoModel.swift */,
-				C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		C0F08BF026C2D4D4003F7236 /* Tabs */ = {

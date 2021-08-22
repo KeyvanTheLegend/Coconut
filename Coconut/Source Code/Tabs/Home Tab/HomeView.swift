@@ -117,7 +117,7 @@ struct HomeView: View {
             }
             .tag(1)
             
-            Text("setting")
+            SettingTabView()
                 .tabItem {
                     Image(systemName: "gearshape.fill")
                     Text("setting")

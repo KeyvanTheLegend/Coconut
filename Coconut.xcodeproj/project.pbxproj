@@ -11,6 +11,7 @@
 		C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */; };
 		C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */; };
 		C024F8E226C8408B0054A8B3 /* LiveChatSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */; };
+		C02ADF2326D277C000905E3A /* SettingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02ADF2226D277C000905E3A /* SettingTabView.swift */; };
 		C0850D7526CB243A003E782E /* LiveChatSessionPersonInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0850D7426CB243A003E782E /* LiveChatSessionPersonInfoModel.swift */; };
 		C0850D7826CB25B8003E782E /* PersonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0850D7726CB25B8003E782E /* PersonInfo.swift */; };
 		C0850D7B26CB2C12003E782E /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0850D7A26CB2C12003E782E /* ChatView.swift */; };
@@ -57,6 +58,7 @@
 		C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryViewModel.swift; sourceTree = "<group>"; };
 		C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryModel.swift; sourceTree = "<group>"; };
 		C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionViewModel.swift; sourceTree = "<group>"; };
+		C02ADF2226D277C000905E3A /* SettingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTabView.swift; sourceTree = "<group>"; };
 		C0850D7426CB243A003E782E /* LiveChatSessionPersonInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionPersonInfoModel.swift; sourceTree = "<group>"; };
 		C0850D7726CB25B8003E782E /* PersonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonInfo.swift; sourceTree = "<group>"; };
 		C0850D7A26CB2C12003E782E /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		C02ADF1A26D2750D00905E3A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C02ADF2126D2778300905E3A /* Setting Tab */,
 				C02ADF1D26D2756200905E3A /* Chat Tab */,
 			);
 			path = View;
@@ -185,6 +188,14 @@
 				C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */,
 			);
 			path = "Chat Tab";
+			sourceTree = "<group>";
+		};
+		C02ADF2126D2778300905E3A /* Setting Tab */ = {
+			isa = PBXGroup;
+			children = (
+				C02ADF2226D277C000905E3A /* SettingTabView.swift */,
+			);
+			path = "Setting Tab";
 			sourceTree = "<group>";
 		};
 		C0850D7226CB21F5003E782E /* Source Code */ = {
@@ -448,6 +459,7 @@
 				C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */,
 				C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
+				C02ADF2326D277C000905E3A /* SettingTabView.swift in Sources */,
 				C09F0D2A26C6C8D7006BC57B /* PersonImageNameLastMessageView.swift in Sources */,
 				C0A41F6926CFC88C008C273B /* TextField+extension.swift in Sources */,
 				C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */,

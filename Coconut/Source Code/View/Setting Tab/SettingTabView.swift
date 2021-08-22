@@ -9,29 +9,38 @@ import SwiftUI
 
 struct SettingTabView: View {
     var body: some View {
-        ScrollView {
-            VStack {
-                VStack(alignment : .center){
-                    Text("🥥")
-                        .frame(width: 90, height: 90, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .background(Color.primery)
-                        .cornerRadius(45)
-                        .font(.title)
-                    Text("Keyvan Yaghoubian")
-                        .foregroundColor(.white)
-                        .padding(.top , 8)
-                        .font(.title2)
-                    Text("+98 9374397796")
-                        .foregroundColor(.gray)
-                        .padding(.vertical , 8)
-                    
+        NavigationView{
+            ScrollView {
+                VStack {
+                    HStack(alignment : .top){
+                        Text("🥥")
+                            .frame(width: 80, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .background(Color.primery)
+                            .cornerRadius(12)
+                            .font(.title)
+                            .padding(.horizontal ,16)
+                        VStack(alignment : .leading){
+                        Text("Keyvan Yaghoubian")
+                            .foregroundColor(.white)
+                            .padding(.top , 10)
+                            .font(.title3)
+                        Text("+98 9374397796")
+                            .foregroundColor(.gray)
+                            .padding(.vertical , 4)
+                            .font(.body)
+
+                        }
+                        Spacer()
+                    }
+                    Divider()
                 }
-                Divider()
+                .frame(maxWidth : .infinity)
+                .padding(.top,16)
             }
-            .frame(maxWidth : .infinity)
+            .background(Color.background
+                            .ignoresSafeArea())
+            .navigationBarTitle("Setting")
         }
-        .background(Color.background
-        .ignoresSafeArea())
     }
 }
 

@@ -50,8 +50,6 @@ extension View {
             UITabBar.appearance().barTintColor = UIColor(named: "BackgroundColor")
             UITabBar.appearance().backgroundColor = UIColor(named: "BackgroundColor")
             break
-        default:
-            break
         }
     }
     

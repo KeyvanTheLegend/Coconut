@@ -19,9 +19,8 @@ struct SettingTabView: View {
                         VStack (alignment : .center){
                         Image("memoji1")
                             .resizable()
-                            .foregroundColor(.primery)
-                            .imageScale(.medium)
                             .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.primery)
                             .frame(width: 45, height: 45, alignment: .center)
                         }
                         .frame(width: 50, height: 50, alignment: .center)

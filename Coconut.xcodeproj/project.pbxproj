@@ -21,6 +21,8 @@
 		C09F0D2A26C6C8D7006BC57B /* PersonImageNameLastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */; };
 		C0A41F6926CFC88C008C273B /* TextField+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A41F6826CFC88C008C273B /* TextField+extension.swift */; };
 		C0A77C8B26C43EE9006B364D /* ChatTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A77C8A26C43EE9006B364D /* ChatTabView.swift */; };
+		C0BB88B526D3C3720061D96E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0BB88B426D3C3720061D96E /* GoogleService-Info.plist */; };
+		C0BB88B826D3D0550061D96E /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB88B726D3D0550061D96E /* SignInView.swift */; };
 		C0BF24D526CAC08000CFCC35 /* ChatTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */; };
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
 		C0DDC56026C0674700535A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* HomeView.swift */; };
@@ -76,6 +78,8 @@
 		C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameLastMessageView.swift; sourceTree = "<group>"; };
 		C0A41F6826CFC88C008C273B /* TextField+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+extension.swift"; sourceTree = "<group>"; };
 		C0A77C8A26C43EE9006B364D /* ChatTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabView.swift; sourceTree = "<group>"; };
+		C0BB88B426D3C3720061D96E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C0BB88B726D3D0550061D96E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabViewModel.swift; sourceTree = "<group>"; };
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC55D26C0674700535A06 /* CoconutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutApp.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 		C02ADF1A26D2750D00905E3A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C0BB88B626D3CD1A0061D96E /* SignIn */,
 				C02ADF2126D2778300905E3A /* Setting Tab */,
 				C02ADF1D26D2756200905E3A /* Chat Tab */,
 			);
@@ -252,6 +257,7 @@
 		C0850D7326CB2266003E782E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C0BB88B426D3C3720061D96E /* GoogleService-Info.plist */,
 				C0DDC56126C0674900535A06 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -271,6 +277,14 @@
 				C0850D7A26CB2C12003E782E /* ChatView.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		C0BB88B626D3CD1A0061D96E /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				C0BB88B726D3D0550061D96E /* SignInView.swift */,
+			);
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		C0DDC55126C0674700535A06 = {
@@ -466,6 +480,7 @@
 			files = (
 				C0DDC56526C0674900535A06 /* Preview Assets.xcassets in Resources */,
 				C0DDC56226C0674900535A06 /* Assets.xcassets in Resources */,
+				C0BB88B526D3C3720061D96E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +614,7 @@
 				C0F08BF426C2E107003F7236 /* ChatRequestContentView.swift in Sources */,
 				C0850D7B26CB2C12003E782E /* ChatView.swift in Sources */,
 				C0850D7526CB243A003E782E /* LiveChatSessionPersonInfoModel.swift in Sources */,
+				C0BB88B826D3D0550061D96E /* SignInView.swift in Sources */,
 				C0E90CCE26CAA2680074734C /* LiveChatSessionModel.swift in Sources */,
 				C0850D7826CB25B8003E782E /* PersonInfo.swift in Sources */,
 				C0E90CD026CAACD40074734C /* PersonImageNameStatusViewModel.swift in Sources */,
@@ -783,7 +799,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.CoconutApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Coconut.CoconutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -806,7 +822,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.CoconutApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Coconut.CoconutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

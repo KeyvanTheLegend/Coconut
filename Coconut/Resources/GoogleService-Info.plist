@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>613939007310-n85pbsdspo787mspdshtccvtbkbihf8l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.613939007310-n85pbsdspo787mspdshtccvtbkbihf8l</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCasTA_AM7G51IfosrrVE90fD771kSFgJQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>613939007310</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Coconut.CoconutApp</string>
+	<key>PROJECT_ID</key>
+	<string>coconut-48065</string>
+	<key>STORAGE_BUCKET</key>
+	<string>coconut-48065.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:613939007310:ios:2f1d4a415389f74d0c181f</string>
+</dict>
+</plist>

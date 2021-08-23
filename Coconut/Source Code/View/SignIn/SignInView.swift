@@ -13,23 +13,26 @@ struct SignInView: View {
     @State var isLogin : Bool = false
     
     var body: some View {
-        VStack{
-            Spacer()
-            Text("🥥")
-                .font(.system(size: 52))
-            Spacer()
-            Group{
-                UsernameTextField(username: $username)
-                PasswordTextField(password: $password)
-                LoginButton(isLogin: $isLogin, username: $username)
+            VStack{
+                Spacer()
+                Text("🥥")
+                    .font(.system(size: 52))
+                Spacer()
+                Group{
+                    UsernameTextField(username: $username)
+                    PasswordTextField(password: $password)
+                    LoginButton(isLogin: $isLogin, username: $username)
+                        .fullScreenCover(isPresented: $isLogin, content: HomeView.init)
+
+                }
+                Group{
+                    Spacer()
+                    SignupViewGroup()
+                    Spacer()
+                }
             }
-            Group{
-            Spacer()
-                SignupViewGroup()
-            Spacer()
-            }
-        }
-        .background(Color.background.ignoresSafeArea())
+            .background(Color.background.ignoresSafeArea())
+        
     }
 }
 
@@ -85,7 +88,7 @@ struct PasswordTextField : View {
                 .padding([.leading,.trailing],32)
                 .padding([.bottom,.top], 12)
                 .background(Color.whiteColor.opacity(0.2))
-
+                
                 .cornerRadius(8)
                 .font(
                     .system(

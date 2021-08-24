@@ -11,34 +11,50 @@ struct SignInView: View {
     @State var username : String = ""
     @State var password : String = ""
     @State var isLogin : Bool = false
+    @State var showSignUpView : Bool = false
     
     var body: some View {
+        NavigationView{
             VStack{
                 Spacer()
+                ZStack{
                 Text("🥥")
-                    .font(.system(size: 52))
+                    .font(.system(size: 46))
+                }
+                .frame(width: 90, height: 90, alignment: .center)
+                .background(Color.whiteColor.opacity(0.2))
+                .cornerRadius(12)
+
                 Spacer()
                 Group{
                     UsernameTextField(username: $username)
                     PasswordTextField(password: $password)
                     LoginButton(isLogin: $isLogin, username: $username)
                         .fullScreenCover(isPresented: $isLogin, content: HomeView.init)
-
+                    
                 }
                 Group{
                     Spacer()
-                    SignupViewGroup()
+                    SignupViewGroup(showSignUpView: $showSignUpView)
+                    NavigationLink(
+                        destination: SignUpView(),
+                        isActive: $showSignUpView,
+                        label: {
+                            EmptyView()
+                        })
                     Spacer()
                 }
             }
             .background(Color.background.ignoresSafeArea())
-        
+            .ignoresSafeArea(.container)
+        }
     }
 }
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         SignInView()
+            .previewDevice("iPhone 8")
     }
 }
 
@@ -55,7 +71,7 @@ struct UsernameTextField: View {
                         .foregroundColor(Color.white)
                 })
                 .padding([.leading,.trailing],32)
-                .padding([.bottom,.top], 12)
+                .padding([.bottom,.top], 16)
                 .foregroundColor(.white)
                 .background(Color.whiteColor.opacity(0.2))
                 .cornerRadius(8)
@@ -69,6 +85,7 @@ struct UsernameTextField: View {
                 .multilineTextAlignment(.center)
             Spacer()
         })
+        .padding(.bottom , 16)
     }
 }
 struct PasswordTextField : View {
@@ -86,7 +103,7 @@ struct PasswordTextField : View {
                 })
                 .foregroundColor(.white)
                 .padding([.leading,.trailing],32)
-                .padding([.bottom,.top], 12)
+                .padding([.bottom,.top], 16)
                 .background(Color.whiteColor.opacity(0.2))
                 
                 .cornerRadius(8)
@@ -100,7 +117,6 @@ struct PasswordTextField : View {
                 .multilineTextAlignment(.center)
                 .textContentType(.password)
                 .padding(.bottom, 32)
-                .padding(.top, 12)
             
             Spacer()
         })
@@ -121,7 +137,7 @@ struct LoginButton : View {
             Text("Login")
                 .fontWeight(.medium)
         })
-        .padding(EdgeInsets(top: 12, leading: 64, bottom: 12, trailing: 64))
+        .padding(EdgeInsets(top: 16, leading: 64, bottom: 16, trailing: 64))
         .background(Color.primery)
         .foregroundColor(.black)
         .cornerRadius(8)
@@ -129,12 +145,13 @@ struct LoginButton : View {
     }
 }
 struct SignupViewGroup : View {
+    @Binding var showSignUpView : Bool
     var body: some View {
         HStack(alignment: .center, spacing: 8, content: {
             Text("Don't have an account ?")
                 .foregroundColor(.white)
             Button(action: {
-                
+                showSignUpView = true
             }, label: {
                 Text("Signup")
                     .foregroundColor(.primery)

@@ -9,9 +9,11 @@ import SwiftUI
 
 struct SignUpView: View {
     @State var name : String = ""
+    @State var email : String = ""
     @State var username : String = ""
     @State var password : String = ""
     @State var isSignedUp : Bool = false
+    @StateObject var viewModel = SignUpViewModel()
     
     var body: some View {
         VStack{
@@ -43,9 +45,18 @@ struct SignUpView: View {
                 NameTextField(name: $name)
                 UsernameTextField(username: $username)
                 PasswordTextField(password: $password)
-                SignUpButton(isSignedUp: $isSignedUp, username: $username)
-                    .fullScreenCover(isPresented: $isSignedUp, content: HomeView.init)
-                
+                Button(action: {
+                    viewModel.signUp(name: name, email: email, password: password)
+                }, label: {
+                    Text("Signup")
+                        .fontWeight(.medium)
+                })
+                .padding(EdgeInsets(top: 16, leading: 64, bottom: 16, trailing: 64))
+                .background(Color.primery)
+                .foregroundColor(.black)
+                .cornerRadius(8)
+                .clipped()
+                .fullScreenCover(isPresented: $isSignedUp, content: HomeView.init)
             }
             Group{
                 Spacer()
@@ -57,7 +68,6 @@ struct SignUpView: View {
 
     }
         .ignoresSafeArea(.all, edges: .top)
-
     }
     
     
@@ -98,28 +108,5 @@ struct NameTextField: View {
         })
         .padding(.bottom , 16)
         
-    }
-}
-
-struct SignUpButton : View {
-    
-    @Binding var isSignedUp : Bool
-    @Binding var username : String
-    
-    var body: some View{
-        Button(action: {
-            self.isSignedUp = true
-            print("HI \(username)")
-            
-            
-        }, label: {
-            Text("Signup")
-                .fontWeight(.medium)
-        })
-        .padding(EdgeInsets(top: 16, leading: 64, bottom: 16, trailing: 64))
-        .background(Color.primery)
-        .foregroundColor(.black)
-        .cornerRadius(8)
-        .clipped()
     }
 }

@@ -46,7 +46,7 @@ struct SignUpView: View {
                 UsernameTextField(username: $username)
                 PasswordTextField(password: $password)
                 Button(action: {
-                    viewModel.signUp(name: name, email: email, password: password)
+                    viewModel.signUp(name: name, email: username, password: password)
                 }, label: {
                     Text("Signup")
                         .fontWeight(.medium)
@@ -56,7 +56,7 @@ struct SignUpView: View {
                 .foregroundColor(.black)
                 .cornerRadius(8)
                 .clipped()
-                .fullScreenCover(isPresented: $isSignedUp, content: HomeView.init)
+                .fullScreenCover(isPresented: $viewModel.isPresentedHomeTabView, content: HomeView.init)
             }
             Group{
                 Spacer()

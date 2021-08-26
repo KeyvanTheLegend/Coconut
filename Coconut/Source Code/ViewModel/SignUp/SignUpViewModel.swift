@@ -20,8 +20,9 @@ class SignUpViewModel : ObservableObject {
     
     // MARK: - Published Variables
     
+    /// user singup **State**
     @Published var state : SignupState = .UNDEFINED
-    
+    @Published var isPresentedHomeTabView = false
     
     // MARK: - Functions :
 
@@ -32,10 +33,20 @@ class SignUpViewModel : ObservableObject {
     func signUp(name: String , email : String , password : String) {
         state = .LOADING
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let result = result {
+            if result != nil {
                 self.state = .SUCCESS
-                print(result)
+                self.publish(with: self.state)
             }
+        }
+    }
+    
+    private func publish(with state : SignupState) {
+        switch state {
+        case .SUCCESS:
+            isPresentedHomeTabView = true
+            break
+        default:
+            break
         }
     }
 }

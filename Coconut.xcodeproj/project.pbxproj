@@ -253,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				C0DDC55D26C0674700535A06 /* CoconutApp.swift */,
+				C02ADF1C26D2752000905E3A /* Model */,
 				C02ADF1A26D2750D00905E3A /* View */,
 				C02ADF1B26D2751400905E3A /* ViewModel */,
 				C0F08BF026C2D4D4003F7236 /* Tabs */,
@@ -328,7 +329,6 @@
 		C0DDC55C26C0674700535A06 /* Coconut */ = {
 			isa = PBXGroup;
 			children = (
-				C02ADF1C26D2752000905E3A /* Model */,
 				C0850D7226CB21F5003E782E /* Source Code */,
 				C0850D7326CB2266003E782E /* Resources */,
 				C0DDC56326C0674900535A06 /* Preview Content */,

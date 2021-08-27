@@ -14,6 +14,9 @@ enum SignupState {
     case LOADING
     case FAILED
     case SUCCESS
+    func isLoading() -> Bool {
+        return self == .LOADING
+    }
 }
 
 class SignUpViewModel : ObservableObject {
@@ -33,14 +36,15 @@ class SignUpViewModel : ObservableObject {
     func signUp(name: String , email : String , password : String) {
         state = .LOADING
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            guard error == nil else {return}
+            guard error == nil else {
+                self.state = .FAILED
+                return
+            }
             let user = UserModel(name: name, email: email)
             DatabaseManager.shared.insertUser(user: user) { result in
                 if result {
                     self.state = .SUCCESS
-                    print(email)
-                    UserDefaults.standard.set(email, forKey: "Email") //Bool
-
+                    UserDefaults.standard.set(email, forKey: "Email")
                 }
                 else{
                     self.state = .FAILED

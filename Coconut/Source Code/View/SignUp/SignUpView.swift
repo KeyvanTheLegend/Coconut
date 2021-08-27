@@ -65,6 +65,9 @@ struct SignUpView: View {
         }
         .background(Color.background.ignoresSafeArea())
         .ignoresSafeArea(.all, edges: .top)
+        .onTapGesture {
+            hideKeyboard()
+        }
 
     }
         .ignoresSafeArea(.all, edges: .top)

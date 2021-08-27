@@ -33,8 +33,18 @@ class SignUpViewModel : ObservableObject {
     func signUp(name: String , email : String , password : String) {
         state = .LOADING
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if result != nil {
-                self.state = .SUCCESS
+            guard error == nil else {return}
+            let user = UserModel(name: name, email: email)
+            DatabaseManager.shared.insertUser(user: user) { result in
+                if result {
+                    self.state = .SUCCESS
+                    print(email)
+                    UserDefaults.standard.set(email, forKey: "Email") //Bool
+
+                }
+                else{
+                    self.state = .FAILED
+                }
                 self.publish(with: self.state)
             }
         }

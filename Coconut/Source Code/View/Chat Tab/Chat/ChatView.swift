@@ -12,6 +12,7 @@ struct ChatView: View {
     @State var shouldHaveExteraButtonPadding = false
     @State var testing : CGFloat = 0
     @State var bottomPadding : CGFloat = 0
+    @StateObject var viewModel = ChatViewModel()
     
     init( ) {
         UITextView.appearance().backgroundColor = .clear
@@ -23,12 +24,27 @@ struct ChatView: View {
                 .padding(0)
             Divider()
             Spacer()
-            List {
-                RecivedTextMessage()
-                SentMessageView()
+            List{
+                ForEach(viewModel.messages) { item in
+                    if item.senderEmail ==                     UserDefaults.standard.string(forKey: "Email")!{
+                        SentMessageView(messsage: item.text)
+                    }else{
+                        RecivedTextMessage(messsage: item.text)
+                        .listRowBackground(Color.red)
+                    }
+                }
+
+
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .listRowBackground(Color.background)
+            .listRowInsets(EdgeInsets())
             .background(Color.background)
-            SendMessageView(text: $text)
+            .listStyle(InsetListStyle())
+            .background(Color.background)
+            .listRowInsets(EdgeInsets())
+            .background(Color.red)
+            SendMessageView(viewModel: viewModel,text: $text)
                 .background(Color.background, alignment: .bottom)
                 .offset(x: 0 , y: -testing)
                 .padding(.bottom , shouldHaveExteraButtonPadding ? bottomPadding : 0)
@@ -119,6 +135,7 @@ struct ChatHeaderView : View {
     }
 }
 struct SendMessageView : View {
+    @ObservedObject var viewModel : ChatViewModel
     @Binding var text :String
     var body: some View {
         VStack(spacing : 8){
@@ -143,7 +160,6 @@ struct SendMessageView : View {
                             .font(.body)
                             .foregroundColor(.gray)
                     }
-                
                 Image(systemName: "arrow.up")
                     .frame(width: 40, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .background(Color.primery)
@@ -151,15 +167,23 @@ struct SendMessageView : View {
                     .padding([.trailing], 16)
                     .padding([.bottom],8)
                     .foregroundColor(.white)
+                    .onTapGesture {
+                        
+                        viewModel.sendMessage(message: text)
+                        text = ""
+                    }
+                
             }
             
         }
     }
 }
 struct RecivedTextMessage : View {
+    var messsage : String
+
     var body: some View {
         HStack(alignment :.center) {
-            Text("Hi Baby Girl How You Doin???")
+            Text(messsage)
                 .foregroundColor(.white)
                 .padding(8)
                 .padding([.horizontal],12)
@@ -170,18 +194,19 @@ struct RecivedTextMessage : View {
         .padding(16)
         .padding(.bottom , 0)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        .listRowBackground(Color.background)
-        .listRowInsets(EdgeInsets())
+        .listRowBackground(Color.red)
+        .listRowInsets(EdgeInsets(.zero))
         .background(Color.background)
         .listStyle(InsetListStyle())
         
     }
 }
 struct SentMessageView : View {
+    var messsage : String
     var body: some View {
         HStack(alignment :.center) {
             Spacer()
-            Text("Hi im fine baby how are you ??" )
+            Text(messsage)
                 .foregroundColor(.black)
                 .padding(8)
                 .padding([.horizontal],12)

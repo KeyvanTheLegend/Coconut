@@ -7,8 +7,9 @@ target 'Coconut' do
   inhibit_all_warnings!
 
   # Pods for Coconut
+  pod 'Firebase/Core'
   pod 'Firebase/Auth'
-  pod 'Firebase/Firestore'
+  pod 'Firebase/Database'
 
   target 'CoconutTests' do
     inherit! :search_paths

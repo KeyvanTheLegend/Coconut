@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct UserModel {
-    var uid : String
-    var name : String
-    var email : String
+struct UserModel : Codable {
+    let name : String
+    let email : String
+    var safeEmail : String {
+        var safeEmail = email.replacingOccurrences(of: "@", with: "-")
+        safeEmail =  safeEmail.replacingOccurrences(of: ".", with: "-")
+        return safeEmail
+    }
 }

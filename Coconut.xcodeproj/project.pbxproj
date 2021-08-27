@@ -24,6 +24,10 @@
 		C0BB61A326D91E3E006F442D /* SignupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A226D91E3E006F442D /* SignupButton.swift */; };
 		C0BB61A526D91E67006F442D /* NameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A426D91E67006F442D /* NameTextField.swift */; };
 		C0BB61A726D91ECB006F442D /* SignupProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A626D91ECB006F442D /* SignupProfileImageView.swift */; };
+		C0BB61AF26D9238D006F442D /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61AE26D9238D006F442D /* PasswordTextField.swift */; };
+		C0BB61B126D924E5006F442D /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61B026D924E5006F442D /* EmailTextField.swift */; };
+		C0BB61B426D92569006F442D /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61B226D92569006F442D /* EmailTextField.swift */; };
+		C0BB61B526D92569006F442D /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61B326D92569006F442D /* PasswordTextField.swift */; };
 		C0BB88B526D3C3720061D96E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0BB88B426D3C3720061D96E /* GoogleService-Info.plist */; };
 		C0BF24D526CAC08000CFCC35 /* ChatTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */; };
 		C0C5058126D40451008081D9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5058026D403C3008081D9 /* SignUpView.swift */; };
@@ -90,6 +94,10 @@
 		C0BB61A226D91E3E006F442D /* SignupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupButton.swift; sourceTree = "<group>"; };
 		C0BB61A426D91E67006F442D /* NameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextField.swift; sourceTree = "<group>"; };
 		C0BB61A626D91ECB006F442D /* SignupProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileImageView.swift; sourceTree = "<group>"; };
+		C0BB61AE26D9238D006F442D /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		C0BB61B026D924E5006F442D /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
+		C0BB61B226D92569006F442D /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmailTextField.swift; path = "Coconut/Source Code/View/SignIn/SubViews/EmailTextField.swift"; sourceTree = SOURCE_ROOT; };
+		C0BB61B326D92569006F442D /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PasswordTextField.swift; path = "Coconut/Source Code/View/SignIn/SubViews/PasswordTextField.swift"; sourceTree = SOURCE_ROOT; };
 		C0BB88B426D3C3720061D96E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0BB88B726D3D0550061D96E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabViewModel.swift; sourceTree = "<group>"; };
@@ -308,7 +316,18 @@
 			children = (
 				C0BB61A626D91ECB006F442D /* SignupProfileImageView.swift */,
 				C0BB61A426D91E67006F442D /* NameTextField.swift */,
+				C0BB61B226D92569006F442D /* EmailTextField.swift */,
+				C0BB61B326D92569006F442D /* PasswordTextField.swift */,
 				C0BB61A226D91E3E006F442D /* SignupButton.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		C0BB61A826D921B3006F442D /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				C0BB61AE26D9238D006F442D /* PasswordTextField.swift */,
+				C0BB61B026D924E5006F442D /* EmailTextField.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -317,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				C0BB88B726D3D0550061D96E /* SignInView.swift */,
+				C0BB61A826D921B3006F442D /* SubViews */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -669,10 +689,12 @@
 			files = (
 				C0C8086226D79C0900D249E4 /* MessageModel.swift in Sources */,
 				C0E7B33B26C178F200D70C7D /* View+extension.swift in Sources */,
+				C0BB61B126D924E5006F442D /* EmailTextField.swift in Sources */,
 				C024F8E226C8408B0054A8B3 /* LiveChatSessionViewModel.swift in Sources */,
 				C0DDC56026C0674700535A06 /* HomeView.swift in Sources */,
 				C0F08BF426C2E107003F7236 /* ChatRequestContentView.swift in Sources */,
 				C0850D7B26CB2C12003E782E /* ChatView.swift in Sources */,
+				C0BB61AF26D9238D006F442D /* PasswordTextField.swift in Sources */,
 				C0850D7526CB243A003E782E /* LiveChatSessionPersonInfoModel.swift in Sources */,
 				C0E90CCE26CAA2680074734C /* LiveChatSessionModel.swift in Sources */,
 				C0850D7826CB25B8003E782E /* PersonInfo.swift in Sources */,
@@ -686,6 +708,7 @@
 				C0BB61A326D91E3E006F442D /* SignupButton.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
 				C0DE3F9F26D5015C00CC1F1C /* UserModel.swift in Sources */,
+				C0BB61B526D92569006F442D /* PasswordTextField.swift in Sources */,
 				C02ADF2326D277C000905E3A /* SettingTabView.swift in Sources */,
 				C0BB61A726D91ECB006F442D /* SignupProfileImageView.swift in Sources */,
 				C0C5058126D40451008081D9 /* SignUpView.swift in Sources */,
@@ -697,6 +720,7 @@
 				C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */,
 				C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */,
 				C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */,
+				C0BB61B426D92569006F442D /* EmailTextField.swift in Sources */,
 				C09F0D2826C6C5E8006BC57B /* LiveChatSessionView.swift in Sources */,
 				C0EC668426D7E86A00CB2BBB /* ChatViewModel.swift in Sources */,
 				C0F08BF226C2E074003F7236 /* MustMeetsContentView.swift in Sources */,

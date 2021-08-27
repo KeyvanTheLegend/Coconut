@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignInView: View {
-    @State var username : String = ""
+    @State var email : String = ""
     @State var password : String = ""
     @State var isLogin : Bool = false
     @State var showSignUpView : Bool = false
@@ -27,9 +27,9 @@ struct SignInView: View {
 
                 Spacer()
                 Group{
-                    UsernameTextField(username: $username)
+                    EmailTextField(email: $email)
                     PasswordTextField(password: $password)
-                    LoginButton(isLogin: $isLogin, username: $username)
+                    LoginButton(isLogin: $isLogin, username: $email)
                         .fullScreenCover(isPresented: $isLogin, content: HomeView.init)
                     
                 }
@@ -55,71 +55,6 @@ struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         SignInView()
             .previewDevice("iPhone 8")
-    }
-}
-
-struct UsernameTextField: View {
-    
-    @Binding var username  : String
-    
-    var body : some View {
-        HStack(alignment: .center, spacing: 24, content: {
-            Spacer()
-            TextField("", text : $username)
-                .placeholder(when: username.isEmpty ,alignment: .center, placeholder: {
-                    Text("Username")
-                        .foregroundColor(Color.white)
-                })
-                .padding([.leading,.trailing],32)
-                .padding([.bottom,.top], 16)
-                .foregroundColor(.white)
-                .background(Color.whiteColor.opacity(0.2))
-                .cornerRadius(8)
-                .font(
-                    .system(
-                        size: 16,
-                        weight: .regular,
-                        design: .monospaced
-                    )
-                )
-                .multilineTextAlignment(.center)
-            Spacer()
-        })
-        .padding(.bottom , 16)
-    }
-}
-struct PasswordTextField : View {
-    
-    @Binding var password :String
-    
-    var body: some View {
-        HStack(alignment: .center, spacing: 24, content: {
-            Spacer()
-            SecureField("", text : $password)
-                
-                .placeholder(when: password.isEmpty ,alignment: .center, placeholder: {
-                    Text("Password")
-                        .foregroundColor(Color.white)
-                })
-                .foregroundColor(.white)
-                .padding([.leading,.trailing],32)
-                .padding([.bottom,.top], 16)
-                .background(Color.whiteColor.opacity(0.2))
-                
-                .cornerRadius(8)
-                .font(
-                    .system(
-                        size: 16,
-                        weight: .regular,
-                        design: .monospaced
-                    )
-                )
-                .multilineTextAlignment(.center)
-                .textContentType(.password)
-                .padding(.bottom, 32)
-            
-            Spacer()
-        })
     }
 }
 struct LoginButton : View {

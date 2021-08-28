@@ -10,27 +10,18 @@ import SwiftUI
 /// Signup view using
 struct SignupView: View {
     
-    @State var name : String = ""
-    @State var email : String = ""
-    @State var password : String = ""
-    
     @StateObject var viewModel = SignupViewModel()
     
     var body: some View {
         VStack{
             VStack{
                 Spacer()
-                SignupProfileImageView()
+                SignupProfileImageView(viewModel: viewModel)
                 Group{
-                    NameTextField(name: $name)
-                    EmailTextField(email: $email)
-                    PasswordTextField(password: $password)
-                    SingUpButton(
-                        name: $name,
-                        email: $email,
-                        password: $password,
-                        viewModel: viewModel
-                    )
+                    NameTextField(name: $viewModel.name)
+                    EmailTextField(email: $viewModel.email)
+                    PasswordTextField(password: $viewModel.password)
+                    SingUpButton(viewModel: viewModel)
                     .fullScreenCover(
                         isPresented: $viewModel.isPresentedHomeTabView,
                         content: HomeView.init
@@ -46,9 +37,11 @@ struct SignupView: View {
                         message: Text(viewModel.errorSignup?.description ?? "error"),
                         dismissButton: .default(
                             Text("Dismiss")
-                                .foregroundColor(Color.red)
                         )
                     )
+                }
+                .popover(isPresented: $viewModel.showImagePicker) {
+                    ImagePicker(selectedImage: $viewModel.selectedImage, didSet: $viewModel.isImageSelected)
                 }
             }
             .background(Color.background.ignoresSafeArea())

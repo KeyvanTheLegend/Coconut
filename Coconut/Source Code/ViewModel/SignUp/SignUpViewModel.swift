@@ -12,11 +12,20 @@ class SignupViewModel : ObservableObject {
     
     // MARK: - Published Variables
     
+    @Published var name : String = ""
+    @Published var email : String = ""
+    @Published var password : String = ""
+    @Published var isImageSelected: Bool = false
+    @Published var showImagePicker: Bool = false
+    @Published var selectedImage: UIImage = UIImage()
+    
     /// user singup **State**
     @Published var stateSignup : NetworkRequestState = .UNDEFINED
     @Published var errorSignup : SignupError? = nil
     @Published var showAlert : Bool = false
     @Published var isPresentedHomeTabView = false
+    
+    
     
     // MARK: - Functions :
 
@@ -25,7 +34,7 @@ class SignupViewModel : ObservableObject {
     ///   - name: user name
     ///   - email: user email
     ///   - password: user email
-    func signUp(name: String , email : String , password : String) {
+    func signUp() {
         stateSignup = .LOADING
         /// Local validation 👇
         do{
@@ -50,11 +59,11 @@ class SignupViewModel : ObservableObject {
                 self.showAlert = true
                 return
             }
-            let user = UserModel(name: name, email: email)
+            let user = UserModel(name: self.name, email: self.email)
             DatabaseManager.shared.insertUser(user: user) { result in
                 if result {
                     self.stateSignup = .SUCCESS
-                    UserDefaults.standard.set(email, forKey: "Email")
+                    UserDefaults.standard.set(self.email, forKey: "Email")
                     self.isPresentedHomeTabView = true
                 }else{self.stateSignup = .FAILED}
             }

@@ -9,9 +9,6 @@ import SwiftUI
 
 struct SigninButton : View {
     
-    @Binding var email : String
-    @Binding var password : String
-    
     @ObservedObject var viewModel : SigninViewModel
     
     var body: some View{
@@ -37,10 +34,7 @@ struct SigninButton : View {
                 )
             /// singup button
             Button(action: {
-                viewModel.signIn(
-                    email: email,
-                    password: password
-                )
+                viewModel.signIn()
             }, label: {
                 Text("Signup")
                     .fontWeight(.medium)

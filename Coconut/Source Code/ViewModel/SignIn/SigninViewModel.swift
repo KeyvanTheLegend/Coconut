@@ -12,6 +12,11 @@ class SigninViewModel : ObservableObject{
     
     // MARK: - Published Variables
     
+    @Published var email : String = ""
+    @Published var password : String = ""
+    @Published var isLogin : Bool = false
+    @Published var showSignUpView : Bool = false
+    
     /// login request state
     @Published var stateSignin : NetworkRequestState = .UNDEFINED
     @Published var errorSignin : SigninError? = nil
@@ -25,7 +30,7 @@ class SigninViewModel : ObservableObject{
     /// - Parameters:
     ///   - email: user email
     ///   - password: user password
-    func signIn(email : String , password : String) {
+    func signIn() {
         stateSignin = .LOADING
         /// Local validation 👇
         do{
@@ -49,7 +54,7 @@ class SigninViewModel : ObservableObject{
                 self.showAlert = true
                 return
             }
-            UserDefaults.standard.setValue(email, forKey: "Email")
+            UserDefaults.standard.setValue(self.email, forKey: "Email")
             self.stateSignin = .SUCCESS
             self.presentHomeTabView = true
         }

@@ -9,11 +9,6 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @State var email : String = ""
-    @State var password : String = ""
-    @State var isLogin : Bool = false
-    @State var showSignUpView : Bool = false
-    
     @ObservedObject var viewModel = SigninViewModel()
     
     var body: some View {
@@ -34,13 +29,9 @@ struct SignInView: View {
                 Spacer()
                 Group
                 {
-                    EmailTextField(email: $email)
-                    PasswordTextField(password: $password)
-                    SigninButton(
-                        email: $email,
-                        password: $password,
-                        viewModel: viewModel
-                    )
+                    EmailTextField(email: $viewModel.email)
+                    PasswordTextField(password: $viewModel.password)
+                    SigninButton(viewModel: viewModel)
                     .fullScreenCover(
                         isPresented: $viewModel.presentHomeTabView,
                         content: HomeView.init
@@ -49,10 +40,10 @@ struct SignInView: View {
                 Group
                 {
                     Spacer()
-                    SignupViewGroup(showSignUpView: $showSignUpView)
+                    SignupViewGroup(showSignUpView: $viewModel.showSignUpView)
                     NavigationLink(
                         destination: SignupView(),
-                        isActive: $showSignUpView,
+                        isActive: $viewModel.showSignUpView,
                         label: {
                             EmptyView()
                         })

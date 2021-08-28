@@ -10,9 +10,6 @@ import SwiftUI
 /// user tap this button to send **signup** request to firebase
 struct SingUpButton : View {
     
-    @Binding var name : String
-    @Binding var email : String
-    @Binding var password : String
     /// injected viewModel
     @ObservedObject var viewModel : SignupViewModel
     
@@ -39,11 +36,7 @@ struct SingUpButton : View {
                 )
             /// singup button
             Button(action: {
-                viewModel.signUp(
-                    name: name,
-                    email: email,
-                    password: password
-                )
+                viewModel.signUp()
             }, label: {
                 Text("Signup")
                     .fontWeight(.medium)

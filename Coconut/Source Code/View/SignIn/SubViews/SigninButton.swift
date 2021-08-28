@@ -22,18 +22,18 @@ struct SigninButton : View {
                 .frame(width: 30, height: 30, alignment: .center)
                 .foregroundColor(.white)
                 .zIndex(
-                    viewModel.stateLogin.isLoading() ? 2:0
+                    viewModel.stateSignin.isLoading() ? 2:0
                 )
                 .rotationEffect(
-                    viewModel.stateLogin.isLoading() ? Angle(degrees: 360):.zero,
+                    viewModel.stateSignin.isLoading() ? Angle(degrees: 360):.zero,
                     anchor: .center
                 )
                 .animation(
-                    viewModel.stateLogin.isLoading() ?
+                    viewModel.stateSignin.isLoading() ?
                         .easeIn(duration: 1).repeatForever(autoreverses: false):.linear(duration: 0)
                 )
                 .opacity(
-                    viewModel.stateLogin.isLoading() ? 1:0
+                    viewModel.stateSignin.isLoading() ? 1:0
                 )
             /// singup button
             Button(action: {
@@ -49,7 +49,7 @@ struct SigninButton : View {
             .foregroundColor(.black)
             .clipped()
             .opacity(
-                viewModel.stateLogin == .LOADING ? 0:1
+                viewModel.stateSignin == .LOADING ? 0:1
             )
         }
         .padding(EdgeInsets(top: 12, leading: 64, bottom: 12, trailing: 64))

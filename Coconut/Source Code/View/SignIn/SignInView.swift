@@ -16,6 +16,11 @@ struct SignInView: View {
     
     @ObservedObject var viewModel = SigninViewModel()
     
+    init(){
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self])
+          .tintColor = UIColor(Color("AccentColor"))
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -57,6 +62,16 @@ struct SignInView: View {
                             EmptyView()
                         })
                     Spacer()
+                }
+                /// Alert
+                .alert(isPresented: $viewModel.showAlert) {
+                    Alert(
+                        title: Text(viewModel.errorSignin?.title ?? "error"),
+                        message: Text(viewModel.errorSignin?.description ?? "error"),
+                        dismissButton: .default(Text("Dismiss")
+                                                    .foregroundColor(Color.red)
+                        )
+                    )
                 }
             }
             .background(Color.background.ignoresSafeArea())

@@ -63,9 +63,6 @@ struct SignInView: View {
                         })
                     Spacer()
                 }
-                .onTapGesture {
-                    hideKeyboard()
-                }
                 /// Alert
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(
@@ -79,6 +76,9 @@ struct SignInView: View {
             }
             .background(Color.background.ignoresSafeArea())
             .ignoresSafeArea(.container)
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
     }
 }

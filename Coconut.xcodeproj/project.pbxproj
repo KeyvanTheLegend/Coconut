@@ -42,7 +42,7 @@
 		C0DDC56526C0674900535A06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DDC56426C0674900535A06 /* Preview Assets.xcassets */; };
 		C0DDC57026C0674900535A06 /* CoconutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC56F26C0674900535A06 /* CoconutTests.swift */; };
 		C0DDC57B26C0674900535A06 /* CoconutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC57A26C0674900535A06 /* CoconutUITests.swift */; };
-		C0DE3F9D26D4F79500CC1F1C /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE3F9C26D4F79500CC1F1C /* SignUpViewModel.swift */; };
+		C0DE3F9D26D4F79500CC1F1C /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE3F9C26D4F79500CC1F1C /* SignupViewModel.swift */; };
 		C0DE3F9F26D5015C00CC1F1C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE3F9E26D5015C00CC1F1C /* UserModel.swift */; };
 		C0E2087626DA177A000B905C /* Encodeable+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E2087526DA177A000B905C /* Encodeable+extension.swift */; };
 		C0E2087826DA792C000B905C /* Error+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E2087726DA792C000B905C /* Error+extension.swift */; };
@@ -122,7 +122,7 @@
 		C0DDC57626C0674900535A06 /* CoconutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoconutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC57A26C0674900535A06 /* CoconutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutUITests.swift; sourceTree = "<group>"; };
 		C0DDC57C26C0674900535A06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C0DE3F9C26D4F79500CC1F1C /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		C0DE3F9C26D4F79500CC1F1C /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		C0DE3F9E26D5015C00CC1F1C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C0E2087526DA177A000B905C /* Encodeable+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodeable+extension.swift"; sourceTree = "<group>"; };
 		C0E2087726DA792C000B905C /* Error+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+extension.swift"; sourceTree = "<group>"; };
@@ -421,7 +421,7 @@
 		C0DE3F9B26D4F78300CC1F1C /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				C0DE3F9C26D4F79500CC1F1C /* SignUpViewModel.swift */,
+				C0DE3F9C26D4F79500CC1F1C /* SignupViewModel.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -713,7 +713,7 @@
 				C0A77C8B26C43EE9006B364D /* ChatTabView.swift in Sources */,
 				C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */,
 				C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */,
-				C0DE3F9D26D4F79500CC1F1C /* SignUpViewModel.swift in Sources */,
+				C0DE3F9D26D4F79500CC1F1C /* SignupViewModel.swift in Sources */,
 				C0BB61A326D91E3E006F442D /* SignupButton.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,
 				C0BB61B726D94C53006F442D /* SigninViewModel.swift in Sources */,

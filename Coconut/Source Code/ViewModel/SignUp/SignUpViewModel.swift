@@ -19,12 +19,14 @@ enum NetworkRequestState {
     }
 }
 
-class SignUpViewModel : ObservableObject {
+class SignupViewModel : ObservableObject {
     
     // MARK: - Published Variables
     
     /// user singup **State**
     @Published var stateSignup : NetworkRequestState = .UNDEFINED
+    @Published var errorSignup : SignupError? = nil
+    @Published var showAlert : Bool = false
     @Published var isPresentedHomeTabView = false
     
     // MARK: - Functions :
@@ -33,8 +35,24 @@ class SignUpViewModel : ObservableObject {
     /// - Parameters:
     ///   - name: user name
     ///   - email: user email
+    ///   - password: user email
     func signUp(name: String , email : String , password : String) {
         stateSignup = .LOADING
+        /// Local validation 👇
+        do{
+            try isEmailValid(email: email)
+            try isPasswordValid(password:password)
+        }catch {
+            guard let error = error as? SignupError else {
+                self.stateSignup = .FAILED
+                return
+            }
+            self.stateSignup = .FAILED
+            self.errorSignup = error
+            self.showAlert = true
+            return
+        }
+        /// Local validation passed  👆
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             guard error == nil else {
                 self.stateSignup = .FAILED
@@ -45,22 +63,60 @@ class SignUpViewModel : ObservableObject {
                 if result {
                     self.stateSignup = .SUCCESS
                     UserDefaults.standard.set(email, forKey: "Email")
-                }
-                else{
-                    self.stateSignup = .FAILED
-                }
-                self.publish(with: self.stateSignup)
+                    self.isPresentedHomeTabView = true
+                }else{self.stateSignup = .FAILED}
             }
         }
     }
+}
+
+// MARK: - Local User Validation
+extension SignupViewModel {
     
-    private func publish(with state : NetworkRequestState) {
-        switch state {
-        case .SUCCESS:
-            isPresentedHomeTabView = true
-            break
-        default:
-            break
+    ///  check validation of entered email
+    /// - Parameter email: entered email
+    /// - Throws: throws error if not valid
+    private func isEmailValid(email : String) throws {
+        guard email.count > 0 else {
+            throw SigninError.EMPTY_EMAIL
+        }
+    }
+    /// check validation of entered password
+    /// - Parameter password: entered password
+    /// - Throws: throws error if not valid
+    private func isPasswordValid(password : String) throws {
+        guard password.count > 0 else {
+            throw SigninError.EMPTY_PASSWORD
+        }
+    }
+}
+
+// MARK: - Singup Errors
+enum SignupError : Int , Error {
+    case EMPTY_EMAIL
+    case EMPTY_PASSWORD
+    case WEAK_PASSWORD = 17009
+    
+    /// this is shown on alret **title**
+    var title : String {
+        switch self {
+        case .EMPTY_EMAIL:
+            return "Empty Email"
+        case .EMPTY_PASSWORD:
+            return "Empty Password"
+        case .WEAK_PASSWORD:
+            return "Weak Password"
+        }
+    }
+    /// this is shown on alret **message**
+    var description : String {
+        switch self {
+        case .EMPTY_EMAIL:
+            return "Please enter your email"
+        case .EMPTY_PASSWORD:
+            return "Please enter your password"
+        case .WEAK_PASSWORD:
+            return "Please enter the correct password"
         }
     }
 }

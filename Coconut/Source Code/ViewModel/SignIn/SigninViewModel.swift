@@ -69,30 +69,30 @@ enum SigninError : Int , Error {
     case EMPTY_PASSWORD
     case WRONG_PASSWORD = 17009
     case TEMPORARILY_DISABLED = 17010
-    
+    /// this is shown on alret **title**
     var title : String {
         switch self {
         case .EMPTY_EMAIL:
             return "Empty Email"
+        case .EMPTY_PASSWORD:
+            return "Empty Password"
         case .WRONG_PASSWORD:
             return "Wrong Password"
         case .TEMPORARILY_DISABLED:
             return "Temporarily Disabled"
-        default:
-            return "error"
         }
     }
+    /// this is shown on alret **message**
     var description : String {
         switch self {
         case .EMPTY_EMAIL:
             return "Please enter your email"
+        case .EMPTY_PASSWORD:
+            return "Please enter your password"
         case .WRONG_PASSWORD:
             return "Please enter the correct password"
         case .TEMPORARILY_DISABLED:
             return "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
-            
-        default:
-            return "error"
         }
     }
 }

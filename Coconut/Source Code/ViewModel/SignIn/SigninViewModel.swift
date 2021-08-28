@@ -53,6 +53,9 @@ class SigninViewModel : ObservableObject{
             self.presentHomeTabView = true
         }
     }
+}
+// MARK: - Local User Validation
+extension SigninViewModel {
     private func isEmailValid(email : String) throws -> Void {
         guard email.count > 0 else {
             throw SigninError.EMPTY_EMAIL
@@ -64,6 +67,8 @@ class SigninViewModel : ObservableObject{
         }
     }
 }
+
+// MARK: - Singin Errors
 enum SigninError : Int , Error {
     case EMPTY_EMAIL
     case EMPTY_PASSWORD

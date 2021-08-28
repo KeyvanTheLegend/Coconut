@@ -8,17 +8,6 @@
 import Foundation
 import FirebaseAuth
 
-///  Network request state such as firebase database changes
-enum NetworkRequestState {
-    case UNDEFINED
-    case LOADING
-    case FAILED
-    case SUCCESS
-    func isLoading() -> Bool {
-        return self == .LOADING
-    }
-}
-
 class SignupViewModel : ObservableObject {
     
     // MARK: - Published Variables
@@ -40,6 +29,7 @@ class SignupViewModel : ObservableObject {
         stateSignup = .LOADING
         /// Local validation 👇
         do{
+            try isNameValid(name: name)
             try isEmailValid(email: email)
             try isPasswordValid(password:password)
         }catch {
@@ -73,12 +63,21 @@ class SignupViewModel : ObservableObject {
 // MARK: - Local User Validation
 extension SignupViewModel {
     
+    ///  check validation of entered name
+    /// - Parameter name: entered name
+    /// - Throws: throws error if not valid
+    private func isNameValid(name : String) throws {
+        guard name.count > 0 else {
+            throw SignupError.EMPTY_NAME
+        }
+    }
+    
     ///  check validation of entered email
     /// - Parameter email: entered email
     /// - Throws: throws error if not valid
     private func isEmailValid(email : String) throws {
         guard email.count > 0 else {
-            throw SigninError.EMPTY_EMAIL
+            throw SignupError.EMPTY_EMAIL
         }
     }
     /// check validation of entered password
@@ -86,20 +85,24 @@ extension SignupViewModel {
     /// - Throws: throws error if not valid
     private func isPasswordValid(password : String) throws {
         guard password.count > 0 else {
-            throw SigninError.EMPTY_PASSWORD
+            throw SignupError.EMPTY_PASSWORD
         }
     }
 }
 
 // MARK: - Singup Errors
 enum SignupError : Int , Error {
+    case EMPTY_NAME
     case EMPTY_EMAIL
     case EMPTY_PASSWORD
+    
     case WEAK_PASSWORD = 17009
     
     /// this is shown on alret **title**
     var title : String {
         switch self {
+        case .EMPTY_NAME:
+            return "Empty Name"
         case .EMPTY_EMAIL:
             return "Empty Email"
         case .EMPTY_PASSWORD:
@@ -111,6 +114,8 @@ enum SignupError : Int , Error {
     /// this is shown on alret **message**
     var description : String {
         switch self {
+        case .EMPTY_NAME:
+            return "Please enter your name"
         case .EMPTY_EMAIL:
             return "Please enter your email"
         case .EMPTY_PASSWORD:

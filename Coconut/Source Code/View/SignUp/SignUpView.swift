@@ -8,13 +8,13 @@
 import SwiftUI
 
 /// Signup view using
-struct SignUpView: View {
+struct SignupView: View {
     
     @State var name : String = ""
     @State var email : String = ""
     @State var password : String = ""
     
-    @StateObject var viewModel = SignUpViewModel()
+    @StateObject var viewModel = SignupViewModel()
     
     var body: some View {
         VStack{
@@ -40,6 +40,16 @@ struct SignUpView: View {
                     Spacer()
                     Spacer()
                 }
+                .alert(isPresented: $viewModel.showAlert) {
+                    Alert(
+                        title: Text(viewModel.errorSignup?.title ?? "error"),
+                        message: Text(viewModel.errorSignup?.description ?? "error"),
+                        dismissButton: .default(
+                            Text("Dismiss")
+                                .foregroundColor(Color.red)
+                        )
+                    )
+                }
             }
             .background(Color.background.ignoresSafeArea())
             .ignoresSafeArea(.all, edges: .top)
@@ -48,11 +58,12 @@ struct SignUpView: View {
             }
         }
         .ignoresSafeArea(.all, edges: .top)
+        
     }
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignupView()
     }
 }

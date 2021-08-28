@@ -14,7 +14,7 @@ struct SingUpButton : View {
     @Binding var email : String
     @Binding var password : String
     /// injected viewModel
-    @ObservedObject var viewModel : SignUpViewModel
+    @ObservedObject var viewModel : SignupViewModel
     
     var body: some View{
         ZStack(alignment: .center){

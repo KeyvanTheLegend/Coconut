@@ -51,7 +51,7 @@ struct SignInView: View {
                     Spacer()
                     SignupViewGroup(showSignUpView: $showSignUpView)
                     NavigationLink(
-                        destination: SignUpView(),
+                        destination: SignupView(),
                         isActive: $showSignUpView,
                         label: {
                             EmptyView()

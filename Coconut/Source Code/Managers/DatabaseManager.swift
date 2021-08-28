@@ -66,3 +66,15 @@ extension DatabaseManager {
         database.child("test").childByAutoId().setValue(json!)
     }    
 }
+// MARK: - Enums
+///  Network request state such as firebase database changes
+enum NetworkRequestState {
+    case UNDEFINED
+    case LOADING
+    case FAILED
+    case SUCCESS
+    
+    func isLoading() -> Bool {
+        return self == .LOADING
+    }
+}

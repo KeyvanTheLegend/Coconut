@@ -63,6 +63,9 @@ struct SignInView: View {
                         })
                     Spacer()
                 }
+                .onTapGesture {
+                    hideKeyboard()
+                }
                 /// Alert
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(

@@ -10,7 +10,10 @@ import Firebase
 
 @main
 struct CoconutApp: App {
-    init() {FirebaseApp.configure()}
+    init() {
+        FirebaseApp.configure()
+        globalConfigure()
+    }
     var body: some Scene {
         WindowGroup {
             /// user is signed in
@@ -21,5 +24,9 @@ struct CoconutApp: App {
                 SignInView()
             }
         }
+    }
+    private func globalConfigure(){
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self])
+          .tintColor = UIColor(Color("AccentColor"))
     }
 }

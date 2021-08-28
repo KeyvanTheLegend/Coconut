@@ -16,11 +16,6 @@ struct SignInView: View {
     
     @ObservedObject var viewModel = SigninViewModel()
     
-    init(){
-        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self])
-          .tintColor = UIColor(Color("AccentColor"))
-    }
-    
     var body: some View {
         NavigationView {
             VStack {

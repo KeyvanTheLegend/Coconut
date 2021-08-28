@@ -27,6 +27,7 @@ class SigninViewModel : ObservableObject{
     ///   - password: user password
     func signIn(email : String , password : String) {
         stateSignin = .LOADING
+        /// Local validation 👇
         do{
             try isEmailValid(email: email)
             try isPasswordValid(password:password)
@@ -40,6 +41,7 @@ class SigninViewModel : ObservableObject{
             self.showAlert = true
             return
         }
+        /// Local validation passed  👆
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             guard error == nil else {
                 self.stateSignin = .FAILED
@@ -56,12 +58,19 @@ class SigninViewModel : ObservableObject{
 }
 // MARK: - Local User Validation
 extension SigninViewModel {
-    private func isEmailValid(email : String) throws -> Void {
+    
+    ///  check validation of entered email
+    /// - Parameter email: entered email
+    /// - Throws: throws error if not valid
+    private func isEmailValid(email : String) throws {
         guard email.count > 0 else {
             throw SigninError.EMPTY_EMAIL
         }
     }
-    private func isPasswordValid(password : String) throws -> Void {
+    /// check validation of entered password
+    /// - Parameter password: entered password
+    /// - Throws: throws error if not valid
+    private func isPasswordValid(password : String) throws {
         guard password.count > 0 else {
             throw SigninError.EMPTY_PASSWORD
         }

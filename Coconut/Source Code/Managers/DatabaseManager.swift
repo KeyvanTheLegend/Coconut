@@ -64,6 +64,5 @@ extension DatabaseManager {
     func sendMessage(message : MessageModel){
         let json = message.dictionary
         database.child("test").childByAutoId().setValue(json!)
-        
     }    
 }

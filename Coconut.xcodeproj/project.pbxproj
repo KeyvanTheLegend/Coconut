@@ -45,6 +45,7 @@
 		C0DE3F9D26D4F79500CC1F1C /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE3F9C26D4F79500CC1F1C /* SignUpViewModel.swift */; };
 		C0DE3F9F26D5015C00CC1F1C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE3F9E26D5015C00CC1F1C /* UserModel.swift */; };
 		C0E2087626DA177A000B905C /* Encodeable+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E2087526DA177A000B905C /* Encodeable+extension.swift */; };
+		C0E2087826DA792C000B905C /* Error+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E2087726DA792C000B905C /* Error+extension.swift */; };
 		C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33526C1714C00D70C7D /* Color+extension.swift */; };
 		C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */; };
 		C0E7B33B26C178F200D70C7D /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33A26C178F200D70C7D /* View+extension.swift */; };
@@ -124,6 +125,7 @@
 		C0DE3F9C26D4F79500CC1F1C /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		C0DE3F9E26D5015C00CC1F1C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C0E2087526DA177A000B905C /* Encodeable+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodeable+extension.swift"; sourceTree = "<group>"; };
+		C0E2087726DA792C000B905C /* Error+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33526C1714C00D70C7D /* Color+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33A26C178F200D70C7D /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				C0E7B33A26C178F200D70C7D /* View+extension.swift */,
 				C0FEFDAC26C1A3E9008F362B /* List+extension.swift */,
 				C0E2087526DA177A000B905C /* Encodeable+extension.swift */,
+				C0E2087726DA792C000B905C /* Error+extension.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				C0BB61A526D91E67006F442D /* NameTextField.swift in Sources */,
 				C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */,
 				C0BB61BA26D97777006F442D /* SigninButton.swift in Sources */,
+				C0E2087826DA792C000B905C /* Error+extension.swift in Sources */,
 				C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */,
 				C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */,
 				C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */,

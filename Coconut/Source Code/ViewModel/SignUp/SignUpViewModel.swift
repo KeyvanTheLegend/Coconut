@@ -44,8 +44,10 @@ class SignupViewModel : ObservableObject {
         }
         /// Local validation passed  👆
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            guard error == nil else {
+            if let error = error {
                 self.stateSignup = .FAILED
+                self.errorSignup = SignupError(rawValue: error.code)
+                self.showAlert = true
                 return
             }
             let user = UserModel(name: name, email: email)
@@ -95,8 +97,7 @@ enum SignupError : Int , Error {
     case EMPTY_NAME
     case EMPTY_EMAIL
     case EMPTY_PASSWORD
-    
-    case WEAK_PASSWORD = 17009
+    case WEAK_PASSWORD = 17026
     
     /// this is shown on alret **title**
     var title : String {
@@ -121,7 +122,7 @@ enum SignupError : Int , Error {
         case .EMPTY_PASSWORD:
             return "Please enter your password"
         case .WEAK_PASSWORD:
-            return "Please enter the correct password"
+            return "The password must be 6 characters long or more."
         }
     }
 }

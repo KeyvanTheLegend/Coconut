@@ -43,10 +43,9 @@ class SigninViewModel : ObservableObject{
         }
         /// Local validation passed  👆
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            guard error == nil else {
+            if let error = error {
                 self.stateSignin = .FAILED
-                guard let errorCode = (error as NSError?)?.code else {return}
-                self.errorSignin = SigninError(rawValue: errorCode)
+                self.errorSignin = SigninError(rawValue: error.code)
                 self.showAlert = true
                 return
             }

@@ -186,29 +186,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		C0198A2826C6D22400AF1FC8 /* Chat Tab */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Chat Tab";
-			sourceTree = "<group>";
-		};
-		C0198A2926C6D23C00AF1FC8 /* Home Tab */ = {
-			isa = PBXGroup;
-			children = (
-				C0DDC55F26C0674700535A06 /* HomeView.swift */,
-				C0F08BF326C2E107003F7236 /* ChatRequestContentView.swift */,
-				C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */,
-			);
-			path = "Home Tab";
-			sourceTree = "<group>";
-		};
 		C02ADF1A26D2750D00905E3A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				C0C5057F26D403B1008081D9 /* SignUp */,
 				C0BB88B626D3CD1A0061D96E /* SignIn */,
 				C02ADF2126D2778300905E3A /* Setting Tab */,
+				C0E2087326DA1522000B905C /* Home Tab */,
 				C02ADF1D26D2756200905E3A /* Chat Tab */,
 			);
 			path = View;
@@ -284,7 +268,6 @@
 				C02ADF1B26D2751400905E3A /* ViewModel */,
 				C0C8085E26D7859A00D249E4 /* Managers */,
 				C0E7B33726C171DB00D70C7D /* Extentions */,
-				C0F08BF026C2D4D4003F7236 /* Tabs */,
 			);
 			path = "Source Code";
 			sourceTree = "<group>";
@@ -439,6 +422,24 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		C0E2087326DA1522000B905C /* Home Tab */ = {
+			isa = PBXGroup;
+			children = (
+				C0DDC55F26C0674700535A06 /* HomeView.swift */,
+				C0E2087426DA1547000B905C /* SubViews */,
+			);
+			path = "Home Tab";
+			sourceTree = "<group>";
+		};
+		C0E2087426DA1547000B905C /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				C0F08BF326C2E107003F7236 /* ChatRequestContentView.swift */,
+				C0F08BF126C2E074003F7236 /* MustMeetsContentView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		C0E7B33726C171DB00D70C7D /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,18 +451,6 @@
 			);
 			path = Extentions;
 			sourceTree = "<group>";
-		};
-		C0F08BF026C2D4D4003F7236 /* Tabs */ = {
-			isa = PBXGroup;
-			children = (
-				C0198A2926C6D23C00AF1FC8 /* Home Tab */,
-				C0198A2826C6D22400AF1FC8 /* Chat Tab */,
-			);
-			indentWidth = 4;
-			path = Tabs;
-			sourceTree = "<group>";
-			tabWidth = 4;
-			usesTabs = 0;
 		};
 /* End PBXGroup section */
 

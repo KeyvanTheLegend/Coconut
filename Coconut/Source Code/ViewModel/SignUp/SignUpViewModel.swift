@@ -8,8 +8,8 @@
 import Foundation
 import FirebaseAuth
 
-///  User **SIGNUP** states
-enum SignupState {
+///  Network request state such as firebase database changes
+enum NetworkRequestState {
     case UNDEFINED
     case LOADING
     case FAILED
@@ -24,7 +24,7 @@ class SignUpViewModel : ObservableObject {
     // MARK: - Published Variables
     
     /// user singup **State**
-    @Published var state : SignupState = .UNDEFINED
+    @Published var stateSignup : NetworkRequestState = .UNDEFINED
     @Published var isPresentedHomeTabView = false
     
     // MARK: - Functions :
@@ -34,27 +34,27 @@ class SignUpViewModel : ObservableObject {
     ///   - name: user name
     ///   - email: user email
     func signUp(name: String , email : String , password : String) {
-        state = .LOADING
+        stateSignup = .LOADING
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             guard error == nil else {
-                self.state = .FAILED
+                self.stateSignup = .FAILED
                 return
             }
             let user = UserModel(name: name, email: email)
             DatabaseManager.shared.insertUser(user: user) { result in
                 if result {
-                    self.state = .SUCCESS
+                    self.stateSignup = .SUCCESS
                     UserDefaults.standard.set(email, forKey: "Email")
                 }
                 else{
-                    self.state = .FAILED
+                    self.stateSignup = .FAILED
                 }
-                self.publish(with: self.state)
+                self.publish(with: self.stateSignup)
             }
         }
     }
     
-    private func publish(with state : SignupState) {
+    private func publish(with state : NetworkRequestState) {
         switch state {
         case .SUCCESS:
             isPresentedHomeTabView = true

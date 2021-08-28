@@ -1,20 +1,18 @@
 //
-//  SignupButton.swift
+//  SigninButton.swift
 //  Coconut
 //
-//  Created by sh on 8/27/21.
+//  Created by Keyvan Yaghoubian on 8/28/21.
 //
 
 import SwiftUI
 
-/// user tap this button to send **signup** request to firebase
-struct SingUpButton : View {
+struct SigninButton : View {
     
-    @Binding var name : String
     @Binding var email : String
     @Binding var password : String
-    /// injected viewModel
-    @ObservedObject var viewModel : SignUpViewModel
+    
+    @ObservedObject var viewModel : SigninViewModel
     
     var body: some View{
         ZStack(alignment: .center){
@@ -24,23 +22,22 @@ struct SingUpButton : View {
                 .frame(width: 30, height: 30, alignment: .center)
                 .foregroundColor(.white)
                 .zIndex(
-                    viewModel.stateSignup.isLoading() ? 2:0
+                    viewModel.stateLogin.isLoading() ? 2:0
                 )
                 .rotationEffect(
-                    viewModel.stateSignup.isLoading() ? Angle(degrees: 360) : .zero,
+                    viewModel.stateLogin.isLoading() ? Angle(degrees: 360):.zero,
                     anchor: .center
                 )
                 .animation(
-                    viewModel.stateSignup.isLoading() ?
-                        .easeIn(duration: 1).repeatForever() : .linear(duration: 0)
+                    viewModel.stateLogin.isLoading() ?
+                        .easeIn(duration: 1).repeatForever(autoreverses: false):.linear(duration: 0)
                 )
                 .opacity(
-                    viewModel.stateSignup.isLoading() ? 1:0
+                    viewModel.stateLogin.isLoading() ? 1:0
                 )
             /// singup button
             Button(action: {
-                viewModel.signUp(
-                    name: name,
+                viewModel.signIn(
                     email: email,
                     password: password
                 )
@@ -52,7 +49,7 @@ struct SingUpButton : View {
             .foregroundColor(.black)
             .clipped()
             .opacity(
-                viewModel.stateSignup == .LOADING ? 0:1
+                viewModel.stateLogin == .LOADING ? 0:1
             )
         }
         .padding(EdgeInsets(top: 12, leading: 64, bottom: 12, trailing: 64))
@@ -60,4 +57,3 @@ struct SingUpButton : View {
         .cornerRadius(8)
     }
 }
-

@@ -13,7 +13,13 @@ struct CoconutApp: App {
     init() {FirebaseApp.configure()}
     var body: some Scene {
         WindowGroup {
-            SignInView()
+            /// user is signed in
+            if UserDefaults.standard.string(forKey: "Email") != nil {
+                HomeView()
+            }
+            else{
+                SignInView()
+            }
         }
     }
 }

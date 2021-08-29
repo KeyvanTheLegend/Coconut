@@ -54,9 +54,17 @@ class SigninViewModel : ObservableObject{
                 self.showAlert = true
                 return
             }
-            UserDefaults.standard.setValue(self.email, forKey: "Email")
-            self.stateSignin = .SUCCESS
-            self.presentHomeTabView = true
+            print(email)
+            print(email.safeString())
+            UserDefaults.standard.setValue(email, forKey: "Email")
+            DatabaseManager.shared.getUser(withEmail: email.safeString()) { test in
+                UserDefaults.standard.setValue(test.picture , forKey: "ProfilePictureUrl")
+                UserDefaults.standard.setValue(test.name , forKey: "Name")
+
+                self.stateSignin = .SUCCESS
+                self.presentHomeTabView = true
+            }
+
         }
     }
 }

@@ -14,9 +14,7 @@ struct UserModel : Codable {
     var picture : String = ""
     
     var safeEmail : String {
-        var safeEmail = email.replacingOccurrences(of: "@", with: "-")
-        safeEmail =  safeEmail.replacingOccurrences(of: ".", with: "-")
-        return safeEmail
+        return email.safeString()
     }
     var pictureFileName : String {
         return safeEmail + ".png"

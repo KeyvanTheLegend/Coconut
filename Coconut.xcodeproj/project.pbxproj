@@ -21,6 +21,8 @@
 		C09F0D2A26C6C8D7006BC57B /* PersonImageNameLastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */; };
 		C0A41F6926CFC88C008C273B /* TextField+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A41F6826CFC88C008C273B /* TextField+extension.swift */; };
 		C0A77C8B26C43EE9006B364D /* ChatTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A77C8A26C43EE9006B364D /* ChatTabView.swift */; };
+		C0B9DD5626DBA423005BC51C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9DD5526DBA423005BC51C /* ImageView.swift */; };
+		C0B9DD5826DBB6E6005BC51C /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9DD5726DBB6E6005BC51C /* String+extension.swift */; };
 		C0BB61A326D91E3E006F442D /* SignupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A226D91E3E006F442D /* SignupButton.swift */; };
 		C0BB61A526D91E67006F442D /* NameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A426D91E67006F442D /* NameTextField.swift */; };
 		C0BB61A726D91ECB006F442D /* SignupProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A626D91ECB006F442D /* SignupProfileImageView.swift */; };
@@ -97,6 +99,8 @@
 		C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameLastMessageView.swift; sourceTree = "<group>"; };
 		C0A41F6826CFC88C008C273B /* TextField+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+extension.swift"; sourceTree = "<group>"; };
 		C0A77C8A26C43EE9006B364D /* ChatTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabView.swift; sourceTree = "<group>"; };
+		C0B9DD5526DBA423005BC51C /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		C0B9DD5726DBB6E6005BC51C /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		C0BB61A226D91E3E006F442D /* SignupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupButton.swift; sourceTree = "<group>"; };
 		C0BB61A426D91E67006F442D /* NameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextField.swift; sourceTree = "<group>"; };
 		C0BB61A626D91ECB006F442D /* SignupProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileImageView.swift; sourceTree = "<group>"; };
@@ -460,6 +464,7 @@
 				C0FEFDAC26C1A3E9008F362B /* List+extension.swift */,
 				C0E2087526DA177A000B905C /* Encodeable+extension.swift */,
 				C0E2087726DA792C000B905C /* Error+extension.swift */,
+				C0B9DD5726DBB6E6005BC51C /* String+extension.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -468,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				C0E9333726DAA066005212E3 /* ImagePicker.swift */,
+				C0B9DD5526DBA423005BC51C /* ImageView.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -714,6 +720,7 @@
 				C0E7B33B26C178F200D70C7D /* View+extension.swift in Sources */,
 				C0BB61B126D924E5006F442D /* EmailTextField.swift in Sources */,
 				C0E9333826DAA066005212E3 /* ImagePicker.swift in Sources */,
+				C0B9DD5626DBA423005BC51C /* ImageView.swift in Sources */,
 				C024F8E226C8408B0054A8B3 /* LiveChatSessionViewModel.swift in Sources */,
 				C0DDC56026C0674700535A06 /* HomeView.swift in Sources */,
 				C0F08BF426C2E107003F7236 /* ChatRequestContentView.swift in Sources */,
@@ -735,6 +742,7 @@
 				C0DE3F9F26D5015C00CC1F1C /* UserModel.swift in Sources */,
 				C0BB61B526D92569006F442D /* PasswordTextField.swift in Sources */,
 				C0E2087626DA177A000B905C /* Encodeable+extension.swift in Sources */,
+				C0B9DD5826DBB6E6005BC51C /* String+extension.swift in Sources */,
 				C02ADF2326D277C000905E3A /* SettingTabView.swift in Sources */,
 				C0BB61A726D91ECB006F442D /* SignupProfileImageView.swift in Sources */,
 				C0C5058126D40451008081D9 /* SignupView.swift in Sources */,

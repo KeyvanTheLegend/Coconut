@@ -120,7 +120,7 @@ struct SettingTabHeaderView : View {
     var body: some View{
         HStack(alignment : .top){
             ImageView(withURL: UserDefaults.standard.string(forKey: "ProfilePictureUrl") ?? "" )
-                .frame(width: 80, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .frame(width: 80, height: 80, alignment: .center)
                 .background(Color.primery)
                 .cornerRadius(12)
                 .font(.title)
@@ -137,68 +137,6 @@ struct SettingTabHeaderView : View {
                 
             }
             Spacer()
-        }
-    }
-}
-//struct RemoteImage : Image {
-//
-//    init(withUrl : String) {
-//        fetchImage(with: withUrl)
-//    }
-//    private func fetchImage(with url : String){
-//        guard let url = URL(string: url) else {
-//            return
-//        }
-//        let task = URLSession.shared.dataTask(
-//            with: url,
-//            completionHandler: { (data, response, error) in
-//                guard let data = data,
-//                      let image = UIImage(data: data) else { return }
-//                DispatchQueue.main.async {
-//
-//                }
-//        })
-//    }
-//}
-import Combine
-class ImageLoader: ObservableObject {
-    var didChange = PassthroughSubject<Data, Never>()
-    var data = Data() {
-        didSet {
-            didChange.send(data)
-        }
-    }
-
-    init(urlString:String) {
-        guard let url = URL(string: urlString) else { return }
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else { return }
-            DispatchQueue.main.async {
-                self.data = data
-            }
-        }
-        task.resume()
-    }
-}
-struct ImageView: View {
-    @ObservedObject var imageLoader:ImageLoader
-    @State var image:UIImage = UIImage()
-
-    init(withURL url:String) {
-        print(url)
-        print("HI")
-        print("ASD \(UserDefaults.standard.string(forKey: "ProfilePictureUrl"))")
-        imageLoader = ImageLoader(urlString:url)
-    }
-
-    var body: some View {
-        
-            Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width:80, height:80)
-                .onReceive(imageLoader.didChange) { data in
-                self.image = UIImage(data: data) ?? UIImage()
         }
     }
 }

@@ -23,11 +23,23 @@ extension DatabaseManager {
     ///   - compeltion: return true if success
     func insertUser(user : UserModel ,compeltion : @escaping ((Bool)->Void)) {
         database.child(user.safeEmail).setValue([
-            "name":user.name
+            "name":user.name,
+            "picture":user.picture,
+            "email":user.email
         ]) { error, _ in
             guard error == nil else {return compeltion(false)}
             compeltion(true)
         }
+    }
+    func getUser(withEmail safeEmail: String ,compeltion : @escaping ((UserModel)->Void)) {
+        database.child(safeEmail).observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value as? [String:Any] else {return}
+            let decoder = JSONDecoder()
+            let jsonData = try! JSONSerialization.data(withJSONObject:value)
+            let x = try! decoder.decode(UserModel.self, from: jsonData)
+            compeltion(x)
+        })
+        
     }
 }
 // MARK: - Messages Manager

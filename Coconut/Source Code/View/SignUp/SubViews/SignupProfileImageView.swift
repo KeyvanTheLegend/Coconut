@@ -14,12 +14,14 @@ struct SignupProfileImageView : View{
     var body: some View {
         ZStack(alignment : .top){
             if viewModel.isImageSelected {
-                Image(uiImage: viewModel.selectedImage)
+                if let image = viewModel.selectedImage {
+                Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .foregroundColor(.primery)
                     .frame(width: 110, height: 110, alignment: .center)
                     .cornerRadius(12)
+                }
             }
             else{
             Image(systemName: "person.fill")

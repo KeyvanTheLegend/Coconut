@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) private var presentationMode // allows you to dismiss the image picker overlay
-    @Binding var selectedImage: UIImage // selected image binding
+    @Binding var selectedImage: UIImage? // selected image binding
     @Binding var didSet: Bool // tells if the view was set or cancelled
     var sourceType = UIImagePickerController.SourceType.photoLibrary
     

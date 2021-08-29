@@ -34,9 +34,9 @@ struct SigninButton : View {
                 )
             /// singup button
             Button(action: {
-                viewModel.signIn()
+                viewModel.signIn(email: viewModel.email, password: viewModel.password)
             }, label: {
-                Text("Signup")
+                Text("Signin")
                     .fontWeight(.medium)
                     .foregroundColor(.white)
             })

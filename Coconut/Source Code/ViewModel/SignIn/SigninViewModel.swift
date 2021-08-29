@@ -30,7 +30,7 @@ class SigninViewModel : ObservableObject{
     /// - Parameters:
     ///   - email: user email
     ///   - password: user password
-    func signIn() {
+    func signIn(email :String , password : String) {
         stateSignin = .LOADING
         /// Local validation 👇
         do{

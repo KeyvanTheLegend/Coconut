@@ -10,6 +10,7 @@ target 'Coconut' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
 
   target 'CoconutTests' do
     inherit! :search_paths

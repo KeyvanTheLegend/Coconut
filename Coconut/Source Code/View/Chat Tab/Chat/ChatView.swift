@@ -6,31 +6,45 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ChatView: View {
+
     @State var text : String = ""
     @State var shouldHaveExteraButtonPadding = false
     @State var testing : CGFloat = 0
     @State var bottomPadding : CGFloat = 0
     @StateObject var viewModel = ChatViewModel()
-    
-    init( ) {
-        UITextView.appearance().backgroundColor = .clear
-    }
+    @Binding var converastionId :String?
+    @Binding var user :UserModel?
+
+
     var body: some View {
         VStack(alignment :  .leading , spacing: 0){
-            ChatHeaderView()
-                .background(Color.background)
+            ZStack{
+            ChatHeaderView(user: $user)
+                .background(Color.background.opacity(0.95))
+                
                 .padding(0)
+                
+            }
+            .background(BlurView().ignoresSafeArea(.container, edges: .top))
+            .zIndex(2)
             Divider()
+                .zIndex(2)
             Spacer()
+            ScrollViewReader { scrollViewReader in
             List{
                 ForEach(viewModel.messages) { item in
-                    if item.senderEmail ==                     UserDefaults.standard.string(forKey: "Email")!{
+                    if item.senderEmail == UserDefaults.standard.string(forKey: "Email")!{
                         SentMessageView(messsage: item.text)
+                            .id(item.id)
+
                     }else{
                         RecivedTextMessage(messsage: item.text)
-                        .listRowBackground(Color.red)
+                            .id(item.id)
+                            .listRowBackground(Color.background)
+                        
                     }
                 }
 
@@ -43,7 +57,26 @@ struct ChatView: View {
             .listStyle(InsetListStyle())
             .background(Color.background)
             .listRowInsets(EdgeInsets())
-            .background(Color.red)
+            .offset(CGSize(width: 0, height: -testing + 10 ))
+            .background(Color.background)
+            .onChange(of: testing, perform: { value in
+                withAnimation {
+                    if viewModel.messages.count > 0 {
+                    scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1].id,anchor: .bottom)
+                    }
+                }
+            })
+            .onChange(of: viewModel.messages.count, perform: { value in
+                withAnimation{
+                if viewModel.messages.count > 0 {
+                    print("onchange viewmodel message \(viewModel.messages.count)")
+                    print("ID \(viewModel.messages[viewModel.messages.count - 1 ].id)")
+                    scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1 ].id, anchor: .bottom)
+                }
+                }
+            })
+
+            }
             SendMessageView(viewModel: viewModel,text: $text)
                 .background(Color.background, alignment: .bottom)
                 .offset(x: 0 , y: -testing)
@@ -58,6 +91,8 @@ struct ChatView: View {
             hideKeyboard()
         }
         .onAppear(perform: {
+            UITextView.appearance().backgroundColor = .clear
+
             if let window = UIApplication.shared.windows.first{
                 let tempBottomPadding = window.safeAreaInsets.bottom
                 print(tempBottomPadding)
@@ -67,10 +102,15 @@ struct ChatView: View {
                 }
             }
         })
+        .onAppear(perform: {
+            print("CHAT VIEW ON APPEAR CONVERSATIONID IS  : \(converastionId)")
+            viewModel.setConverationId(convesationId: converastionId)
+            viewModel.setUser(user : user)
+            
+        })
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)) { notifictation in
             let keyboardSize = notifictation.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
             let keyboardheight = keyboardSize.height
-            print(keyboardheight)
             let duration = notifictation.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
             shouldHaveExteraButtonPadding = false
             withAnimation(.easeOut(duration: (duration - 0.05)) ) {
@@ -85,24 +125,34 @@ struct ChatView: View {
                     shouldHaveExteraButtonPadding = true
                 }
             }
+        
         }
+        .onDisappear(perform: {
+            print("HI IM HERE ")
+            viewModel.setConverationId(convesationId: nil)
+            viewModel.messages.removeAll()
+            
+
+        })
         .ignoresSafeArea(.keyboard)
+
     }
 }
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ChatView()
+//            ChatView(converastionId: nil)
         }
     }
 }
 
 struct ChatHeaderView : View {
+    @Binding var user : UserModel?
     
     var body: some View {
         HStack(alignment : .top){
-            Image("memoji1")
+            WebImage(url: URL(string: user?.picture ?? ""))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 90, alignment: .center)
@@ -113,7 +163,7 @@ struct ChatHeaderView : View {
                 .hiddenTabBar()
             VStack (alignment: .leading, spacing: 8, content: {
                 
-                Text("Keyvan")
+                Text(user?.name ?? "")
                     .foregroundColor(.white)
                     .font(.title3.weight(.medium))
                 HStack{
@@ -194,7 +244,7 @@ struct RecivedTextMessage : View {
         .padding(16)
         .padding(.bottom , 0)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        .listRowBackground(Color.red)
+        .listRowBackground(Color.background)
         .listRowInsets(EdgeInsets(.zero))
         .background(Color.background)
         .listStyle(InsetListStyle())
@@ -221,5 +271,22 @@ struct SentMessageView : View {
         .listRowBackground(Color.background)
         .listRowInsets(EdgeInsets())
         .background(Color.background)
+    }
+}
+struct BlurView: UIViewRepresentable {
+    typealias UIViewType = UIVisualEffectView
+    
+    let style: UIBlurEffect.Style
+    
+    init(style: UIBlurEffect.Style = .dark) {
+        self.style = style
+    }
+    
+    func makeUIView(context: Context) -> UIVisualEffectView {
+        return UIVisualEffectView(effect: UIBlurEffect(style: self.style))
+    }
+    
+    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = UIBlurEffect(style: .dark)
     }
 }

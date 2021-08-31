@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct UserModel : Codable {
-    
+struct UserModel : Identifiable , Codable {
+
     let name : String
     let email : String
     var picture : String = ""
@@ -19,4 +19,16 @@ struct UserModel : Codable {
     var pictureFileName : String {
         return safeEmail + ".png"
     }
+    
+    var id: UUID {
+        UUID()
+    }
+    enum CodingKeys : String, CodingKey {
+        case name
+        case email
+        case picture
+    }
+    var conversation : [ConversationModel] = []
+
+
 }

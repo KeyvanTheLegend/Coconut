@@ -12,5 +12,7 @@ extension Color {
     static let blackColor = Color("BackgroundColor")
     static let primery = Color("PrimeryColor")
     static let secondaryColor = Color("SecondaryColor")
+    static let test = Color("NavigationBackgroundColor")
+
 
 }

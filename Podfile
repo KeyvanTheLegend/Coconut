@@ -11,6 +11,7 @@ target 'Coconut' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  pod 'SDWebImageSwiftUI'
 
   target 'CoconutTests' do
     inherit! :search_paths

@@ -23,6 +23,7 @@ class ChatViewModel : ObservableObject  {
         guard self.conversationId == nil else {
             return	
         }
+        print(conversationId)
         if let convesationId = convesationId {
             self.conversationId = convesationId
             print("SETTING CONVERSATION ID \(convesationId)")
@@ -36,9 +37,29 @@ class ChatViewModel : ObservableObject  {
         }
     }
     func setUser(user : UserModel?){
-        self.user = user
+        if let user = user {
+            self.user = user
+            if let conversationId = user.sharedConversastion {
+                setConverationId(convesationId: conversationId)
+                return
+            }
+            let conversationId = conversationIdIfExsit(with: user)
+            print("user is set \(conversationId)")
+
+            setConverationId(convesationId: conversationId)
+        }
     }
     
+    private func conversationIdIfExsit(with otherUser : UserModel) ->String?{
+        guard let userEmail = UserDefaults.standard.string(forKey: "Email") else {return nil}
+        for conversation in otherUser.conversation {
+            if conversation.email ==  userEmail {
+                return conversation.conversationId
+            }
+            continue
+        }
+        return nil
+    }
     func sendMessage (message:String){
         print("Sending MEssage ConversationID is \(conversationId)")
         let email = UserDefaults.standard.string(forKey: "Email")!

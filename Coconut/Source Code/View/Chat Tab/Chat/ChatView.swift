@@ -9,20 +9,18 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ChatView: View {
-
+    
     @State var text : String = ""
     @State var shouldHaveExteraButtonPadding = false
     @State var testing : CGFloat = 0
     @State var bottomPadding : CGFloat = 0
     @StateObject var viewModel = ChatViewModel()
-    @Binding var converastionId :String?
-    @Binding var user :UserModel?
-
+    @Binding var withUser :UserModel?
 
     var body: some View {
         VStack(alignment :  .leading , spacing: 0){
             ZStack{
-            ChatHeaderView(user: $user)
+            ChatHeaderView(user: $withUser)
                 .background(Color.background.opacity(0.95))
                 
                 .padding(0)
@@ -103,9 +101,11 @@ struct ChatView: View {
             }
         })
         .onAppear(perform: {
-            print("CHAT VIEW ON APPEAR CONVERSATIONID IS  : \(converastionId)")
-            viewModel.setConverationId(convesationId: converastionId)
-            viewModel.setUser(user : user)
+//            print("CHAT VIEW ON APPEAR CONVERSATIONID IS  : \(converastionId)")
+//            viewModel.setConverationId(convesationId: converastionId)
+            viewModel.setUser(user : withUser)
+            setNavBarAppearence(to: .transparent)
+
             
         })
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)) { notifictation in
@@ -149,7 +149,7 @@ struct ChatView_Previews: PreviewProvider {
 
 struct ChatHeaderView : View {
     @Binding var user : UserModel?
-    
+
     var body: some View {
         HStack(alignment : .top){
             WebImage(url: URL(string: user?.picture ?? ""))
@@ -162,12 +162,12 @@ struct ChatHeaderView : View {
                 .padding([.all],16)
                 .hiddenTabBar()
             VStack (alignment: .leading, spacing: 8, content: {
-                
+
                 Text(user?.name ?? "")
                     .foregroundColor(.white)
                     .font(.title3.weight(.medium))
                 HStack{
-                    
+
                     Circle()
                         .frame(width: 10, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(Color.primery)
@@ -180,10 +180,37 @@ struct ChatHeaderView : View {
             })
             .padding(.top,32)
             Spacer()
-            
+
         }.frame(height : 100)
     }
 }
+//struct ChatHeaderView : View {
+//    @Binding var user : UserModel?
+//
+//    var body: some View {
+//        VStack(alignment : .center, spacing : 4){
+//            WebImage(url: URL(string: user?.picture ?? ""))
+//                .resizable()
+//                .placeholder(Image("profile"))
+//                .aspectRatio(contentMode: .fill)
+//                .frame(width: 90, height: 90, alignment: .center)
+//                .cornerRadius(45)
+//                .clipped()
+//                .aspectRatio(contentMode: .fit)
+//                .hiddenTabBar()
+//            VStack (alignment: .leading, spacing: 0, content: {
+//                Text(user?.name ?? "")
+//                    .foregroundColor(.white)
+//                    .font(.title3.weight(.medium))
+//            })
+//
+//
+//        }.frame(height : 120)
+//        .frame(maxWidth : .infinity)
+//        .background(Color.background)
+//        .zIndex(2)
+//    }
+//}
 struct SendMessageView : View {
     @ObservedObject var viewModel : ChatViewModel
     @Binding var text :String

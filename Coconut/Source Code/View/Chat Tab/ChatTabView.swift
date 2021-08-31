@@ -31,7 +31,7 @@ struct ChatTabView: View {
                                 ZStack{
                                     NavigationLink(
                                         destination:
-                                            ChatView(converastionId: $selectedConversationId, user: $selectedUser)
+                                            ChatView(withUser: $selectedUser)
                                         .navigationBarTitleDisplayMode(.inline),
                                     isActive: $navigateToChatView
                                     ){
@@ -48,11 +48,9 @@ struct ChatTabView: View {
 
                                         .onTapGesture {
                                                 print("TAPPED BROOOO")
-                                                let user = UserModel(name: item.name, email: item.email, picture: item.picture, conversation: [])
+                                            let user = UserModel(name: item.name, email: item.email, picture: item.picture ,sharedConversastion: item.conversationId)
                                                 selectedUser = user
-                                                selectedConversationId = item.conversationId
                                                 navigateToChatView = true
-                                            
                                         }
 
                                 }
@@ -70,7 +68,7 @@ struct ChatTabView: View {
                         .padding(0)
                 NavigationLink(
                     destination:
-                        FindFriendsView()
+                        SearchView()
                         .navigationBarTitleDisplayMode(.inline),
                     isActive: $showSearchView
                 ){

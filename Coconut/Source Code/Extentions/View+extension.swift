@@ -11,6 +11,8 @@ enum NavigationBarStyle {
     case defualt
     case light
     case dark
+    case transparent
+
 }
 enum TabBarStyle {
     case defualt
@@ -34,7 +36,14 @@ extension View {
             /// TODO - add light style
             break
         case .dark:
+            break
             /// TODO - add dark style
+        case .transparent:
+            appearence.configureWithTransparentBackground()
+            appearence.backgroundColor = .clear
+            /// Title Text Color
+            appearence.titleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
+            appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
             break
         }
         

@@ -29,6 +29,8 @@ struct UserModel : Identifiable , Codable {
         case picture
     }
     var conversation : [ConversationModel] = []
+    
+    var sharedConversastion : String? = nil
 
 
 }

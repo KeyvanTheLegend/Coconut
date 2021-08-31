@@ -42,14 +42,18 @@ extension DatabaseManager {
         
     }
     func searchUser(withText text: String ,compeltion : @escaping (([UserModel])->Void)) {
-        database.queryOrdered(byChild: "name").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").observeSingleEvent(of: .value, with: { data in
-            guard let users = data.value as? [String:Any] else {print("FUCK");return}
-            print(users)
+        DispatchQueue.global().async {
+
+            self.database.queryOrdered(byChild: "name").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").observeSingleEvent(of: .value, with: { data in
+            guard let users = data.value as? [String:Any] else {
+                print("HI IM HERE RSULT IS []")
+                compeltion([])
+                return
+            }
             let decoder = JSONDecoder()
             var usersModel : [UserModel] = []
 
             for user in users{
-                print(user)
                 let jsonData = try! JSONSerialization.data(withJSONObject:user.value)
                 var userModel = try! decoder.decode(UserModel.self, from: jsonData)
                 if let userDic = user.value as? [String:Any] {
@@ -66,12 +70,11 @@ extension DatabaseManager {
                 }
 
                 usersModel.append(userModel)
-                
-                print(userModel)
-                
             }
+            print("RESULT IS \(usersModel)")
             compeltion(usersModel)
         })
+        }
     }
     
 }

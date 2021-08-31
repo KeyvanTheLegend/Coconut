@@ -7,93 +7,72 @@
 
 import SwiftUI
 
-struct FindFriendsView: View {
-    @State var text : String = ""
+struct SearchView: View {
+    
+    // MARK: - UI STATES
+    @State var searchText : String = ""
     @State var navigateToChatView = false
-    @State var selectedConversationId : String? = nil
     @State var selectedUser : UserModel? = nil
-
-    @ObservedObject var viewModel = ViewModel()
+    
+    // MARK: - VIEWMODEL
+    @ObservedObject var viewModel = SearchViewModel()
     
     var body: some View {
         VStack{
-            SearchBar(text: $text)
-                .onChange(of: text, perform: { value in
-                    //mode this to viewmodel
-                    if text.isEmpty{
-                        viewModel.users = []
-                    }else{
-                    DatabaseManager.shared.searchUser(withText: text) { users in
-                        self.viewModel.users = users
-                        
-                    }
-                    }
+            /// search bar
+            SearchBar(text: $searchText)
+                .onChange(of: searchText, perform: { value in
+                    if searchText.isEmpty {
+                        viewModel.clearList(delay: viewModel.SHORT_DELAY)
+                    }else{viewModel.search(with : searchText)}
                 })
+            
+            /// found useres based on serach text
             List {
-                ForEach(viewModel.users) { user in
+                ForEach(viewModel.searchResult) { user in
                     ZStack{
-                    MessageViewContentView(profileImage: user.picture, name: user.name, isOnline: true)
+                        MessageViewContentView(
+                            profileImage: user.picture,
+                            name: user.name,
+                            isOnline: true
+                        )
                         .frame(height: 88, alignment: .center)
                         .frame(maxWidth: .infinity)
                         .background(Color.background)
                         .onTapGesture {
-                                print("TAPPED ON A PERSON ")
-                                for conversation in user.conversation {
-                                    print(conversation.email)
-                                    if conversation.email == UserDefaults.standard.string(forKey: "Email"){
-                                        print("COVERSATION FOUND \(conversation.conversationId)")
-                                        selectedConversationId = conversation.conversationId
-                                        selectedUser = user
-                                        navigateToChatView = true
-                                        break
-                                    }
-                                    selectedConversationId = nil
-
-                                }
                             selectedUser = user
                             navigateToChatView = true
-
-	
-                                
-                            
                         }
                         .background(Color.background)
                         .listRowBackground(Color.background)
                         NavigationLink(
                             destination:
-                                ChatView(converastionId:$selectedConversationId,user : $selectedUser)
+                                ChatView(withUser : $selectedUser)
                                 .navigationBarTitleDisplayMode(.inline),
                             isActive: $navigateToChatView
-                            ){
-                                EmptyView()
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            .frame(width:0)
-                            .opacity(0)
-                        }
+                        ){EmptyView()}
+                        .buttonStyle(PlainButtonStyle())
+                        .frame(width:0)
+                        .opacity(0)
+                    }
                     .listRowBackground(Color.background)
-                    
                 }
-
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .listRowBackground(Color.background)
             .listRowInsets(EdgeInsets())
             .background(Color.background)
             .listStyle(InsetListStyle())
-            .background(Color.background)
         }
         .padding(.top , 16)
         .background(Color.background)
     }
 }
-class ViewModel : ObservableObject {
-    @Published var users : [UserModel] = []
-}
+
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        FindFriendsView()
+        SearchView()
     }
 }
 struct SearchBar: View {
@@ -127,6 +106,5 @@ struct SearchBar: View {
             }
         }
         .animation(.default)
-
     }
 }

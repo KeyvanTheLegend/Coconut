@@ -31,7 +31,7 @@ struct SearchView: View {
             List {
                 ForEach(viewModel.searchResult) { user in
                     ZStack{
-                        MessageViewContentView(
+                        SearchResultContentView(
                             profileImage: user.picture,
                             name: user.name,
                             isOnline: true

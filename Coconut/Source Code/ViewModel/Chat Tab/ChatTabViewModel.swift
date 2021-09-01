@@ -9,20 +9,16 @@ import Foundation
 
 class ChatTabViewModel : ObservableObject  {
     
-    /// - sub ViewModels :
-    @Published private(set) var liveChatSessionViewModel : LiveChatSessionViewModel
-    @Published private(set) var hasLiveSesssion : Bool = false
-    @Published private(set) var conversations : [MessageModel] = []
+//    @Published private(set) var liveChatSessionViewModel : LiveChatSessionViewModel
+//    @Published private(set) var hasLiveSesssion : Bool = false
+    @Published private(set) var conversations : [ConversationModel] = []
 
-    
-    init() {
-        liveChatSessionViewModel = LiveChatSessionViewModel()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.hasLiveSesssion = true
+    /// get all user conversations and start observing new ones
+    func getAllConversations(){
+        guard let userEmail = UserDefaults.standard.string(forKey: "Email") else { return }
+        DispatchQueue.global(qos: .background).async {
+            DatabaseManager.shared.getAllConversations(for: userEmail.safeString()) { conversations in
+                DispatchQueue.main.async {self.conversations = conversations}}
         }
-
-//        DatabaseManager.shared.createConversation(with: "Keyvan-ygh1-gmail-com", and: "Tara-gmail-com")
-    }
-    func getConversations(){
     }
 }

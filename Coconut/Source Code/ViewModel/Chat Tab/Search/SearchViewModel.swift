@@ -15,12 +15,16 @@ class SearchViewModel : ObservableObject {
     
     @Published var searchResult : SearchResult = []
     
+    /// serach for user by name
+    /// - Parameter searchText: user serach text
     func search(with searchText : String) {
             DatabaseManager.shared.searchUser(withText: searchText) { searchResult in
                 DispatchQueue.main.async {self.searchResult = searchResult}
             }
         
     }
+    /// clear serach list
+    /// - Parameter delay: delay in mllisecond, defaul is 0
     func clearList(delay : Double = 0){
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.searchResult.removeAll()

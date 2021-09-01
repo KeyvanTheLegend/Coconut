@@ -101,12 +101,7 @@ struct ChatView: View {
             }
         })
         .onAppear(perform: {
-//            print("CHAT VIEW ON APPEAR CONVERSATIONID IS  : \(converastionId)")
-//            viewModel.setConverationId(convesationId: converastionId)
             viewModel.setUser(user : withUser)
-            setNavBarAppearence(to: .transparent)
-
-            
         })
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)) { notifictation in
             let keyboardSize = notifictation.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect

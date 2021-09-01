@@ -45,15 +45,6 @@ struct SearchView: View {
                         }
                         .background(Color.background)
                         .listRowBackground(Color.background)
-                        NavigationLink(
-                            destination:
-                                ChatView(withUser : $selectedUser)
-                                .navigationBarTitleDisplayMode(.inline),
-                            isActive: $navigateToChatView
-                        ){EmptyView()}
-                        .buttonStyle(PlainButtonStyle())
-                        .frame(width:0)
-                        .opacity(0)
                     }
                     .listRowBackground(Color.background)
                 }
@@ -63,6 +54,15 @@ struct SearchView: View {
             .listRowInsets(EdgeInsets())
             .background(Color.background)
             .listStyle(InsetListStyle())
+            NavigationLink(
+                destination:
+                    ChatView(withUser : $selectedUser)
+                    .navigationBarTitleDisplayMode(.inline),
+                isActive: $navigateToChatView
+            ){EmptyView()}
+            .buttonStyle(PlainButtonStyle())
+            .frame(width:0)
+            .opacity(0)
         }
         .padding(.top , 16)
         .background(Color.background)

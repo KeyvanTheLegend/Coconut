@@ -25,29 +25,30 @@ class ChatViewModel : ObservableObject  {
     /// set shared conversationID
     /// - Parameter convesationID: shared conversationID if exist
     func setConverationID(convesationID : String?){
-        guard self.conversationID == nil else {
-            return	
-        }
         guard let convesationID = convesationID else {
+            print("error 2)")
+
             return
         }
         self.conversationID = convesationID
         DatabaseManager.shared.observeMessagesForConversation(conversationId: convesationID) { message in
+            print("HI 3\(message)")
             self.messages += message
         }
     }
     /// set otherUser in viewModel
     /// - Parameter user: otherUser
     func setOtherUser(user : UserModel?){
-        guard let user = user else {
+        guard let otherUser = user else {
             return
         }
-        self.otherUser = user
+        self.otherUser = otherUser
         // if shared conversation id exist , no need to check for shared conversation
-        if let sharedConversationId = user.sharedConversastion {
+        if let sharedConversationId = otherUser.sharedConversastion {
+            print("HI shared is \(sharedConversationId)")
             setConverationID(convesationID: sharedConversationId)
         }else {
-            setConverationID(convesationID: conversationIDIfExsit(with: user))
+            setConverationID(convesationID: conversationIDIfExsit(with: otherUser))
         }
     }
     

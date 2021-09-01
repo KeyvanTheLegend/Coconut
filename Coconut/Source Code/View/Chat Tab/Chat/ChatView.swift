@@ -15,7 +15,7 @@ struct ChatView: View {
     @State var keyboardWillOpen : Bool = false
     @State var keyboardheight : CGFloat = 0
 
-    @StateObject var viewModel = ChatViewModel()
+    @ObservedObject var viewModel = ChatViewModel()
     @Binding var withUser :UserModel?
     
     var body: some View {
@@ -87,6 +87,7 @@ struct ChatView: View {
         })
         // MARK: - onAppear
         .onAppear(perform: {
+            print("on APPEAR \(withUser)")
             viewModel.setOtherUser(user : withUser)
         })
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)) { notifictation in
@@ -105,6 +106,7 @@ struct ChatView: View {
         .onDisappear(perform: {
             viewModel.setConverationID(convesationID: nil)
             viewModel.messages.removeAll()
+            viewModel.setOtherUser(user: nil)
         })
         .padding(.bottom, keyboardWillOpen ? 0: -safeAreaInsetsBotton)
     }

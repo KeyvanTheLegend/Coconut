@@ -7,17 +7,12 @@
 
 import SwiftUI
 
+// MARK: - NAVIGATION BAR
 enum NavigationBarStyle {
     case defualt
     case light
     case dark
-    case transparent
-
 }
-enum TabBarStyle {
-    case defualt
-}
-
 extension View {
     
     func setNavBarAppearence(to style : NavigationBarStyle){
@@ -38,13 +33,6 @@ extension View {
         case .dark:
             break
             /// TODO - add dark style
-        case .transparent:
-            appearence.configureWithTransparentBackground()
-            appearence.backgroundColor = .clear
-            /// Title Text Color
-            appearence.titleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
-            appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
-            break
         }
         
         UINavigationBar.appearance().standardAppearance = appearence
@@ -63,6 +51,7 @@ extension View {
     }
     
 }
+// MARK: - ANIMATION
 extension View {
 
     /// Calls the completion handler whenever an animation on the given value completes.
@@ -113,6 +102,7 @@ struct AnimationCompletionObserverModifier<Value>: AnimatableModifier where Valu
         return content
     }
 }
+// MARK: - KEYBOARD
 #if canImport(UIKit)
 extension View {
     func hideKeyboard() {
@@ -120,6 +110,10 @@ extension View {
     }
 }
 #endif
+// MARK: - TAB BAR
+enum TabBarStyle {
+    case defualt
+}
 /// - Description : extenstion for hidding and showing tabbar
 extension View {
     func showTabBar() -> some View {
@@ -129,7 +123,6 @@ extension View {
         return self.modifier(HiddenTabBar())
     }
 }
-
 /// - Description : Tool for showing or hidding tabbar
 struct Tool {
     static func showTabBar() {

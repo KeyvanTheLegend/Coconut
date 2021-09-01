@@ -34,6 +34,7 @@
 		C0BB61B726D94C53006F442D /* SigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61B626D94C53006F442D /* SigninViewModel.swift */; };
 		C0BB61BA26D97777006F442D /* SigninButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61B926D97777006F442D /* SigninButton.swift */; };
 		C0BB88B526D3C3720061D96E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0BB88B426D3C3720061D96E /* GoogleService-Info.plist */; };
+		C0BC791126DF5D3900979BCB /* SerachBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC791026DF5D3900979BCB /* SerachBar.swift */; };
 		C0BF24D526CAC08000CFCC35 /* ChatTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */; };
 		C0C5058126D40451008081D9 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5058026D403C3008081D9 /* SignupView.swift */; };
 		C0C5058226D40C8A008081D9 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB88B726D3D0550061D96E /* SignInView.swift */; };
@@ -117,6 +118,7 @@
 		C0BB61B926D97777006F442D /* SigninButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninButton.swift; sourceTree = "<group>"; };
 		C0BB88B426D3C3720061D96E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0BB88B726D3D0550061D96E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		C0BC791026DF5D3900979BCB /* SerachBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerachBar.swift; sourceTree = "<group>"; };
 		C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabViewModel.swift; sourceTree = "<group>"; };
 		C0C5058026D403C3008081D9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		C0C8085F26D7862E00D249E4 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -395,6 +397,14 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
+		C0BC790F26DF5D2A00979BCB /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				C0BC791026DF5D3900979BCB /* SerachBar.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		C0C5057F26D403B1008081D9 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +512,7 @@
 			isa = PBXGroup;
 			children = (
 				C0E492B426DBFB5400C66412 /* SearchView.swift */,
+				C0BC790F26DF5D2A00979BCB /* SubViews */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -787,6 +798,7 @@
 				C0A77C8B26C43EE9006B364D /* ChatTabView.swift in Sources */,
 				C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */,
 				C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */,
+				C0BC791126DF5D3900979BCB /* SerachBar.swift in Sources */,
 				C0DE3F9D26D4F79500CC1F1C /* SignupViewModel.swift in Sources */,
 				C0BB61A326D91E3E006F442D /* SignupButton.swift in Sources */,
 				C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */,

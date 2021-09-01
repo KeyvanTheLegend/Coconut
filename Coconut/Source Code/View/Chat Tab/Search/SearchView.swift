@@ -20,7 +20,7 @@ struct SearchView: View {
     var body: some View {
         VStack{
             /// search bar
-            SearchBar(text: $searchText)
+            SearchBar(searchText: $searchText)
                 .onChange(of: searchText, perform: { value in
                     if searchText.isEmpty {
                         viewModel.clearList(delay: viewModel.SHORT_DELAY)
@@ -75,36 +75,4 @@ struct SearchView_Previews: PreviewProvider {
         SearchView()
     }
 }
-struct SearchBar: View {
-    @Binding var text: String
- 
-    @State private var isEditing = false
- 
-    var body: some View {
-        HStack {
- 
-            TextField("Search ...", text: $text)
-                .padding(8)
-                .padding(.horizontal, 4)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .padding(.horizontal, 16)
-                .onTapGesture {
-                    self.isEditing = true
-                }
- 
-            if isEditing {
-                Button(action: {
-                    self.isEditing = false
-                    self.text = ""
- 
-                }) {
-                    Text("Cancel")
-                }
-                .padding(.trailing, 16)
-                .transition(.move(edge: .trailing))
-            }
-        }
-        .animation(.default)
-    }
-}
+

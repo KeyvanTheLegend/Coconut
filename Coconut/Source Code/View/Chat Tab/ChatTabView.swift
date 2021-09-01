@@ -8,7 +8,7 @@
 import SwiftUI
 struct ChatTabView: View {
     
-    @ObservedObject var viewModel = ChatTabViewModel()
+    @StateObject var viewModel = ChatTabViewModel()
     
     @State var isClosed :Bool = true
     @State var hasLiveChatSession = false
@@ -31,16 +31,6 @@ struct ChatTabView: View {
                 List{
                     ForEach(viewModel.conversations) {item in
                         ZStack{
-                            NavigationLink(
-                                destination:
-                                    ChatView(withUser: $selectedUser)
-                                    .navigationBarTitleDisplayMode(.inline),
-                                isActive: $navigateToChatView
-                            ){EmptyView()}
-                            .buttonStyle(PlainButtonStyle())
-                            .frame(width:0)
-                            .opacity(0)
-                            
                             SearchResultContentView(
                                 profileImage: item.picture,
                                 name: item.name,
@@ -70,6 +60,16 @@ struct ChatTabView: View {
                     }
                 }
                 .padding(0)
+                NavigationLink(
+                    destination:
+                        ChatView(withUser: $selectedUser)
+                        .navigationBarTitleDisplayMode(.inline),
+                    isActive: $navigateToChatView
+                ){EmptyView()}
+                .buttonStyle(PlainButtonStyle())
+                .frame(width:0)
+                .opacity(0)
+                
                 NavigationLink(
                     destination:
                         SearchView()

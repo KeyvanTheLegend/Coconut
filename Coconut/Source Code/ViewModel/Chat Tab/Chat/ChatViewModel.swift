@@ -77,9 +77,17 @@ class ChatViewModel : ObservableObject  {
             let otherUser = otherUser else {
             return
         }
-        let user = UserModel(name: userName, email: userEmail, picture: userPicture)
-        let message = MessageModel(id:UUID(),text: messageText, senderEmail: userEmail, sentDate: Date())
-    
+        let user = UserModel(
+            name: userName,
+            email: userEmail,
+            picture: userPicture
+        )
+        let message = MessageModel(
+            id:UUID(),
+            text: messageText,
+            senderEmail: userEmail,
+            sentDate: Date()
+        )
         if let conversationId = conversationID {
             DatabaseManager.shared.sendMessage(conversationId: conversationId,message: message)
         }else {

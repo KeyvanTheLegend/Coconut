@@ -2,17 +2,19 @@
 //  ChatView.swift
 //  Coconut
 //
-//  Created by sh on 8/17/21.
+//  Created by Keyvan Yaghoubian on 8/17/21.
 //
 
 import SwiftUI
 
 struct ChatView: View {
     
-    @State var text : String = ""
-    @State var shouldHaveExteraButtonPadding = false
-    @State var testing : CGFloat = 0
-    @State var bottomPadding : CGFloat = 0
+    @State var messageText : String = ""
+    @State var safeAreaInsetsBotton :CGFloat = 0
+    @State var keyboardDidOpen : Bool = false
+    @State var keyboardWillOpen : Bool = false
+    @State var keyboardheight : CGFloat = 0
+
     @StateObject var viewModel = ChatViewModel()
     @Binding var withUser :UserModel?
     
@@ -29,7 +31,6 @@ struct ChatView: View {
             .zIndex(2)
             Divider()
                 .zIndex(2)
-            Spacer()
             ScrollViewReader { scrollViewReader in
                 List{
                     if let userEmail = viewModel.userEmail {
@@ -46,16 +47,13 @@ struct ChatView: View {
                         }
                     }
                 }
+                .hasScrollEnabled(true)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .listRowBackground(Color.background)
                 .listRowInsets(EdgeInsets())
                 .background(Color.background)
                 .listStyle(InsetListStyle())
-                .background(Color.background)
-                .listRowInsets(EdgeInsets())
-                .offset(CGSize(width: 0, height: -testing + 10 ))
-                .background(Color.background)
-                .onChange(of: testing, perform: { value in
+                .onChange(of: keyboardDidOpen, perform: { value in
                     withAnimation {
                         if viewModel.messages.count > 0 {
                             scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1].id,anchor: .bottom)
@@ -73,29 +71,18 @@ struct ChatView: View {
                 })
                 
             }
-            SendMessageView(viewModel: viewModel,text: $text)
+
+            SendMessageView(viewModel: viewModel,text: $messageText)
                 .background(Color.background, alignment: .bottom)
-                .offset(x: 0 , y: -testing)
-                .padding(.bottom , shouldHaveExteraButtonPadding ? bottomPadding : 0)
-                .background(Color.background, alignment: .bottom)
-                .ignoresSafeArea(.all, edges: .bottom)
-                .padding(.top,8)
         }
         .background(Color.background.ignoresSafeArea())
-        .ignoresSafeArea(.all, edges: .bottom)
         .onTapGesture {
             hideKeyboard()
         }
         .onAppear(perform: {
             UITextView.appearance().backgroundColor = .clear
-            
             if let window = UIApplication.shared.windows.first{
-                let tempBottomPadding = window.safeAreaInsets.bottom
-                print(tempBottomPadding)
-                if tempBottomPadding > 0 {
-                    bottomPadding = 34
-                    shouldHaveExteraButtonPadding = true
-                }
+                safeAreaInsetsBotton = window.safeAreaInsets.bottom
             }
         })
         // MARK: - onAppear
@@ -103,34 +90,25 @@ struct ChatView: View {
             viewModel.setOtherUser(user : withUser)
         })
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)) { notifictation in
-            let keyboardSize = notifictation.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-            let keyboardheight = keyboardSize.height
-            let duration = notifictation.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
-            shouldHaveExteraButtonPadding = false
-            withAnimation(.easeOut(duration: (duration - 0.05)) ) {
-                testing  = keyboardheight
-            }
+            
+            keyboardWillOpen = true
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)) { notifictation in
-            let duration = notifictation.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
-            withAnimation(.easeOut(duration: (duration + 0.03)).delay(0.03) ) {
-                testing  = 0
-                if bottomPadding > 0 {
-                    shouldHaveExteraButtonPadding = true
-                }
-            }
+            keyboardDidOpen = false
+            keyboardWillOpen = false
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardDidShowNotification)) { notifictation in
+            keyboardDidOpen = true
             
         }
         // MARK: - onDisappear
         .onDisappear(perform: {
             viewModel.setConverationID(convesationID: nil)
             viewModel.messages.removeAll()
-            
-            
         })
-        .ignoresSafeArea(.keyboard)
-        
+        .padding(.bottom, keyboardWillOpen ? 0: -safeAreaInsetsBotton)
     }
+    
 }
 
 struct ChatView_Previews: PreviewProvider {

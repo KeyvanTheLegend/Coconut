@@ -34,6 +34,8 @@ struct SendMessageView : View {
                             .padding(.bottom , 10)
                             .font(.body)
                             .foregroundColor(.gray)
+                            .disabled(true)
+
                     }
                 Image(systemName: "arrow.up")
                     .frame(width: 40,

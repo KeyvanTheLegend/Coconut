@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Introspect
 
 struct ChatHeaderView : View {
     @Binding var user : UserModel?
@@ -21,7 +22,11 @@ struct ChatHeaderView : View {
                 .clipped()
                 .aspectRatio(contentMode: .fit)
                 .padding([.all],16)
-                .hiddenTabBar()
+                .introspectTabBarController { (UITabBarController) in
+                    UITabBarController.tabBar.isHidden = true
+                }
+            
+//                .hiddenTabBar()
             VStack (alignment: .leading, spacing: 8, content: {
 
                 Text(user?.name ?? "")

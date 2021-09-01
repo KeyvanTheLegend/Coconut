@@ -27,6 +27,7 @@ struct SearchBar: View {
             if isEditing {
                 Button(action: {
                     self.isEditing = false
+                    self.hideKeyboard()
                     self.searchText = ""
  
                 }) {
@@ -36,6 +37,6 @@ struct SearchBar: View {
                 .transition(.move(edge: .trailing))
             }
         }
-        .animation(.easeIn)
+        .animation(.default)
     }
 }

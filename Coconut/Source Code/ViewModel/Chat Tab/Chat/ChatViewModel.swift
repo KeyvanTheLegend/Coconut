@@ -12,45 +12,46 @@ class ChatViewModel : ObservableObject  {
     
     /// - sub ViewModels :
     @Published var messages : [MessageModel] = []
-    @Published var conversationId : String? = nil
-    @Published var user : UserModel? = nil
+    @Published private(set) var conversationID : String? = nil
+    @Published private(set) var user : UserModel? = nil
 
     
     init(){
 
     }
-    func setConverationId(convesationId : String?){
-        guard self.conversationId == nil else {
+    /// set shared conversationID
+    /// - Parameter convesationID: shared conversationID if exist
+    func setConverationID(convesationID : String?){
+        guard self.conversationID == nil else {
             return	
         }
-        print(conversationId)
-        if let convesationId = convesationId {
-            self.conversationId = convesationId
-            print("SETTING CONVERSATION ID \(convesationId)")
-//            DatabaseManager.shared.getMessagesForConversation(conversationId: convesationId) { result in
-//                print("SET CONVERSATION : OBSERVIONG CONVERSATION = \(convesationId) + Message is \(result)")
-//                self.messages = result
-//            }
-            DatabaseManager.shared.observeMessagesForConversation(conversationId: convesationId) { message in
-                self.messages += message
-            }
+        guard let convesationID = convesationID else {
+            return
+        }
+        self.conversationID = convesationID
+        DatabaseManager.shared.observeMessagesForConversation(conversationId: convesationID) { message in
+            self.messages += message
         }
     }
+    /// set otherUser in viewModel
+    /// - Parameter user: otherUser
     func setUser(user : UserModel?){
-        if let user = user {
-            self.user = user
-            if let conversationId = user.sharedConversastion {
-                setConverationId(convesationId: conversationId)
-                return
-            }
-            let conversationId = conversationIdIfExsit(with: user)
-            print("user is set \(conversationId)")
-
-            setConverationId(convesationId: conversationId)
+        guard let user = user else {
+            return
+        }
+        self.user = user
+        // if shared conversation id exist , no need to check for shared conversation
+        if let sharedConversationId = user.sharedConversastion {
+            setConverationID(convesationID: sharedConversationId)
+        }else {
+            setConverationID(convesationID: conversationIDIfExsit(with: user))
         }
     }
     
-    private func conversationIdIfExsit(with otherUser : UserModel) ->String?{
+    /// check if user has a existing conversation (shared) with other user
+    /// - Parameter otherUser: other user
+    /// - Returns: shared **conversationID** if exist
+    private func conversationIDIfExsit(with otherUser : UserModel) ->String?{
         guard let userEmail = UserDefaults.standard.string(forKey: "Email") else {return nil}
         for conversation in otherUser.conversation {
             if conversation.email ==  userEmail {
@@ -60,38 +61,46 @@ class ChatViewModel : ObservableObject  {
         }
         return nil
     }
-    func sendMessage (message:String){
-        print("Sending MEssage ConversationID is \(conversationId)")
-        let email = UserDefaults.standard.string(forKey: "Email")!
-        guard let me = user else {
+    
+    /// send message to other user
+    /// - Parameters:
+    ///   - message: message text
+    ///   - otherUser: user to send message to
+    func sendMessage(messageText:String,to otherUser : UserModel?){
+        guard
+            let userEmail = UserDefaults.standard.string(forKey: "Email"),
+            let userName = UserDefaults.standard.string(forKey: "Name"),
+            let userPicture = UserDefaults.standard.string(forKey: "ProfilePictureUrl"),
+            let otherUser = otherUser else {
             return
         }
-        
-        let otherPerson = UserModel(name: UserDefaults.standard.string(forKey: "Name")!, email: UserDefaults.standard.string(forKey: "Email")!, picture: UserDefaults.standard.string(forKey: "ProfilePictureUrl")!)
-        let message = MessageModel(id:UUID(),text: message, senderEmail: email, sentDate: Date())
-        if let conversationId = conversationId {
-            //send message
+        let user = UserModel(name: userName, email: userEmail, picture: userPicture)
+        let message = MessageModel(id:UUID(),text: messageText, senderEmail: userEmail, sentDate: Date())
+    
+        if let conversationId = conversationID {
             DatabaseManager.shared.sendMessage(conversationId: conversationId,message: message)
-            
         }else {
             // create conversation with message
-            DatabaseManager.shared.createConversation(with: otherPerson, and: me, message: message) { ID in
-                print("Created ConversationId ConversationID is \(ID)")
-
-                self.conversationId = ID
-                DatabaseManager.shared.getMessagesForConversation(conversationId: ID) { result in
-                    print("OBSERVIONG CONVERSATION = \(ID) + Message is \(result)")
-                    self.messages = result
-                }
-                DatabaseManager.shared.observeMessagesForConversation(conversationId: ID) { message in
-                    self.messages += message
-                }
-	
-
+            DatabaseManager.shared.createConversation(with: otherUser, and: user, message: message) { conversationID in
+                self.conversationID = conversationID
+                self.getMessagesForConversation(with: conversationID)
+                self.observeMessagesForConversation(with: conversationID)
             }
         }
-        
-        
+    }
+    /// start observing for new messages
+    /// - Parameter conversationID: conversationID
+    private func observeMessagesForConversation(with conversationID : String){
+        DatabaseManager.shared.observeMessagesForConversation(conversationId: conversationID) { message in
+            self.messages += message
+        }
+    }
+    /// get all messages for conversation **ONCE**
+    /// - Parameter conversationID: conversationID
+    private func getMessagesForConversation(with conversationID : String){
+        DatabaseManager.shared.getMessagesForConversation(conversationId: conversationID) { messages in
+            self.messages = messages
+        }
     }
 }
 

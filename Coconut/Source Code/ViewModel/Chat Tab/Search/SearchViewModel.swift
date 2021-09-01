@@ -11,7 +11,7 @@ class SearchViewModel : ObservableObject {
     
     typealias SearchResult = [UserModel]
     
-    let SHORT_DELAY : Double = 0.2
+    let SHORT_DELAY : Double = 0.5
     
     @Published var searchResult : SearchResult = []
     

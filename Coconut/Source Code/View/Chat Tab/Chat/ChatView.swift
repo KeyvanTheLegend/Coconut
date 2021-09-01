@@ -15,64 +15,63 @@ struct ChatView: View {
     @State var bottomPadding : CGFloat = 0
     @StateObject var viewModel = ChatViewModel()
     @Binding var withUser :UserModel?
-
+    
     var body: some View {
         VStack(alignment :  .leading , spacing: 0){
             ZStack{
-            ChatHeaderView(user: $withUser)
-                .background(Color.background.opacity(0.95))
-                
-                .padding(0)
-                
+                ChatHeaderView(user: $withUser)
+                    .background(Color.background.opacity(0.95))
+                    .padding(0)
             }
-            .background(BlurView().ignoresSafeArea(.container, edges: .top))
+            .background(
+                BlurView().ignoresSafeArea(.container, edges: .top)
+            )
             .zIndex(2)
             Divider()
                 .zIndex(2)
             Spacer()
             ScrollViewReader { scrollViewReader in
-            List{
-                ForEach(viewModel.messages) { item in
-                    if item.senderEmail == UserDefaults.standard.string(forKey: "Email")!{
-                        SentMessageView(messsage: item.text)
-                            .id(item.id)
-
-                    }else{
-                        RecivedTextMessage(messsage: item.text)
-                            .id(item.id)
-                            .listRowBackground(Color.background)
-                        
+                List{
+                    if let userEmail = viewModel.userEmail {
+                        ForEach(viewModel.messages) { item in
+                            if userEmail == item.senderEmail {
+                                SentMessageView(messsage: item.text)
+                                    .id(item.id)
+                                
+                            }else{
+                                RecivedTextMessage(messsage: item.text)
+                                    .id(item.id)
+                                    .listRowBackground(Color.background)
+                            }
+                        }
                     }
                 }
-
-
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .listRowBackground(Color.background)
-            .listRowInsets(EdgeInsets())
-            .background(Color.background)
-            .listStyle(InsetListStyle())
-            .background(Color.background)
-            .listRowInsets(EdgeInsets())
-            .offset(CGSize(width: 0, height: -testing + 10 ))
-            .background(Color.background)
-            .onChange(of: testing, perform: { value in
-                withAnimation {
-                    if viewModel.messages.count > 0 {
-                    scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1].id,anchor: .bottom)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .listRowBackground(Color.background)
+                .listRowInsets(EdgeInsets())
+                .background(Color.background)
+                .listStyle(InsetListStyle())
+                .background(Color.background)
+                .listRowInsets(EdgeInsets())
+                .offset(CGSize(width: 0, height: -testing + 10 ))
+                .background(Color.background)
+                .onChange(of: testing, perform: { value in
+                    withAnimation {
+                        if viewModel.messages.count > 0 {
+                            scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1].id,anchor: .bottom)
+                        }
                     }
-                }
-            })
-            .onChange(of: viewModel.messages.count, perform: { value in
-                withAnimation{
-                if viewModel.messages.count > 0 {
-                    print("onchange viewmodel message \(viewModel.messages.count)")
-                    print("ID \(viewModel.messages[viewModel.messages.count - 1 ].id)")
-                    scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1 ].id, anchor: .bottom)
-                }
-                }
-            })
-
+                })
+                .onChange(of: viewModel.messages.count, perform: { value in
+                    withAnimation{
+                        if viewModel.messages.count > 0 {
+                            print("onchange viewmodel message \(viewModel.messages.count)")
+                            print("ID \(viewModel.messages[viewModel.messages.count - 1 ].id)")
+                            scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1 ].id, anchor: .bottom)
+                        }
+                    }
+                })
+                
             }
             SendMessageView(viewModel: viewModel,text: $text)
                 .background(Color.background, alignment: .bottom)
@@ -89,7 +88,7 @@ struct ChatView: View {
         }
         .onAppear(perform: {
             UITextView.appearance().backgroundColor = .clear
-
+            
             if let window = UIApplication.shared.windows.first{
                 let tempBottomPadding = window.safeAreaInsets.bottom
                 print(tempBottomPadding)
@@ -101,7 +100,7 @@ struct ChatView: View {
         })
         // MARK: - onAppear
         .onAppear(perform: {
-            viewModel.setUser(user : withUser)
+            viewModel.setOtherUser(user : withUser)
         })
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)) { notifictation in
             let keyboardSize = notifictation.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
@@ -120,24 +119,24 @@ struct ChatView: View {
                     shouldHaveExteraButtonPadding = true
                 }
             }
-        
+            
         }
         // MARK: - onDisappear
         .onDisappear(perform: {
             viewModel.setConverationID(convesationID: nil)
             viewModel.messages.removeAll()
             
-
+            
         })
         .ignoresSafeArea(.keyboard)
-
+        
     }
 }
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-//            ChatView(converastionId: nil)
+            //            ChatView(converastionId: nil)
         }
     }
 }

@@ -2,7 +2,7 @@
 //  ChatViewModel.swift
 //  Coconut
 //
-//  Created by sh on 8/26/21.
+//  Created by Keyvan Yaghoubian on 8/26/21.
 //
 
 import Foundation
@@ -13,8 +13,11 @@ class ChatViewModel : ObservableObject  {
     /// - sub ViewModels :
     @Published var messages : [MessageModel] = []
     @Published private(set) var conversationID : String? = nil
-    @Published private(set) var user : UserModel? = nil
-
+    @Published private(set) var otherUser : UserModel? = nil
+    
+    var userEmail : String? {
+        return UserDefaults.standard.string(forKey: "Email")!
+    }
     
     init(){
 
@@ -35,11 +38,11 @@ class ChatViewModel : ObservableObject  {
     }
     /// set otherUser in viewModel
     /// - Parameter user: otherUser
-    func setUser(user : UserModel?){
+    func setOtherUser(user : UserModel?){
         guard let user = user else {
             return
         }
-        self.user = user
+        self.otherUser = user
         // if shared conversation id exist , no need to check for shared conversation
         if let sharedConversationId = user.sharedConversastion {
             setConverationID(convesationID: sharedConversationId)

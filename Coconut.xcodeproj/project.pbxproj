@@ -249,11 +249,8 @@
 			children = (
 				C0E492B326DBFB4400C66412 /* Search */,
 				C0850D7C26CB8FFF003E782E /* Chat */,
-				C0A77C8A26C43EE9006B364D /* ChatTabView.swift */,
 				C0BC791226DF6AA700979BCB /* SubViews */,
-				C09F0D2726C6C5E8006BC57B /* LiveChatSessionView.swift */,
-				C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */,
-				C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */,
+				C0A77C8A26C43EE9006B364D /* ChatTabView.swift */,
 			);
 			path = "Chat Tab";
 			sourceTree = "<group>";
@@ -415,6 +412,9 @@
 			isa = PBXGroup;
 			children = (
 				C0BC791326DF6ABB00979BCB /* ConversationContentView.swift */,
+				C09F0D2726C6C5E8006BC57B /* LiveChatSessionView.swift */,
+				C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */,
+				C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";

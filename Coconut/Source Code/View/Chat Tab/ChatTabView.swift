@@ -40,14 +40,18 @@ struct ChatTabView: View {
                             .frame(maxWidth : .infinity)
                             .background(Color.background)
                             .onTapGesture {
+                                print("SELECTED IS \(item)")
+                                print("SELECTED CONV IS \(item.userToken)")
                                 let user = UserModel(
                                     name: item.name,
                                     email: item.email,
                                     picture: item.picture,
+                                    userToken: item.userToken,
                                     sharedConversastion: item.conversationId
                                 )
                                 selectedUser = user
                                 navigateToChatView = true
+                                
                             }
                         }
                         .listRowBackground(Color.background)
@@ -95,6 +99,7 @@ struct ChatTabView: View {
                 }))
             }
             .padding(0)
+
             //                            if hasLiveChatSession{
             //                                withAnimation(Animation.easeInOut(duration: 10)) {
             //                                    LiveChatSessionView(viewModel: viewModel.liveChatSessionViewModel)
@@ -173,6 +178,7 @@ struct ChatTabView: View {
         .ignoresSafeArea(.keyboard)
         // MARK: - onAppear :
         .onAppear(perform: {viewModel.getAllConversations()})
+        
     }
 }
 

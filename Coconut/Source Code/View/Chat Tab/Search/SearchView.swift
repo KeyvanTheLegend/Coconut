@@ -15,7 +15,7 @@ struct SearchView: View {
     @State var selectedUser : UserModel? = nil
     
     // MARK: - VIEWMODEL
-    @ObservedObject var viewModel = SearchViewModel()
+    @StateObject var viewModel = SearchViewModel()
     
     var body: some View {
         VStack{

@@ -128,14 +128,15 @@ struct Tool {
     static func showTabBar() {
         UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.allSubviews().forEach({ (v) in
             if let view = v as? UITabBar {
-                view.isHidden = false
+                print("HI IM HERE GOOOz")
+                view.alpha = 1
             }
         })
     }
     static func hiddenTabBar() {
         UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.allSubviews().forEach({ (v) in
             if let view = v as? UITabBar {
-                view.isHidden = true
+                view.alpha = 0
                 print(view.bounds)
             }
         })

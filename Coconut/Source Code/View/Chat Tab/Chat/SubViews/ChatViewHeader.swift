@@ -11,7 +11,6 @@ import Introspect
 
 struct ChatHeaderView : View {
     @Binding var user : UserModel?
-
     var body: some View {
         HStack(alignment : .top){
             WebImage(url: URL(string: user?.picture ?? ""))
@@ -22,10 +21,6 @@ struct ChatHeaderView : View {
                 .clipped()
                 .aspectRatio(contentMode: .fit)
                 .padding([.all],16)
-                .introspectTabBarController { (UITabBarController) in
-                    UITabBarController.tabBar.isHidden = true
-                }
-            
 //                .hiddenTabBar()
             VStack (alignment: .leading, spacing: 8, content: {
 

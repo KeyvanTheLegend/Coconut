@@ -37,10 +37,15 @@ extension DatabaseManager {
             let decoder = JSONDecoder()
             let jsonData = try! JSONSerialization.data(withJSONObject:value)
             let x = try! decoder.decode(UserModel.self, from: jsonData)
+            print("user is X :")
             compeltion(x)
         })
         
     }
+    func updateUserToken(withEmail email: String ,to token : String) {
+        database.child(email.safeString()).child("userToken").setValue(token)
+    }
+    /// - TODO: Clean this
     func searchUser(withText text: String ,compeltion : @escaping (([UserModel])->Void)) {
         DispatchQueue.global().async {
 
@@ -67,6 +72,7 @@ extension DatabaseManager {
                     
                     userModel.conversation = conversationsModel
                     }
+                    print("USER IS : \(userModel)")
                 }
 
                 usersModel.append(userModel)
@@ -88,11 +94,13 @@ extension DatabaseManager {
                 compelition(conversationsModel)
                 return
             }
+            print("conv is \(conversations)")
             let decoder = JSONDecoder()
             for conversation in conversations {
                 let jsonData = try! JSONSerialization.data(withJSONObject:conversation.value)
                 let conversationModel = try! decoder.decode(ConversationModel.self, from: jsonData)
                 conversationsModel.append(conversationModel)
+                print("Conversation is \(conversationsModel)")
             }
             compelition(conversationsModel)
         }
@@ -101,10 +109,11 @@ extension DatabaseManager {
     func createConversation(with me : UserModel , and otherPerson : UserModel , message : MessageModel , compelition : @escaping (String) -> Void ){
         let conversationId = database.childByAutoId()
         let json = message.dictionary
-        let conversationForMe = ConversationModel(name: me.name, email: me.email, picture: me.picture, conversationId: conversationId.key!)
-        let conversationForOtherPerson = ConversationModel(name: otherPerson.name, email: otherPerson.email, picture: otherPerson.picture, conversationId: conversationId.key!)
+        let conversationForMe = ConversationModel(userToken : me.userToken,name: me.name, email: me.email, picture: me.picture, conversationId: conversationId.key!)
+        let conversationForOtherPerson = ConversationModel(userToken : otherPerson.userToken ,name: otherPerson.name, email: otherPerson.email, picture: otherPerson.picture, conversationId: conversationId.key!)
         database.child(conversationId.key!).child("lastMessage").childByAutoId().setValue(json!)
         database.child(conversationId.key!).child("messages").childByAutoId().setValue(json!)
+        
         database.child(me.safeEmail).child("conversations").childByAutoId().setValue(conversationForOtherPerson.dictionary!)
         database.child(otherPerson.safeEmail).child("conversations").childByAutoId().setValue(conversationForMe.dictionary!) { err, _ in
             

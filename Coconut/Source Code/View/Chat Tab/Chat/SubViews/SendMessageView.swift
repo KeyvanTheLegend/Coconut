@@ -48,7 +48,7 @@ struct SendMessageView : View {
                     .padding([.bottom],8)
                     .foregroundColor(.white)
                     .onTapGesture {
-                        viewModel.sendMessage(messageText: text, to: viewModel.otherUser)
+                        viewModel.sendMessage(messageText: text,to: viewModel.otherUser)
                         text = ""
                     }
             }

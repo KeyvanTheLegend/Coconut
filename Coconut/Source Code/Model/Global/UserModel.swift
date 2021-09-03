@@ -12,7 +12,8 @@ struct UserModel : Identifiable , Codable {
     let name : String
     let email : String
     var picture : String = ""
-    
+    var userToken : String = ""
+
     var safeEmail : String {
         return email.safeString()
     }
@@ -27,6 +28,7 @@ struct UserModel : Identifiable , Codable {
         case name
         case email
         case picture
+        case userToken
     }
     var conversation : [ConversationModel] = []
     

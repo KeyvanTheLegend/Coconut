@@ -132,6 +132,7 @@ class SignupViewModel : ObservableObject {
                 UserDefaults.standard.set(user.name, forKey: "Name")
                 UserDefaults.standard.set(user.email, forKey: "Email")
                 UserDefaults.standard.set(user.picture, forKey: "ProfilePictureUrl")
+                UserDefaults.standard.set(user.userToken, forKey: "FCMToken")
                 self.isPresentedHomeTabView = true
             }else{
                 self.stateSignup = .FAILED

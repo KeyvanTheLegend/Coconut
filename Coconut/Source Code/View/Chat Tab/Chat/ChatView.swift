@@ -10,12 +10,12 @@ import SwiftUI
 struct ChatView: View {
     
     @State var messageText : String = ""
-    @State var safeAreaInsetsBotton :CGFloat = 0
+    @State var safeAreaBottonInset :CGFloat = 0
     @State var keyboardDidOpen : Bool = false
     @State var keyboardWillOpen : Bool = false
-    @State var keyboardheight : CGFloat = 0
 
-    @ObservedObject var viewModel = ChatViewModel()
+
+    @StateObject var viewModel = ChatViewModel()
     @Binding var withUser :UserModel?
     
     var body: some View {
@@ -81,13 +81,10 @@ struct ChatView: View {
         }
         .onAppear(perform: {
             UITextView.appearance().backgroundColor = .clear
-            if let window = UIApplication.shared.windows.first{
-                safeAreaInsetsBotton = window.safeAreaInsets.bottom
-            }
+
         })
         // MARK: - onAppear
         .onAppear(perform: {
-            print("on APPEAR \(withUser)")
             viewModel.setOtherUser(user : withUser)
         })
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)) { notifictation in
@@ -102,13 +99,28 @@ struct ChatView: View {
             keyboardDidOpen = true
             
         }
+        .introspectTabBarController { (UITabBarController) in
+            
+                print("TABBAR : ENTERED ")
+                let tabBarHeight = UITabBarController.tabBar.bounds.height
+                print("TABBAR : tabBarHeight : \(tabBarHeight)")
+                if let window = UIApplication.shared.windows.first{
+                    let phoneSafeAreaBottonInsets = window.safeAreaInsets.bottom
+                    safeAreaBottonInset = tabBarHeight - phoneSafeAreaBottonInsets
+
+                    print("TABBAR : safeAreaBottonInset : \(safeAreaBottonInset)")
+            }
+            UITabBarController.tabBar.alpha = 0
+        }
+        
+
         // MARK: - onDisappear
         .onDisappear(perform: {
             viewModel.setConverationID(convesationID: nil)
             viewModel.messages.removeAll()
             viewModel.setOtherUser(user: nil)
         })
-        .padding(.bottom, keyboardWillOpen ? 0: -safeAreaInsetsBotton)
+        .padding(.bottom, keyboardWillOpen ? 0: -safeAreaBottonInset)
     }
     
 }

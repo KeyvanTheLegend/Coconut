@@ -14,7 +14,7 @@ struct HomeView: View {
         setTabBarAppearence(to: .defualt)
     }
     
-    @State private var selection = 1
+    @State private var selection = 0
     
     var body: some View {
         TabView(selection : $selection) {
@@ -26,103 +26,103 @@ struct HomeView: View {
                 }
                 .tag(0)
             
-            GeometryReader { geometry in
-                NavigationView {
-                    ScrollView {
-                        VStack(alignment: .center , spacing: 4) {
-                            StartChatWithStrangerView()
-                                .padding([.horizontal],16)
-                                .padding([.top],16)
-                                .frame(width: abs(geometry.size.width),
-                                       height: 90)
-                            TitleView(title: "Chat requests")
-                                .padding([.leading,.trailing,.top],16)
-                            List {
-                                
-                                ChatRequestContentView(profileImage: "profile",
-                                                       name: "Keyvan Yaghoubian",
-                                                       isOnline: true)
-                                    .frame(width: geometry.size.width,
-                                           height: 70 + 16,
-                                           alignment: .leading)
-                                    .listRowBackground(Color.background)
-
-                                ChatRequestContentView(profileImage: "profile2",
-                                                       name: "Tara Asghari",
-                                                       isOnline: false)
-                                    .frame(width: geometry.size.width,
-                                           height: 70 + 16 ,
-                                           alignment: .leading)
-                                    .listRowBackground(Color.background)
-                                
-                            }
-                            .padding(0)
-                            .background(Color.red)
-                            .frame(width: geometry.size.width,
-                                   height: 180,
-                                   alignment: .top)
-                            .hasScrollEnabled(false)
-                            
-                            TitleView(title: "Must Meets")
-                                .padding([.leading,
-                                          .trailing,
-                                          .top],16)
-                            
-                            List {
-                                
-                                MustMeetsContentView(profileImage: "profile3",
-                                                     name: "Fati Ghasemi",
-                                                     matchPercentage: CGFloat(0.85))
-                                    .listRowBackground(Color.background)
-                                    .frame(width: geometry.size.width,
-                                           height: 70 + 16,
-                                           alignment: .leading)
-                                
-                                MustMeetsContentView(profileImage: "profile4",
-                                                     name: "Sina Rahim",
-                                                     matchPercentage: CGFloat(0.7))
-                                    .listRowBackground(Color.background)
-                                    .frame(width: geometry.size.width,
-                                           height: 70 + 16,
-                                           alignment: .leading)
-                                
-                                MustMeetsContentView(profileImage: "profile5",
-                                                     name: "Mehdi Falahati",
-                                                     matchPercentage: CGFloat(1))
-                                    .listRowBackground(Color.background)
-                                    .frame(width: geometry.size.width,
-                                           height: 70 + 16,
-                                           alignment: .leading)
-                                
-                            }
-                            .hasScrollEnabled(false)
-                            .padding(0)
-                            .background(Color.red)
-                            .frame(width: geometry.size.width, height: 290, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            
-                        }
-                        .frame(width: geometry.size.width)
-                        .navigationTitle("Home")
-                        
-                    }
-                    .fixFlickering { scrollView in
-                        scrollView.background(Color.background)
-                    }
-                }
-            }
-            .tabViewStyle(PageTabViewStyle())
-            .tabItem {
-                Image(systemName: "house.fill")
-                Text("Home")
-            }
-            .tag(1)
-            
+//            GeometryReader { geometry in
+//                NavigationView {
+//                    ScrollView {
+//                        VStack(alignment: .center , spacing: 4) {
+//                            StartChatWithStrangerView()
+//                                .padding([.horizontal],16)
+//                                .padding([.top],16)
+//                                .frame(width: abs(geometry.size.width),
+//                                       height: 90)
+//                            TitleView(title: "Chat requests")
+//                                .padding([.leading,.trailing,.top],16)
+//                            List {
+//
+//                                ChatRequestContentView(profileImage: "profile",
+//                                                       name: "Keyvan Yaghoubian",
+//                                                       isOnline: true)
+//                                    .frame(width: geometry.size.width,
+//                                           height: 70 + 16,
+//                                           alignment: .leading)
+//                                    .listRowBackground(Color.background)
+//
+//                                ChatRequestContentView(profileImage: "profile2",
+//                                                       name: "Tara Asghari",
+//                                                       isOnline: false)
+//                                    .frame(width: geometry.size.width,
+//                                           height: 70 + 16 ,
+//                                           alignment: .leading)
+//                                    .listRowBackground(Color.background)
+//
+//                            }
+//                            .padding(0)
+//                            .background(Color.red)
+//                            .frame(width: geometry.size.width,
+//                                   height: 180,
+//                                   alignment: .top)
+//                            .hasScrollEnabled(false)
+//
+//                            TitleView(title: "Must Meets")
+//                                .padding([.leading,
+//                                          .trailing,
+//                                          .top],16)
+//
+//                            List {
+//
+//                                MustMeetsContentView(profileImage: "profile3",
+//                                                     name: "Fati Ghasemi",
+//                                                     matchPercentage: CGFloat(0.85))
+//                                    .listRowBackground(Color.background)
+//                                    .frame(width: geometry.size.width,
+//                                           height: 70 + 16,
+//                                           alignment: .leading)
+//
+//                                MustMeetsContentView(profileImage: "profile4",
+//                                                     name: "Sina Rahim",
+//                                                     matchPercentage: CGFloat(0.7))
+//                                    .listRowBackground(Color.background)
+//                                    .frame(width: geometry.size.width,
+//                                           height: 70 + 16,
+//                                           alignment: .leading)
+//
+//                                MustMeetsContentView(profileImage: "profile5",
+//                                                     name: "Mehdi Falahati",
+//                                                     matchPercentage: CGFloat(1))
+//                                    .listRowBackground(Color.background)
+//                                    .frame(width: geometry.size.width,
+//                                           height: 70 + 16,
+//                                           alignment: .leading)
+//
+//                            }
+//                            .hasScrollEnabled(false)
+//                            .padding(0)
+//                            .background(Color.red)
+//                            .frame(width: geometry.size.width, height: 290, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//
+//                        }
+//                        .frame(width: geometry.size.width)
+//                        .navigationTitle("Home")
+//
+//                    }
+//                    .fixFlickering { scrollView in
+//                        scrollView.background(Color.background)
+//                    }
+//                }
+//            }
+//            .tabViewStyle(PageTabViewStyle())
+//            .tabItem {
+//                Image(systemName: "house.fill")
+//                Text("Home")
+//            }
+//            .tag(1)
+//
             SettingTabView()
                 .tabItem {
                     Image(systemName: "gearshape.fill")
                     Text("setting")
                 }
-                .tag(2)
+                .tag(1)
         }
     }
 }

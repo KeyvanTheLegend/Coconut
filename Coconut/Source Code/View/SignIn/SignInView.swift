@@ -12,7 +12,6 @@ struct SignInView: View {
     @ObservedObject var viewModel = SigninViewModel()
     
     var body: some View {
-        NavigationView {
             VStack {
                 Spacer()
                 ZStack {
@@ -65,8 +64,9 @@ struct SignInView: View {
             .onTapGesture {
                 hideKeyboard()
             }
+            
         }
-    }
+    
 }
 
 struct SignInView_Previews: PreviewProvider {

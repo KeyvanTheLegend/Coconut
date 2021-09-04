@@ -45,6 +45,12 @@ extension DatabaseManager {
     func updateUserToken(withEmail email: String ,to token : String) {
         database.child(email.safeString()).child("userToken").setValue(token)
     }
+    func updateProfilePicture(forEmail email: String , withImageUrl url : String){
+        database.child(email.safeString()).child("picture").setValue(url) { err, ref in
+            print("updated image url \(ref)")
+        }
+
+    }
     /// - TODO: Clean this
     func searchUser(withText text: String ,compeltion : @escaping (([UserModel])->Void)) {
         DispatchQueue.global().async {
@@ -59,6 +65,7 @@ extension DatabaseManager {
             var usersModel : [UserModel] = []
 
             for user in users{
+                print("USER IS : \(user.value)")
                 let jsonData = try! JSONSerialization.data(withJSONObject:user.value)
                 var userModel = try! decoder.decode(UserModel.self, from: jsonData)
                 if let userDic = user.value as? [String:Any] {
@@ -72,7 +79,6 @@ extension DatabaseManager {
                     
                     userModel.conversation = conversationsModel
                     }
-                    print("USER IS : \(userModel)")
                 }
 
                 usersModel.append(userModel)

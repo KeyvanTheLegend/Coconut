@@ -13,19 +13,13 @@ import FirebaseMessaging
 struct CoconutApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    
     init() {
         globalConfigure()
     }
     var body: some Scene {
         WindowGroup {
             /// user is signed in
-            if UserDefaults.standard.string(forKey: "Email") != nil {
-                HomeView()
-            }
-            else{
-                SignInView()
-            }
+            SplashView()
         }
         
     }

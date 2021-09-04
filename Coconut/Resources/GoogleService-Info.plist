@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>613939007310-n85pbsdspo787mspdshtccvtbkbihf8l.apps.googleusercontent.com</string>
+	<string>613939007310-f9e2obb7840ta2skenfvph1agr78fc0j.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.613939007310-n85pbsdspo787mspdshtccvtbkbihf8l</string>
+	<string>com.googleusercontent.apps.613939007310-f9e2obb7840ta2skenfvph1agr78fc0j</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCasTA_AM7G51IfosrrVE90fD771kSFgJQ</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.Coconut.CoconutApp</string>
+	<string>com.CoconutChat.CoconutApp</string>
 	<key>PROJECT_ID</key>
 	<string>coconut-48065</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:613939007310:ios:2f1d4a415389f74d0c181f</string>
+	<string>1:613939007310:ios:821aa90bfdf97dec0c181f</string>
+	<key>DATABASE_URL</key>
+	<string>https://coconut-48065-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

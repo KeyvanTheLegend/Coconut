@@ -16,7 +16,7 @@ struct ChatHeaderView : View {
             WebImage(url: URL(string: user?.picture ?? ""))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 90, alignment: .center)
+                .frame(width: 80, height: 80, alignment: .center)
                 .cornerRadius(12)
                 .clipped()
                 .aspectRatio(contentMode: .fit)

@@ -22,7 +22,7 @@ struct SearchResultContentView : View {
         GeometryReader { geometry in
             
             HStack(content: {
-                
+                if profileImage != ""{
                 WebImage(url: URL(string: profileImage))
                     .resizable()
                     .scaledToFit()
@@ -35,6 +35,24 @@ struct SearchResultContentView : View {
                     .padding([.trailing],16)
                     .padding([.bottom,.top],0)
                     .clipped()
+                }
+                else {
+                    ZStack(alignment: .center){
+                        Image("cocoImage")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 35, height: 35, alignment: .center)
+                    }
+                    .frame(width: 70,
+                           height: 70,
+                           alignment: .center)
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(12)
+                    .padding([.trailing],16)
+                    .padding([.bottom,.top],0)
+                    
+                }
+                
                 
                 VStack (alignment: .leading, spacing: 6, content: {
                     

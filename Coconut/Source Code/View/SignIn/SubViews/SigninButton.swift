@@ -34,6 +34,7 @@ struct SigninButton : View {
                 )
             /// singup button
             Button(action: {
+                hideKeyboard()
                 viewModel.signIn(email: viewModel.email, password: viewModel.password)
             }, label: {
                 Text("Signin")

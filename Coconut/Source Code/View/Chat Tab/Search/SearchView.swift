@@ -49,6 +49,7 @@ struct SearchView: View {
                     .listRowBackground(Color.background)
                 }
             }
+            .id(UUID())
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .listRowBackground(Color.background)
             .listRowInsets(EdgeInsets())

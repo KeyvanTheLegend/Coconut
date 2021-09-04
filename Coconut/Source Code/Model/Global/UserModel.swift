@@ -18,7 +18,7 @@ struct UserModel : Identifiable , Codable {
         return email.safeString()
     }
     var pictureFileName : String {
-        return safeEmail + ".png"
+        return safeEmail + "\(Date())" + ".png"
     }
     
     var id: UUID {

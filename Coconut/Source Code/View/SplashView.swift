@@ -2,29 +2,32 @@
 //  SplashView.swift
 //  Coconut
 //
-//  Created by sh on 9/5/21.
+//  Created by sh on 9/8/21.
 //
 
 import SwiftUI
 
+import SwiftUI
+
 struct SplashView: View {
-    @StateObject var loginState = LoginState()
+    @EnvironmentObject var userStatus : UserStatus
     var body: some View {
         NavigationView {
         SignInView()
-            .opacity(loginState.isLogin ? 0:1)
-            .fullScreenCover(isPresented: $loginState.isLogin, content: {
+            .opacity(userStatus.isSignin ? 0:1)
+            .fullScreenCover(isPresented: $userStatus.isSignin, content: {
             HomeView()
 
         })
         }
-        .environmentObject(loginState)
+        .navigationViewStyle(StackNavigationViewStyle())
+//        .environmentObject(userStatus)
         .background(Color.background.ignoresSafeArea())
         .onAppear(perform: {
             if UserDefaults.standard.string(forKey: "Email") == nil {
-                loginState.isLogin = false
+                userStatus.isSignin = false
             }
-            else {loginState.isLogin = true}
+            else {userStatus.isSignin = true}
         })
 
     }
@@ -35,7 +38,3 @@ struct SplashView_Previews: PreviewProvider {
         SplashView()
     }
 }
-class LoginState: ObservableObject {
-    @Published var isLogin : Bool = false
-}
-

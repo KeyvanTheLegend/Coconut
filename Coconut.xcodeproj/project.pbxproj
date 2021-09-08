@@ -25,6 +25,7 @@
 		C09F0D2A26C6C8D7006BC57B /* PersonImageNameLastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */; };
 		C0A41F6926CFC88C008C273B /* TextField+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A41F6826CFC88C008C273B /* TextField+extension.swift */; };
 		C0A77C8B26C43EE9006B364D /* ChatTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A77C8A26C43EE9006B364D /* ChatTabView.swift */; };
+		C0AFADD626E8B2FA00E43F16 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AFADD526E8B2FA00E43F16 /* SplashView.swift */; };
 		C0B9DD5626DBA423005BC51C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9DD5526DBA423005BC51C /* ImageView.swift */; };
 		C0B9DD5826DBB6E6005BC51C /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9DD5726DBB6E6005BC51C /* String+extension.swift */; };
 		C0BB61A326D91E3E006F442D /* SignupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A226D91E3E006F442D /* SignupButton.swift */; };
@@ -45,7 +46,6 @@
 		C0BC792126DF7AB600979BCB /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC792026DF7AB600979BCB /* BlurView.swift */; };
 		C0BC792326DF7AE400979BCB /* ChatViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BC792226DF7AE400979BCB /* ChatViewHeader.swift */; };
 		C0BF24D526CAC08000CFCC35 /* ChatTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */; };
-		C0C182EA26E41C8C0087ECB0 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C182E926E41C8C0087ECB0 /* SplashView.swift */; };
 		C0C5058126D40451008081D9 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5058026D403C3008081D9 /* SignupView.swift */; };
 		C0C5058226D40C8A008081D9 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB88B726D3D0550061D96E /* SignInView.swift */; };
 		C0C8086026D7862E00D249E4 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8085F26D7862E00D249E4 /* DatabaseManager.swift */; };
@@ -118,6 +118,7 @@
 		C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameLastMessageView.swift; sourceTree = "<group>"; };
 		C0A41F6826CFC88C008C273B /* TextField+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+extension.swift"; sourceTree = "<group>"; };
 		C0A77C8A26C43EE9006B364D /* ChatTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabView.swift; sourceTree = "<group>"; };
+		C0AFADD526E8B2FA00E43F16 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		C0B646D126E0CDFB00A7F79A /* Coconut.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Coconut.entitlements; sourceTree = "<group>"; };
 		C0B9DD5526DBA423005BC51C /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		C0B9DD5726DBB6E6005BC51C /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
@@ -140,7 +141,6 @@
 		C0BC792026DF7AB600979BCB /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		C0BC792226DF7AE400979BCB /* ChatViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewHeader.swift; sourceTree = "<group>"; };
 		C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabViewModel.swift; sourceTree = "<group>"; };
-		C0C182E926E41C8C0087ECB0 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		C0C5058026D403C3008081D9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		C0C8085F26D7862E00D249E4 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		C0C8086126D79C0900D249E4 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
@@ -238,6 +238,7 @@
 				C02ADF2126D2778300905E3A /* Setting Tab */,
 				C0E2087326DA1522000B905C /* Home Tab */,
 				C02ADF1D26D2756200905E3A /* Chat Tab */,
+				C0AFADD526E8B2FA00E43F16 /* SplashView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -584,7 +585,6 @@
 				C0BC792026DF7AB600979BCB /* BlurView.swift */,
 				C0E9333726DAA066005212E3 /* ImagePicker.swift */,
 				C0B9DD5526DBA423005BC51C /* ImageView.swift */,
-				C0C182E926E41C8C0087ECB0 /* SplashView.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -843,7 +843,7 @@
 				C0850D7526CB243A003E782E /* LiveChatSessionPersonInfoModel.swift in Sources */,
 				C0E90CCE26CAA2680074734C /* LiveChatSessionModel.swift in Sources */,
 				C0850D7826CB25B8003E782E /* PersonInfo.swift in Sources */,
-				C0C182EA26E41C8C0087ECB0 /* SplashView.swift in Sources */,
+				C0AFADD626E8B2FA00E43F16 /* SplashView.swift in Sources */,
 				C0BC791826DF6D5300979BCB /* SearchResultContentView.swift in Sources */,
 				C0E90CD026CAACD40074734C /* PersonImageNameStatusViewModel.swift in Sources */,
 				C0C5058226D40C8A008081D9 /* SignInView.swift in Sources */,
@@ -1046,11 +1046,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Coconut/Coconut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Coconut/Preview Content\"";
 				DEVELOPMENT_TEAM = P7PPJZH7GM;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Coconut/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1070,11 +1071,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Coconut/Coconut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Coconut/Preview Content\"";
 				DEVELOPMENT_TEAM = P7PPJZH7GM;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Coconut/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

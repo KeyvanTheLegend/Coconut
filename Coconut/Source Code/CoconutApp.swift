@@ -12,6 +12,7 @@ import FirebaseMessaging
 @main
 struct CoconutApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var userStatus = UserStatus()
     
     init() {
         globalConfigure()
@@ -20,6 +21,7 @@ struct CoconutApp: App {
         WindowGroup {
             /// user is signed in
             SplashView()
+                .environmentObject(userStatus)
         }
         
     }
@@ -27,6 +29,10 @@ struct CoconutApp: App {
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self])
             .tintColor = UIColor(Color("AccentColor"))
     }
+}
+class UserStatus: ObservableObject {
+    /// user signin state
+    @Published var isSignin : Bool = false
 }
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
@@ -124,11 +130,14 @@ extension AppDelegate: MessagingDelegate {
             object: nil,
             userInfo: dataDict
         )
+        guard let userFcmToken  = fcmToken else {return}
+        UserDefaults.standard.setValue(userFcmToken, forKey: "FCMToken")
+        DatabaseManager.shared.log(logText: "TOKEN IS : \(userFcmToken)")
         if let userEmail = UserDefaults.standard.string(forKey: "Email") {
-            guard let userFcmToken  = fcmToken else {return}
             print(userFcmToken)
-            DatabaseManager.shared.updateUserToken(withEmail: userEmail, to: userFcmToken)
-            UserDefaults.standard.setValue(userFcmToken, forKey: "FCMToken")
+            DispatchQueue.global().async {
+                DatabaseManager.shared.updateUserToken(withEmail: userEmail, to: userFcmToken)
+            }
         }
     }
 }

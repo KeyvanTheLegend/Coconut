@@ -11,7 +11,8 @@ import SwiftUI
 struct SignupView: View {
     
     @StateObject var viewModel = SignupViewModel()
-    
+    @EnvironmentObject var userStatus: UserStatus
+
     var body: some View {
         VStack{
             VStack{
@@ -22,10 +23,11 @@ struct SignupView: View {
                     EmailTextField(email: $viewModel.email)
                     PasswordTextField(password: $viewModel.password)
                     SingUpButton(viewModel: viewModel)
-                    .fullScreenCover(
-                        isPresented: $viewModel.isPresentedHomeTabView,
-                        content: HomeView.init
-                    )
+                        .onChange(of: viewModel.isPresentedHomeTabView, perform: { value in
+                            if value {
+                                userStatus.isSignin = true
+                            }
+                        })
                 }
                 Group{
                     Spacer()

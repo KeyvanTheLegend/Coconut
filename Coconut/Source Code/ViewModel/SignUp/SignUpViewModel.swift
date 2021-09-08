@@ -81,8 +81,9 @@ class SignupViewModel : ObservableObject {
         name : String,
         email : String,
         profilePicture: UIImage?) {
+        let userToken = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
         
-        var user = UserModel(name: name, email: email)
+        var user = UserModel(name: name, email: email,picture: "",userToken: userToken)
         
         guard let profilePicture = profilePicture else{
             self.insertUser(user)

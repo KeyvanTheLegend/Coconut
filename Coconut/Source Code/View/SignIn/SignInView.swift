@@ -9,8 +9,9 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @ObservedObject var viewModel = SigninViewModel()
-    
+    @StateObject var viewModel = SigninViewModel()
+    @EnvironmentObject var userStatus: UserStatus
+
     var body: some View {
             VStack {
                 Spacer()
@@ -31,10 +32,7 @@ struct SignInView: View {
                     EmailTextField(email: $viewModel.email)
                     PasswordTextField(password: $viewModel.password)
                     SigninButton(viewModel: viewModel)
-                    .fullScreenCover(
-                        isPresented: $viewModel.presentHomeTabView,
-                        content: HomeView.init
-                    )
+
                 }
                 Group
                 {
@@ -63,6 +61,15 @@ struct SignInView: View {
             .ignoresSafeArea(.container)
             .onTapGesture {
                 hideKeyboard()
+            }
+            .onAppear(perform: {
+                viewModel.presentHomeTabView = false
+            })
+            .onChange(of: viewModel.presentHomeTabView) { value in
+                if value{
+                    DatabaseManager.shared.log(logText: "\(Date())  | action : changin loginState to \(value)")
+                userStatus.isSignin = true
+                }
             }
             
         }

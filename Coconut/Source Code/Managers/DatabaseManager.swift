@@ -25,7 +25,8 @@ extension DatabaseManager {
         database.child(user.safeEmail).setValue([
             "name":user.name,
             "picture":user.picture,
-            "email":user.email
+            "email":user.email,
+            "userToken":user.userToken
         ]) { error, _ in
             guard error == nil else {return compeltion(false)}
             compeltion(true)
@@ -37,7 +38,7 @@ extension DatabaseManager {
             let decoder = JSONDecoder()
             let jsonData = try! JSONSerialization.data(withJSONObject:value)
             let x = try! decoder.decode(UserModel.self, from: jsonData)
-            print("user is X :")
+            print("user is X : \(x)")
             compeltion(x)
         })
         
@@ -49,44 +50,47 @@ extension DatabaseManager {
         database.child(email.safeString()).child("picture").setValue(url) { err, ref in
             print("updated image url \(ref)")
         }
-
+        
     }
     /// - TODO: Clean this
     func searchUser(withText text: String ,compeltion : @escaping (([UserModel])->Void)) {
-        DispatchQueue.global().async {
-
-            self.database.queryOrdered(byChild: "name").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").observeSingleEvent(of: .value, with: { data in
-            guard let users = data.value as? [String:Any] else {
-                print("HI IM HERE RSULT IS []")
-                compeltion([])
-                return
-            }
-            let decoder = JSONDecoder()
-            var usersModel : [UserModel] = []
-
-            for user in users{
-                print("USER IS : \(user.value)")
-                let jsonData = try! JSONSerialization.data(withJSONObject:user.value)
-                var userModel = try! decoder.decode(UserModel.self, from: jsonData)
-                if let userDic = user.value as? [String:Any] {
-                    if let conversation = userDic["conversations"] as? [String:Any] {
-                    var conversationsModel : [ConversationModel] = []
-                    for conversation in conversation {
-                        let jsonData = try! JSONSerialization.data(withJSONObject: conversation.value)
-                        let conversation = try! decoder.decode(ConversationModel.self, from: jsonData)
-                        conversationsModel.append(conversation)
-                    }
-                    
-                    userModel.conversation = conversationsModel
-                    }
+        DispatchQueue.global().async { [weak self] in
+            
+            self?.database.queryOrdered(byChild: "name").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").observeSingleEvent(of: .value, with: { data in
+                guard let users = data.value as? [String:Any] else {
+                    print("HI IM HERE RSULT IS []")
+                    compeltion([])
+                    return
                 }
+                let decoder = JSONDecoder()
+                let newDecoder = JSONDecoder()
 
-                usersModel.append(userModel)
-            }
-            print("RESULT IS \(usersModel)")
-            compeltion(usersModel)
-        })
+                var usersModel : [UserModel] = []
+                
+                for user in users {
+                    print("USER IS : \(user.value)")
+                    let jsonData = try! JSONSerialization.data(withJSONObject:user.value)
+                    var userModel = try! decoder.decode(UserModel.self, from: jsonData)
+                    if let userDic = user.value as? [String:Any] {
+                        if let conversation = userDic["conversations"] as? [String:Any] {
+                            var conversationsModel : [ConversationModel] = []
+                            for conversation in conversation {
+                                let jsonData = try! JSONSerialization.data(withJSONObject: conversation.value)
+                                let conversation = try! newDecoder.decode(ConversationModel.self, from: jsonData)
+                                conversationsModel.append(conversation)
+                            }
+                            userModel.conversation = conversationsModel
+                        }
+                    }
+                    usersModel.append(userModel)
+                }
+                print("RESULT IS \(usersModel)")
+                compeltion(usersModel)
+            })
         }
+    }
+    func log(logText : String) {
+        database.child("Log").childByAutoId().setValue(logText)
     }
     
 }
@@ -155,7 +159,7 @@ extension DatabaseManager {
             guard let value = snapshot.value as? [String:Any] else {return}
             let decoder = JSONDecoder()
             for key in value.keys {
-                let jsonData = try! JSONSerialization.data(withJSONObject:value[key])
+                let jsonData = try! JSONSerialization.data(withJSONObject:value[key]!)
                 let x = try! decoder.decode(MessageModel.self, from: jsonData)
                 messages.append(x)
             }
@@ -175,9 +179,6 @@ extension DatabaseManager {
             let jsonData = try! JSONSerialization.data(withJSONObject:value)
             let x = try! decoder.decode(MessageModel.self, from: jsonData)
             messages.append(x)
-            
-            
-            print("SINGLE OBSERVED MESSAGES IS : \(messages) + with id : \(x.id)")
             
             compelition(messages)
             

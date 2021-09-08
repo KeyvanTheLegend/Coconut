@@ -16,7 +16,7 @@ class ChatTabViewModel : ObservableObject  {
     /// get all user conversations and start observing new ones
     func getAllConversations(){
         guard let userEmail = UserDefaults.standard.string(forKey: "Email") else { return }
-            DatabaseManager.shared.getAllConversations(for: userEmail.safeString()) { conversations in
-                self.conversations = conversations}
+            DatabaseManager.shared.getAllConversations(for: userEmail.safeString()) { [weak self] conversations in
+                self?.conversations = conversations}
     }
 }

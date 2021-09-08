@@ -55,12 +55,7 @@ struct ChatTabView: View {
                             }
                         }
                         .listRowBackground(Color.background)
-                        .listRowInsets(.init(
-                            top: 0,
-                            leading: 0,
-                            bottom: 1,
-                            trailing: 0
-                        ))
+
                     }
                 }
                 .padding(0)
@@ -177,9 +172,14 @@ struct ChatTabView: View {
         .background(Color.background)
         .ignoresSafeArea(.keyboard)
         // MARK: - onAppear :
-        .onAppear(perform: {viewModel.getAllConversations()})
-        
+        .onAppear(perform: {
+            viewModel.getAllConversations()
+            DatabaseManager.shared.log(logText: "\(Date())  | action : chatTab appeared")
+        })
+        .navigationViewStyle(StackNavigationViewStyle())
+
     }
+    
 }
 
 struct MessageView_Previews: PreviewProvider {

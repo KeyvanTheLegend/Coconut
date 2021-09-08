@@ -50,9 +50,7 @@ struct ChatView: View {
                 .hasScrollEnabled(true)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .listRowBackground(Color.background)
-                .listRowInsets(EdgeInsets())
                 .background(Color.background)
-                .listStyle(InsetListStyle())
                 .onChange(of: keyboardDidOpen, perform: { value in
                     withAnimation {
                         if viewModel.messages.count > 0 {
@@ -116,9 +114,6 @@ struct ChatView: View {
 
         // MARK: - onDisappear
         .onDisappear(perform: {
-            viewModel.setConverationID(convesationID: nil)
-            viewModel.messages.removeAll()
-            viewModel.setOtherUser(user: nil)
         })
         .padding(.bottom, keyboardWillOpen ? 0: -safeAreaBottonInset)
     }

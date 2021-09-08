@@ -15,13 +15,8 @@ class ChatViewModel : ObservableObject  {
     private(set) var conversationID : String? = nil
     private(set) var otherUser : UserModel? = nil
     
-    var userEmail : String? {
-        return UserDefaults.standard.string(forKey: "Email")!
-    }
-    
-    init(){
+    let userEmail : String?  = UserDefaults.standard.string(forKey: "Email")!
 
-    }
     /// set shared conversationID
     /// - Parameter convesationID: shared conversationID if exist
     func setConverationID(convesationID : String?){
@@ -29,21 +24,20 @@ class ChatViewModel : ObservableObject  {
             print("CONVERSATION ID DOUS NOT EXIT")
             return
         }
-        self.conversationID = convesationID
-        DatabaseManager.shared.observeMessagesForConversation(conversationId: convesationID) { message in
+//        self.conversationID = convesationID
+        DatabaseManager.shared.observeMessagesForConversation(conversationId: convesationID) { [weak self] message in
             print("HI 3\(message)")
-            self.messages += message
+            self?.messages += message
         }
     }
     /// set otherUser in viewModel
     /// - Parameter user: otherUser
     func setOtherUser(user : UserModel?){
-        print("IH CALLED \(user)")
         guard let otherUser = user else {
             print("USER DOS NOT EXIT")
             return
         }
-        self.otherUser = otherUser
+//        self.otherUser = otherUser
         // if shared conversation id exist , no need to check for shared conversation
         if let sharedConversationId = otherUser.sharedConversastion {
             print("HI shared is \(sharedConversationId)")
@@ -72,12 +66,7 @@ class ChatViewModel : ObservableObject  {
     ///   - message: message text
     ///   - otherUser: user to send message to
     func sendMessage(messageText:String,to otherUser : UserModel?){
-        print(UserDefaults.standard.string(forKey: "Email"))
-        print(UserDefaults.standard.string(forKey: "Name"))
-        print(UserDefaults.standard.string(forKey: "FCMToken"))
-        print(UserDefaults.standard.string(forKey: "ProfilePictureUrl"))
-        print("OTHER USER IS \(otherUser)")
-        
+
         guard
             let userEmail = UserDefaults.standard.string(forKey: "Email"),
             let userName = UserDefaults.standard.string(forKey: "Name"),
@@ -106,12 +95,12 @@ class ChatViewModel : ObservableObject  {
             DatabaseManager.shared.sendMessage(conversationId: conversationId,message: message)
         }else {
             // create conversation with message
-            DatabaseManager.shared.createConversation(with: otherUser, and: user, message: message) { conversationID in
+            DatabaseManager.shared.createConversation(with: otherUser, and: user, message: message) { [weak self] conversationID in
                 print("CREATED \(conversationID)")
                 
-                self.conversationID = conversationID
-                self.observeMessagesForConversation(with: conversationID)
-                self.getMessagesForConversation(with: conversationID)
+//                self?.conversationID = conversationID
+                self?.observeMessagesForConversation(with: conversationID)
+                self?.getMessagesForConversation(with: conversationID)
 
             }
         }
@@ -119,18 +108,18 @@ class ChatViewModel : ObservableObject  {
     /// start observing for new messages
     /// - Parameter conversationID: conversationID
     private func observeMessagesForConversation(with conversationID : String){
-        DatabaseManager.shared.observeMessagesForConversation(conversationId: conversationID) { message in
+        DatabaseManager.shared.observeMessagesForConversation(conversationId: conversationID) { [weak self] message in
             print("HI \(message)")
-            self.messages += message
+            self?.messages += message
         }
     }
     /// get all messages for conversation **ONCE**
     /// - Parameter conversationID: conversationID
     private func getMessagesForConversation(with conversationID : String){
-        DatabaseManager.shared.getMessagesForConversation(conversationId: conversationID) { messages in
+        DatabaseManager.shared.getMessagesForConversation(conversationId: conversationID) { [weak self] messages in
             print("HI MESSAGES IS \(messages)")
             DispatchQueue.main.async {
-                self.messages = messages
+                self?.messages = messages
 
             }
         }

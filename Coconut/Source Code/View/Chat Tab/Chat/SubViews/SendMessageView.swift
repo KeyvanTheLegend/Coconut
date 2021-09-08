@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SendMessageView : View {
-    @ObservedObject var viewModel : ChatViewModel
+    @StateObject var viewModel : ChatViewModel
     @Binding var text :String
     var body: some View {
         VStack(spacing : 8){

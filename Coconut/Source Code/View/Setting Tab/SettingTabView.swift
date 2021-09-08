@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SettingTabView: View {
     @State var presentSignin : Bool = false
-    @EnvironmentObject var loginState: LoginState
+    @EnvironmentObject var userStatus: UserStatus
+    @Environment(\.presentationMode) var presentationModeEdit: Binding<PresentationMode>
 
     var body: some View {
         NavigationView{
@@ -102,7 +103,9 @@ struct SettingTabView: View {
                         Spacer()
                     }
                     .onTapGesture {
-                        loginState.isLogin = false
+                        self.presentationModeEdit.wrappedValue.dismiss()
+
+//                        loginState.isLogin = false
                         let domain = Bundle.main.bundleIdentifier!
                         UserDefaults.standard.removePersistentDomain(forName: domain)
                     }
@@ -117,7 +120,11 @@ struct SettingTabView: View {
             .background(Color.background
                             .ignoresSafeArea())
             .navigationBarTitle("Setting")
+
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+
+
     }
 }
 
@@ -137,33 +144,48 @@ struct SettingTabHeaderView : View {
     var body: some View{
         HStack(alignment : .top){
             if selectedImage == nil{
-            if UserDefaults.standard.string(forKey: "ProfilePictureUrl") ?? "" != "" {
-                WebImage(url: URL(string: UserDefaults.standard.string(forKey: "ProfilePictureUrl") ?? ""))
-                    .resizable()
-                    .frame(width: 80, height: 80, alignment: .center)
+                if UserDefaults.standard.string(forKey: "ProfilePictureUrl") ?? "" != "" {
+                    WebImage(url: URL(string: UserDefaults.standard.string(forKey: "ProfilePictureUrl") ?? ""))
+                        .resizable()
+                        .frame(width: 80, height: 80, alignment: .center)
+                        .background(Color.primery)
+                        .cornerRadius(12)
+                        .font(.title)
+                        .padding(.horizontal ,16)
+                        .onTapGesture {
+                            showImagePicker = true
+                        }
+                }
+                else{
+                    //
+                    ZStack{
+                        Image("cocoImage")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 35, height: 35, alignment: .center)
+                    }                .frame(width: 80,
+                                            height: 80,
+                                            alignment: .center)
                     .background(Color.primery)
                     .cornerRadius(12)
-                    .font(.title)
                     .padding(.horizontal ,16)
                     .onTapGesture {
                         showImagePicker = true
                     }
-            }
+                }
             }
             else {
                 ZStack(alignment: .center){
-                    if isImageSelected {
-                        Image(uiImage: selectedImage!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 80, height: 80, alignment: .center)
-                        
-                    }else{
+                    Image(uiImage: selectedImage!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 80, height: 80, alignment: .center)
+                    
                     Image("cocoImage")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 35, height: 35, alignment: .center)
-                    }
+                    
                     
                 }
                 .frame(width: 80,
@@ -217,6 +239,7 @@ struct SettingTabHeaderView : View {
                 }
             }
         })
+
 //        .onAppear(perform: {
 //            profilePictureUrl = UserDefaults.standard.string(forKey: "ProfilePictureUrl") ?? ""
 //            print("HIIII \(profilePictureUrl)")

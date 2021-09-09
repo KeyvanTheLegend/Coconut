@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - NAVIGATION BAR
 enum NavigationBarStyle {
     case defualt
-    case light
+    case clear
     case dark
 }
 extension View {
@@ -27,8 +27,13 @@ extension View {
             appearence.titleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
             appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
             
-        case .light:
+        case .clear:
             /// TODO - add light style
+            appearence.configureWithTransparentBackground()
+            appearence.backgroundEffect = .none
+            appearence.backgroundColor = .clear
+            appearence.titleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
+            appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
             break
         case .dark:
             break
@@ -39,6 +44,7 @@ extension View {
         UINavigationBar.appearance().scrollEdgeAppearance = appearence
         UINavigationBar.appearance().compactAppearance = appearence
         UINavigationBar.appearance().isTranslucent = true
+        
     }
     func setTabBarAppearence(to style : TabBarStyle) {
         switch style {

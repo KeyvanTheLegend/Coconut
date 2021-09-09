@@ -11,7 +11,7 @@ import SwiftUI
 struct SignupView: View {
     
     @StateObject var viewModel = SignupViewModel()
-    @EnvironmentObject var userStatus: UserStatus
+    @EnvironmentObject var globalObjects: GlobalObjects
 
     var body: some View {
         VStack{
@@ -25,7 +25,7 @@ struct SignupView: View {
                     SingUpButton(viewModel: viewModel)
                         .onChange(of: viewModel.isPresentedHomeTabView, perform: { value in
                             if value {
-                                userStatus.isSignin = true
+                                globalObjects.isSignedIn = true
                             }
                         })
                 }

@@ -114,6 +114,7 @@ struct ChatView: View {
 
         // MARK: - onDisappear
         .onDisappear(perform: {
+            viewModel.removeObserver()
         })
         .padding(.bottom, keyboardWillOpen ? 0: -safeAreaBottonInset)
     }

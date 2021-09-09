@@ -33,15 +33,25 @@ extension DatabaseManager {
         }
     }
     func getUser(withEmail safeEmail: String ,compeltion : @escaping ((UserModel)->Void)) {
+        log(logText: "user \(safeEmail) action : getUser Called ")
         database.child(safeEmail).observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value as? [String:Any] else {return}
+            
+            guard let value = snapshot.value as? [String:Any] else {
+                self.log(logText: "user \(safeEmail) action : getUser ERROR ")
+
+                return
+                
+            }
             let decoder = JSONDecoder()
             let jsonData = try! JSONSerialization.data(withJSONObject:value)
-            let x = try! decoder.decode(UserModel.self, from: jsonData)
-            print("user is X : \(x)")
+            guard let x = try? decoder.decode(UserModel.self, from: jsonData) else{
+                self.log(logText: "user \(safeEmail) action : getUser ERROR decoding ")
+                return
+            }
             compeltion(x)
+            self.log(logText: "user \(safeEmail) action : getUser Compeleted with \(x) ")
+
         })
-        
     }
     func updateUserToken(withEmail email: String ,to token : String) {
         database.child(email.safeString()).child("userToken").setValue(token)
@@ -73,13 +83,13 @@ extension DatabaseManager {
                     var userModel = try! decoder.decode(UserModel.self, from: jsonData)
                     if let userDic = user.value as? [String:Any] {
                         if let conversation = userDic["conversations"] as? [String:Any] {
-                            var conversationsModel : [ConversationModel] = []
+//                            var conversationsModel : [ConversationModel] = []
                             for conversation in conversation {
                                 let jsonData = try! JSONSerialization.data(withJSONObject: conversation.value)
-                                let conversation = try! newDecoder.decode(ConversationModel.self, from: jsonData)
-                                conversationsModel.append(conversation)
+                                userModel.conversation.append(try! newDecoder.decode(ConversationModel.self, from: jsonData))
+//                                conversationsModel.append(conversation)
                             }
-                            userModel.conversation = conversationsModel
+//                            userModel.conversation = conversationsModel
                         }
                     }
                     usersModel.append(userModel)
@@ -182,8 +192,13 @@ extension DatabaseManager {
             
             compelition(messages)
             
-            
+
         }
+
+    }
+    func removeMessageObserver(for conversationId : String ){
+
+        database.child(conversationId).child("messages").removeAllObservers()
     }
     
     func sendMessage(conversationId :String,message : MessageModel){

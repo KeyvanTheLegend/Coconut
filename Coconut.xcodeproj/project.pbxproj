@@ -50,6 +50,8 @@
 		C0C5058226D40C8A008081D9 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB88B726D3D0550061D96E /* SignInView.swift */; };
 		C0C8086026D7862E00D249E4 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8085F26D7862E00D249E4 /* DatabaseManager.swift */; };
 		C0C8086226D79C0900D249E4 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8086126D79C0900D249E4 /* MessageModel.swift */; };
+		C0CDA34C26EA0190006F81E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDA34B26EA0190006F81E2 /* AppDelegate.swift */; };
+		C0CDA34E26EA0D9F006F81E2 /* GlobalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDA34D26EA0D9F006F81E2 /* GlobalObjects.swift */; };
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
 		C0DDC56026C0674700535A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* HomeView.swift */; };
 		C0DDC56226C0674900535A06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DDC56126C0674900535A06 /* Assets.xcassets */; };
@@ -144,6 +146,8 @@
 		C0C5058026D403C3008081D9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		C0C8085F26D7862E00D249E4 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		C0C8086126D79C0900D249E4 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		C0CDA34B26EA0190006F81E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C0CDA34D26EA0D9F006F81E2 /* GlobalObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalObjects.swift; sourceTree = "<group>"; };
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC55D26C0674700535A06 /* CoconutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutApp.swift; sourceTree = "<group>"; };
 		C0DDC55F26C0674700535A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -232,13 +236,13 @@
 		C02ADF1A26D2750D00905E3A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C0AFADD526E8B2FA00E43F16 /* SplashView.swift */,
 				C0E9333626DAA055005212E3 /* Global */,
 				C0BB88B626D3CD1A0061D96E /* SignIn */,
 				C0C5057F26D403B1008081D9 /* SignUp */,
 				C02ADF2126D2778300905E3A /* Setting Tab */,
 				C0E2087326DA1522000B905C /* Home Tab */,
 				C02ADF1D26D2756200905E3A /* Chat Tab */,
-				C0AFADD526E8B2FA00E43F16 /* SplashView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -343,6 +347,8 @@
 			isa = PBXGroup;
 			children = (
 				C0DDC55D26C0674700535A06 /* CoconutApp.swift */,
+				C0CDA34B26EA0190006F81E2 /* AppDelegate.swift */,
+				C0CDA34D26EA0D9F006F81E2 /* GlobalObjects.swift */,
 				C02ADF1C26D2752000905E3A /* Model */,
 				C02ADF1A26D2750D00905E3A /* View */,
 				C02ADF1B26D2751400905E3A /* ViewModel */,
@@ -861,6 +867,7 @@
 				C0DE3F9F26D5015C00CC1F1C /* UserModel.swift in Sources */,
 				C0BB61B526D92569006F442D /* PasswordTextField.swift in Sources */,
 				C0E2087626DA177A000B905C /* Encodeable+extension.swift in Sources */,
+				C0CDA34E26EA0D9F006F81E2 /* GlobalObjects.swift in Sources */,
 				C0B9DD5826DBB6E6005BC51C /* String+extension.swift in Sources */,
 				C02ADF2326D277C000905E3A /* SettingTabView.swift in Sources */,
 				C0BB61A726D91ECB006F442D /* SignupProfileImageView.swift in Sources */,
@@ -876,6 +883,7 @@
 				C0E492B526DBFB5400C66412 /* SearchView.swift in Sources */,
 				C0BB61BA26D97777006F442D /* SigninButton.swift in Sources */,
 				C0E2087826DA792C000B905C /* Error+extension.swift in Sources */,
+				C0CDA34C26EA0190006F81E2 /* AppDelegate.swift in Sources */,
 				C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */,
 				C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */,
 				C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */,
@@ -1046,7 +1054,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Coconut/Coconut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Coconut/Preview Content\"";
 				DEVELOPMENT_TEAM = P7PPJZH7GM;
 				ENABLE_PREVIEWS = YES;
@@ -1071,7 +1079,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Coconut/Coconut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Coconut/Preview Content\"";
 				DEVELOPMENT_TEAM = P7PPJZH7GM;
 				ENABLE_PREVIEWS = YES;

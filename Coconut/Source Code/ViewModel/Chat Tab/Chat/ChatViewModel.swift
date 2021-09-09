@@ -11,7 +11,7 @@ import Foundation
 class ChatViewModel : ObservableObject  {
     
     /// - sub ViewModels :
-    @Published var messages : [MessageModel] = []
+    @Published private(set) var messages : [MessageModel] = []
     private(set) var conversationID : String? = nil
     private(set) var otherUser : UserModel? = nil
     
@@ -24,7 +24,7 @@ class ChatViewModel : ObservableObject  {
             print("CONVERSATION ID DOUS NOT EXIT")
             return
         }
-//        self.conversationID = convesationID
+        self.conversationID = convesationID
         DatabaseManager.shared.observeMessagesForConversation(conversationId: convesationID) { [weak self] message in
             print("HI 3\(message)")
             self?.messages += message
@@ -37,7 +37,7 @@ class ChatViewModel : ObservableObject  {
             print("USER DOS NOT EXIT")
             return
         }
-//        self.otherUser = otherUser
+        self.otherUser = otherUser
         // if shared conversation id exist , no need to check for shared conversation
         if let sharedConversationId = otherUser.sharedConversastion {
             print("HI shared is \(sharedConversationId)")
@@ -98,7 +98,7 @@ class ChatViewModel : ObservableObject  {
             DatabaseManager.shared.createConversation(with: otherUser, and: user, message: message) { [weak self] conversationID in
                 print("CREATED \(conversationID)")
                 
-//                self?.conversationID = conversationID
+                self?.conversationID = conversationID
                 self?.observeMessagesForConversation(with: conversationID)
                 self?.getMessagesForConversation(with: conversationID)
 
@@ -123,6 +123,9 @@ class ChatViewModel : ObservableObject  {
 
             }
         }
+    }
+    func removeObserver(){
+        DatabaseManager.shared.removeMessageObserver(for: self.conversationID ?? "")
     }
 }
 

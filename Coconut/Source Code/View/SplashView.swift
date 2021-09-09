@@ -10,26 +10,15 @@ import SwiftUI
 import SwiftUI
 
 struct SplashView: View {
-    @EnvironmentObject var userStatus : UserStatus
+    
+    @EnvironmentObject var globalObjects : GlobalObjects
+    
     var body: some View {
-        NavigationView {
-        SignInView()
-            .opacity(userStatus.isSignin ? 0:1)
-            .fullScreenCover(isPresented: $userStatus.isSignin, content: {
-            HomeView()
-
-        })
+        VStack{
+            SignInView()
+                .opacity(globalObjects.isSignedIn ? 0:1)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-//        .environmentObject(userStatus)
         .background(Color.background.ignoresSafeArea())
-        .onAppear(perform: {
-            if UserDefaults.standard.string(forKey: "Email") == nil {
-                userStatus.isSignin = false
-            }
-            else {userStatus.isSignin = true}
-        })
-
     }
 }
 

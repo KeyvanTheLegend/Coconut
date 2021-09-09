@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct SettingTabView: View {
-    @State var presentSignin : Bool = false
-    @EnvironmentObject var userStatus: UserStatus
-    @Environment(\.presentationMode) var presentationModeEdit: Binding<PresentationMode>
-
+    @EnvironmentObject var globalObjects : GlobalObjects
+    
     var body: some View {
         NavigationView{
             ScrollView {
@@ -103,13 +101,10 @@ struct SettingTabView: View {
                         Spacer()
                     }
                     .onTapGesture {
-                        self.presentationModeEdit.wrappedValue.dismiss()
-
-//                        loginState.isLogin = false
                         let domain = Bundle.main.bundleIdentifier!
                         UserDefaults.standard.removePersistentDomain(forName: domain)
+                        globalObjects.update()
                     }
-                    
                     Divider()
 
                 }
@@ -120,11 +115,8 @@ struct SettingTabView: View {
             .background(Color.background
                             .ignoresSafeArea())
             .navigationBarTitle("Setting")
-
         }
         .navigationViewStyle(StackNavigationViewStyle())
-
-
     }
 }
 

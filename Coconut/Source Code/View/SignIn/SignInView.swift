@@ -10,9 +10,14 @@ import SwiftUI
 struct SignInView: View {
     
     @StateObject var viewModel = SigninViewModel()
-    @EnvironmentObject var userStatus: UserStatus
+    @EnvironmentObject var globalObject: GlobalObjects
+    
+    init() {
+        setNavBarAppearence(to: .clear)
+    }
 
     var body: some View {
+        NavigationView{
             VStack {
                 Spacer()
                 ZStack {
@@ -32,7 +37,6 @@ struct SignInView: View {
                     EmailTextField(email: $viewModel.email)
                     PasswordTextField(password: $viewModel.password)
                     SigninButton(viewModel: viewModel)
-
                 }
                 Group
                 {
@@ -41,19 +45,17 @@ struct SignInView: View {
                     NavigationLink(
                         destination: SignupView(),
                         isActive: $viewModel.showSignUpView,
-                        label: {
-                            EmptyView()
-                        })
+                        label: {EmptyView()})
                     Spacer()
                 }
                 /// Alert
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(
-                        title: Text(viewModel.errorSignin?.title ?? "error"),
-                        message: Text(viewModel.errorSignin?.description ?? "error"),
-                        dismissButton: .default(Text("Dismiss")
-                                                    .foregroundColor(Color.red)
-                        )
+                        title:
+                            Text(viewModel.errorSignin?.title ?? "error"),
+                        message:
+                            Text(viewModel.errorSignin?.description ?? "error"),
+                        dismissButton: .default(Text("Dismiss"))
                     )
                 }
             }
@@ -65,15 +67,20 @@ struct SignInView: View {
             .onAppear(perform: {
                 viewModel.presentHomeTabView = false
             })
-            .onChange(of: viewModel.presentHomeTabView) { value in
-                if value{
-                    DatabaseManager.shared.log(logText: "\(Date())  | action : changin loginState to \(value)")
-                userStatus.isSignin = true
+            .onChange(of: viewModel.presentHomeTabView) { presentHomeTabView in
+                if presentHomeTabView {
+                    globalObject.isSignedIn = true
+                    // this should be removed
+                    DatabaseManager.shared.log(logText: "\(Date())  | action : changing loginState to \(presentHomeTabView)")
                 }
             }
-            
+            .fullScreenCover(isPresented: $globalObject.isSignedIn, content: {
+                HomeView()
+            })
         }
-    
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
+    }
 }
 
 struct SignInView_Previews: PreviewProvider {

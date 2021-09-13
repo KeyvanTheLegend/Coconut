@@ -65,15 +65,13 @@ struct SignInView: View {
                 hideKeyboard()
             }
             .onAppear(perform: {
-                viewModel.presentHomeTabView = false
                 setNavBarAppearence(to: .clear)
-
+                print("HI IM HERE BRO")
+                viewModel.presentHomeTabView = false
             })
             .onChange(of: viewModel.presentHomeTabView) { presentHomeTabView in
                 if presentHomeTabView {
                     session.update()
-                    // this should be removed
-                    print("HI IM HERE BRO")
                 }
             }
             .fullScreenCover(isPresented: $session.isSignedIn, content: {

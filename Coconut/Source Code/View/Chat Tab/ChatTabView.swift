@@ -11,8 +11,8 @@ struct ChatTabView: View {
     @State var navigateToChatView = false
     @State var navigateToSearchView = false
     
-    @EnvironmentObject var session : Session
     @StateObject var viewModel = ChatTabViewModel()
+    @EnvironmentObject var session : Session
     
     init(){
         UITableView.appearance().backgroundColor = UIColor(named: "BackgroundColor")
@@ -22,7 +22,7 @@ struct ChatTabView: View {
         
         NavigationView {
             ZStack{
-                // MARK: Converastion List
+                // MARK: Conversation List
                 List{
                     ForEach(viewModel.conversations) { conversation in
                         if !viewModel.blockedEmails.contains(
@@ -47,6 +47,7 @@ struct ChatTabView: View {
                     }
                 }
                 .padding(0)
+                
                 // MARK: Navigation Links
                 Group{
                     NavigationLink(
@@ -71,17 +72,15 @@ struct ChatTabView: View {
                 }
             }
             .padding(0)
+            .showTabBar()
+            .navigationTitle("Chat")
         }
         .hasScrollEnabled(true)
-        .showTabBar()
-        
         .background(Color.background)
         .ignoresSafeArea(.keyboard)
-        
-        .navigationTitle("Chat")
         .navigationViewStyle(StackNavigationViewStyle())
         
-        // MARK: Navigation Bar Item :
+        // MARK: Navigation Bar Items :
         .navigationBarItems(trailing: Button(action: {
             navigateToSearchView = true
         }, label: {
@@ -101,7 +100,9 @@ struct ChatTabView: View {
         .onAppear(perform: {
             viewModel.getAllConversations()
             viewModel.observeBlockedEmails()
+            DatabaseManager.shared.log(logText: "\(Date())  | action : chatTab appeared")
         })
+        
     }
     
 }

@@ -7,6 +7,7 @@
 
 import Firebase
 
+// needed implementation of appdelegate for push notification
 final class AppDelegate: NSObject, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.message_id"
     
@@ -62,7 +63,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     
     
 }
-
 extension AppDelegate: UNUserNotificationCenterDelegate {
     // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter,

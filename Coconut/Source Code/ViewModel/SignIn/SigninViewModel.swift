@@ -33,13 +33,11 @@ class SigninViewModel : ObservableObject{
     func signIn(email :String , password : String) {
         stateSignin = .LOADING
         presentHomeTabView = false
-        DatabaseManager.shared.log(logText: "\(Date()) | \n user : \(email) | action : pressed signin botton")
         /// Local validation 👇
         do{
             try isEmailValid(email: email)
             try isPasswordValid(password:password)
         }catch {
-            DatabaseManager.shared.log(logText: "\(Date()) | \n user : \(email) | action : catch an error \(error)")
             guard let error = error as? SigninError else {
                 self.stateSignin = .FAILED
                 return
@@ -52,28 +50,21 @@ class SigninViewModel : ObservableObject{
         /// Local validation passed  👆
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
-                DatabaseManager.shared.log(logText: "\(Date()) | \n user : \(email) | action : singIn failed \(error)")
                 self.stateSignin = .FAILED
                 self.errorSignin = SigninError(rawValue: error.code)
                 self.showAlert = true
                 return
             }
-            DatabaseManager.shared.log(logText: "\(Date()) | \n user : \(email) | action : auth compeleted")
             UserDefaults.standard.setValue(email, forKey: "Email")
             DatabaseManager.shared.getUser(withEmail: email.safeString()) { test in
+                print(test)
                 UserDefaults.standard.setValue(test.picture , forKey: "ProfilePictureUrl")
                 UserDefaults.standard.setValue(test.name , forKey: "Name")
-                DatabaseManager.shared.log(logText: "\(Date()) | \n user : \(email) | action : got user successfully")
                 if let token = UserDefaults.standard.string(forKey: "FCMToken"){
                     DatabaseManager.shared.updateUserToken(withEmail: email, to: token)
-                    DatabaseManager.shared.log(logText: "\(Date()) | \n user : \(email) | action : trying token set to \(token)")
-
                 }
-
                 self.stateSignin = .SUCCESS
-                DatabaseManager.shared.log(logText: "\(Date()) | \n user : \(email) | action : changed state to \(self.stateSignin)")
                 self.presentHomeTabView = true
-                DatabaseManager.shared.log(logText: "\(Date()) | \n user : \(email) | action : changed presentHomeTo to \(self.presentHomeTabView)")
             }
         }
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingTabView: View {
-    @EnvironmentObject var globalObjects : GlobalObjects
+    @EnvironmentObject var session : Session
     
     var body: some View {
         NavigationView{
@@ -103,7 +103,8 @@ struct SettingTabView: View {
                     .onTapGesture {
                         let domain = Bundle.main.bundleIdentifier!
                         UserDefaults.standard.removePersistentDomain(forName: domain)
-                        globalObjects.update()
+                        setNavBarAppearence(to: .clear)
+                        session.update()
                     }
                     Divider()
 

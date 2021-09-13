@@ -22,7 +22,7 @@ extension DatabaseManager {
     ///   - user: user data model
     ///   - compeltion: return true if success
     func insertUser(user : UserModel ,compeltion : @escaping ((Bool)->Void)) {
-        database.child(user.safeEmail).setValue([
+        database.child(user.email.safeString()).setValue([
             "name":user.name,
             "picture":user.picture,
             "email":user.email,
@@ -33,19 +33,15 @@ extension DatabaseManager {
         }
     }
     func getUser(withEmail safeEmail: String ,compeltion : @escaping ((UserModel)->Void)) {
-        log(logText: "user \(safeEmail) action : getUser Called ")
-        database.child(safeEmail).observeSingleEvent(of: .value, with: { snapshot in
-            
+        database.child(safeEmail.safeString()).observeSingleEvent(of: .value, with: { snapshot in
             guard let value = snapshot.value as? [String:Any] else {
-                self.log(logText: "user \(safeEmail) action : getUser ERROR ")
-
+                print("ERROR")
                 return
-                
             }
             let decoder = JSONDecoder()
             let jsonData = try! JSONSerialization.data(withJSONObject:value)
             guard let x = try? decoder.decode(UserModel.self, from: jsonData) else{
-                self.log(logText: "user \(safeEmail) action : getUser ERROR decoding ")
+                print("ERROR DECODING")
                 return
             }
             compeltion(x)
@@ -65,7 +61,6 @@ extension DatabaseManager {
     /// - TODO: Clean this
     func searchUser(withText text: String ,compeltion : @escaping (([UserModel])->Void)) {
         DispatchQueue.global().async { [weak self] in
-            
             self?.database.queryOrdered(byChild: "name").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").observeSingleEvent(of: .value, with: { data in
                 guard let users = data.value as? [String:Any] else {
                     print("HI IM HERE RSULT IS []")
@@ -173,29 +168,68 @@ extension DatabaseManager {
                 let x = try! decoder.decode(MessageModel.self, from: jsonData)
                 messages.append(x)
             }
-
             print("SINGLE OBSERVED MESSAGES IS : \(messages)")
-
             compelition(messages)
-
-            
         }
     }
+    func getBlockedEmails(for email:String,compelition : @escaping ([String]) -> Void ) {
+        database.child(email.safeString()).child("blocked").observe(.value) { snapshot in
+            var blockedEmails : [String] = []
+            guard let value = snapshot.value as? [String:Any] else {return}
+            blockedEmails = value.compactMap({ values in
+                return values.value as? String
+            })
+//            for email in value.values {
+//                blockedEmails.append(email as! String)
+//            }
+            print(blockedEmails)
+            compelition(blockedEmails)
+        }
+    }
+    func blockUser(with email : String , for userEmail : String ,compelition : @escaping (Bool) -> Void ) {
+        print(email.safeString())
+        print(userEmail.safeString())
+        database.child(userEmail.safeString()).child("blocked").childByAutoId().setValue(email.safeString())
+    }
+    func reportUser(with email : String ,compelition : @escaping (Bool) -> Void ) {
+        database.child("report").childByAutoId().setValue(email.safeString())
+        compelition(true)
+    }
+    func userIsTyping(with email :String , in conversationId : String , isTyping : Bool) {
+        database.child(conversationId).child("\(email.safeString())_typing").setValue(isTyping)
+    }
+    func observeIsTypingInConverstion(with conversationID: String , for user: String , compelition : @escaping (Bool) -> Void){
+        database.child(conversationID).child("\(user.safeString())_typing").observe(.value, with: { snapshot in
+            print(snapshot)
+            guard let value = snapshot.value as? Bool else {
+                compelition(false)
+                return
+            }
+            compelition(value)
+            
+        })
+    }
+    
     func observeMessagesForConversation(conversationId id :String,compelition : @escaping ([MessageModel]) -> Void ) {
         database.child(id).child("messages").observe(.childAdded) { snapshot in
+            guard let value = snapshot.value as? [String:Any] else {
+                compelition([])
+                return
+            }
             var messages : [MessageModel] = []
-            guard let value = snapshot.value as? [String:Any] else {return}
             let decoder = JSONDecoder()
-            let jsonData = try! JSONSerialization.data(withJSONObject:value)
-            let x = try! decoder.decode(MessageModel.self, from: jsonData)
-            messages.append(x)
-            
+            guard
+                let jsonData = try? JSONSerialization.data(withJSONObject:value),
+                let message = try? decoder.decode(MessageModel.self, from: jsonData) else {
+                compelition([])
+                return
+            }
+            messages.append(message)
             compelition(messages)
-            
-
         }
-
     }
+    
+    
     func removeMessageObserver(for conversationId : String ){
 
         database.child(conversationId).child("messages").removeAllObservers()

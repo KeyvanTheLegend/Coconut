@@ -11,6 +11,8 @@ import Introspect
 
 struct ChatHeaderView : View {
     @Binding var user : UserModel?
+    @StateObject var viewModel : ChatViewModel
+    
     var body: some View {
         HStack(alignment : .top){
             WebImage(url: URL(string: user?.picture ?? ""))
@@ -27,6 +29,7 @@ struct ChatHeaderView : View {
                 Text(user?.name ?? "")
                     .foregroundColor(.white)
                     .font(.title3.weight(.medium))
+                if viewModel.isTyping{
                 HStack{
 
                     Circle()
@@ -36,6 +39,18 @@ struct ChatHeaderView : View {
                         .foregroundColor(.gray)
                         .font(.caption)
                         .lineLimit(2)
+                }
+                }else {
+                    HStack{
+
+                        Circle()
+                            .frame(width: 10, height: 10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .foregroundColor(Color.gray)
+                        Text("Last seen recently")
+                            .foregroundColor(.gray)
+                            .font(.caption)
+                            .lineLimit(2)
+                    }
                 }
                 Spacer()
             })

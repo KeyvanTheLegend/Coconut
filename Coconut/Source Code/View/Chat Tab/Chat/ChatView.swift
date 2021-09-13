@@ -13,6 +13,11 @@ struct ChatView: View {
     @State var safeAreaBottonInset :CGFloat = 0
     @State var keyboardDidOpen : Bool = false
     @State var keyboardWillOpen : Bool = false
+    @State var showActionSheet : Bool = false
+    @State var showAlert : Bool = false
+    @State var userIsTyping : Bool = false
+
+    let userTypingSemaphore = DispatchSemaphore(value: 0)
 
 
     @StateObject var viewModel = ChatViewModel()
@@ -21,7 +26,7 @@ struct ChatView: View {
     var body: some View {
         VStack(alignment :  .leading , spacing: 0){
             ZStack{
-                ChatHeaderView(user: $withUser)
+                ChatHeaderView(user: $withUser , viewModel:  viewModel)
                     .background(Color.background.opacity(0.95))
                     .padding(0)
             }
@@ -99,35 +104,93 @@ struct ChatView: View {
         }
         .introspectTabBarController { (UITabBarController) in
             
-                print("TABBAR : ENTERED ")
+//                print("TABBAR : ENTERED ")
                 let tabBarHeight = UITabBarController.tabBar.bounds.height
-                print("TABBAR : tabBarHeight : \(tabBarHeight)")
+//                print("TABBAR : tabBarHeight : \(tabBarHeight)")
                 if let window = UIApplication.shared.windows.first{
                     let phoneSafeAreaBottonInsets = window.safeAreaInsets.bottom
                     safeAreaBottonInset = tabBarHeight - phoneSafeAreaBottonInsets
 
-                    print("TABBAR : safeAreaBottonInset : \(safeAreaBottonInset)")
+//                    print("TABBAR : safeAreaBottonInset : \(safeAreaBottonInset)")
             }
             UITabBarController.tabBar.alpha = 0
         }
-        
+        .navigationBarItems(trailing: Button(action: {
+            showActionSheet = true
+        }, label: {
+            HStack{
+                Spacer()
+                Image(systemName: "ellipsis")
+                    .frame(width: 20,
+                           height: 20,
+                           alignment: .center
+                    )
+            }
+            .frame(width: 48, height: 48, alignment: .center)
+        }))
+        .actionSheet(isPresented: $showActionSheet) {
+            ActionSheet(
+                title: Text(withUser?.email ?? ""),
+                buttons: [
+                    .destructive(Text("Block")){
+                        DatabaseManager.shared.blockUser(with: withUser!.email.safeString(), for: UserDefaults.standard.string(forKey: "Email")!.safeString()) { isSuccess in
+                            if isSuccess {
+                                
+                            }
+                        }
+                    },
+                    .destructive(Text("Report")){
+                        DatabaseManager.shared.reportUser(with: withUser!.email.safeString()) { isSuccess in
+                            print("HI IM HERE")
+                            self.showAlert = true
+                        }
+                    },
+                    .cancel(Text("Cancle"))
+                ]
+            )
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Reported"),
+                message: Text("This user is reported for breaking licance agreement"),
+                dismissButton: .default(
+                    Text("Dismiss")
+                )
+            )
+        }
+        .onChange(of: messageText, perform: { _ in
+            if userIsTyping{
+                userTypingSemaphore.signal()
+            }
+            if !userIsTyping {
+                guard let conversationID = viewModel.conversationID else{return}
+            DatabaseManager.shared.userIsTyping(with: UserDefaults.standard.string(forKey: "Email")!.safeString(), in: conversationID, isTyping: true)
+                userIsTyping = true
+            }
 
+            DispatchQueue.global().async {
+                let result =  userTypingSemaphore.wait(timeout: DispatchTime.now() + 0.5)
+                if result == .timedOut && userIsTyping {
+                    userIsTyping = false
+                    DatabaseManager.shared.userIsTyping(with: UserDefaults.standard.string(forKey: "Email")!.safeString(), in: viewModel.conversationID ?? "", isTyping: false)
+                }
+
+            }
+        
+        })
+        
         // MARK: - onDisappear
         .onDisappear(perform: {
-            viewModel.removeObserver()
+//            viewModel.removeObserver()
         })
         .padding(.bottom, keyboardWillOpen ? 0: -safeAreaBottonInset)
+        .colorScheme(.dark)
+        
+
     }
     
 }
 
-struct ChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            //            ChatView(converastionId: nil)
-        }
-    }
-}
 //struct ChatHeaderView : View {
 //    @Binding var user : UserModel?
 //

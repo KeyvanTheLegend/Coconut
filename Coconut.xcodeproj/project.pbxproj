@@ -11,22 +11,16 @@
 		8A8FEAF626BE46CD90DEB837 /* Pods_Coconut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6D38F1D626A178D6B15B8D /* Pods_Coconut.framework */; };
 		C0198A2726C6D19E00AF1FC8 /* LiveChatSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */; };
 		C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */; };
-		C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */; };
-		C024F8E226C8408B0054A8B3 /* LiveChatSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */; };
 		C02ADF2326D277C000905E3A /* SettingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02ADF2226D277C000905E3A /* SettingTabView.swift */; };
 		C055657826E1404000074FCA /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C055657726E1404000074FCA /* NotificationManager.swift */; };
 		C0693C3F26DE802B0023FADF /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0693C3E26DE802B0023FADF /* SearchViewModel.swift */; };
 		C0849D5F26E3E6D1006A6EC7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0849D5E26E3E6D1006A6EC7 /* GoogleService-Info.plist */; };
-		C0850D7526CB243A003E782E /* LiveChatSessionPersonInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0850D7426CB243A003E782E /* LiveChatSessionPersonInfoModel.swift */; };
-		C0850D7826CB25B8003E782E /* PersonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0850D7726CB25B8003E782E /* PersonInfo.swift */; };
 		C0850D7B26CB2C12003E782E /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0850D7A26CB2C12003E782E /* ChatView.swift */; };
 		C08E976D26E2101D00A5AB9C /* hmmsound.caf in Resources */ = {isa = PBXBuildFile; fileRef = C08E976C26E20F6700A5AB9C /* hmmsound.caf */; };
-		C09F0D2826C6C5E8006BC57B /* LiveChatSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2726C6C5E8006BC57B /* LiveChatSessionView.swift */; };
 		C09F0D2A26C6C8D7006BC57B /* PersonImageNameLastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */; };
 		C0A41F6926CFC88C008C273B /* TextField+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A41F6826CFC88C008C273B /* TextField+extension.swift */; };
 		C0A77C8B26C43EE9006B364D /* ChatTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A77C8A26C43EE9006B364D /* ChatTabView.swift */; };
 		C0AFADD626E8B2FA00E43F16 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AFADD526E8B2FA00E43F16 /* SplashView.swift */; };
-		C0B9DD5626DBA423005BC51C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9DD5526DBA423005BC51C /* ImageView.swift */; };
 		C0B9DD5826DBB6E6005BC51C /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9DD5726DBB6E6005BC51C /* String+extension.swift */; };
 		C0BB61A326D91E3E006F442D /* SignupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A226D91E3E006F442D /* SignupButton.swift */; };
 		C0BB61A526D91E67006F442D /* NameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BB61A426D91E67006F442D /* NameTextField.swift */; };
@@ -51,7 +45,7 @@
 		C0C8086026D7862E00D249E4 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8085F26D7862E00D249E4 /* DatabaseManager.swift */; };
 		C0C8086226D79C0900D249E4 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8086126D79C0900D249E4 /* MessageModel.swift */; };
 		C0CDA34C26EA0190006F81E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDA34B26EA0190006F81E2 /* AppDelegate.swift */; };
-		C0CDA34E26EA0D9F006F81E2 /* GlobalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDA34D26EA0D9F006F81E2 /* GlobalObjects.swift */; };
+		C0CDA34E26EA0D9F006F81E2 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDA34D26EA0D9F006F81E2 /* Session.swift */; };
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
 		C0DDC56026C0674700535A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* HomeView.swift */; };
 		C0DDC56226C0674900535A06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DDC56126C0674900535A06 /* Assets.xcassets */; };
@@ -68,7 +62,6 @@
 		C0E7B33626C1714C00D70C7D /* Color+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33526C1714C00D70C7D /* Color+extension.swift */; };
 		C0E7B33926C1770600D70C7D /* ScrollView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */; };
 		C0E7B33B26C178F200D70C7D /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E7B33A26C178F200D70C7D /* View+extension.swift */; };
-		C0E90CCE26CAA2680074734C /* LiveChatSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E90CCD26CAA2680074734C /* LiveChatSessionModel.swift */; };
 		C0E90CD026CAACD40074734C /* PersonImageNameStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */; };
 		C0E9333826DAA066005212E3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9333726DAA066005212E3 /* ImagePicker.swift */; };
 		C0E9333A26DAB439005212E3 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9333926DAB439005212E3 /* StorageManager.swift */; };
@@ -106,17 +99,13 @@
 		9F061CC87CFD9366E8087950 /* Pods_Coconut_CoconutUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Coconut_CoconutUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryView.swift; sourceTree = "<group>"; };
 		C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryViewModel.swift; sourceTree = "<group>"; };
-		C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSummaryModel.swift; sourceTree = "<group>"; };
 		C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionViewModel.swift; sourceTree = "<group>"; };
 		C02ADF2226D277C000905E3A /* SettingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTabView.swift; sourceTree = "<group>"; };
 		C055657726E1404000074FCA /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		C0693C3E26DE802B0023FADF /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		C0849D5E26E3E6D1006A6EC7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C0850D7426CB243A003E782E /* LiveChatSessionPersonInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionPersonInfoModel.swift; sourceTree = "<group>"; };
-		C0850D7726CB25B8003E782E /* PersonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonInfo.swift; sourceTree = "<group>"; };
 		C0850D7A26CB2C12003E782E /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		C08E976C26E20F6700A5AB9C /* hmmsound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hmmsound.caf; sourceTree = "<group>"; };
-		C09F0D2726C6C5E8006BC57B /* LiveChatSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionView.swift; sourceTree = "<group>"; };
 		C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameLastMessageView.swift; sourceTree = "<group>"; };
 		C0A41F6826CFC88C008C273B /* TextField+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+extension.swift"; sourceTree = "<group>"; };
 		C0A77C8A26C43EE9006B364D /* ChatTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabView.swift; sourceTree = "<group>"; };
@@ -147,7 +136,7 @@
 		C0C8085F26D7862E00D249E4 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		C0C8086126D79C0900D249E4 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		C0CDA34B26EA0190006F81E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C0CDA34D26EA0D9F006F81E2 /* GlobalObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalObjects.swift; sourceTree = "<group>"; };
+		C0CDA34D26EA0D9F006F81E2 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC55D26C0674700535A06 /* CoconutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutApp.swift; sourceTree = "<group>"; };
 		C0DDC55F26C0674700535A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -170,7 +159,6 @@
 		C0E7B33526C1714C00D70C7D /* Color+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33826C1770600D70C7D /* ScrollView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+extension.swift"; sourceTree = "<group>"; };
 		C0E7B33A26C178F200D70C7D /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
-		C0E90CCD26CAA2680074734C /* LiveChatSessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatSessionModel.swift; sourceTree = "<group>"; };
 		C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonImageNameStatusViewModel.swift; sourceTree = "<group>"; };
 		C0E9333726DAA066005212E3 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C0E9333926DAB439005212E3 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -236,8 +224,8 @@
 		C02ADF1A26D2750D00905E3A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C0AFADD526E8B2FA00E43F16 /* SplashView.swift */,
 				C0E9333626DAA055005212E3 /* Global */,
+				C08EA5EE26EFBD2A00C16A88 /* Splash */,
 				C0BB88B626D3CD1A0061D96E /* SignIn */,
 				C0C5057F26D403B1008081D9 /* SignUp */,
 				C02ADF2126D2778300905E3A /* Setting Tab */,
@@ -269,10 +257,10 @@
 		C02ADF1D26D2756200905E3A /* Chat Tab */ = {
 			isa = PBXGroup;
 			children = (
+				C0A77C8A26C43EE9006B364D /* ChatTabView.swift */,
 				C0E492B326DBFB4400C66412 /* Search */,
 				C0850D7C26CB8FFF003E782E /* Chat */,
 				C0BC791226DF6AA700979BCB /* SubViews */,
-				C0A77C8A26C43EE9006B364D /* ChatTabView.swift */,
 			);
 			path = "Chat Tab";
 			sourceTree = "<group>";
@@ -280,12 +268,10 @@
 		C02ADF1E26D2756E00905E3A /* Chat Tab */ = {
 			isa = PBXGroup;
 			children = (
+				C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */,
 				C0693C3C26DE80170023FADF /* Search */,
 				C0693C3B26DE80110023FADF /* Chat */,
-				C0BF24D426CAC08000CFCC35 /* ChatTabViewModel.swift */,
-				C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */,
-				C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */,
-				C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */,
+				C08EA5EF26EFBDE400C16A88 /* SubViewModels */,
 			);
 			path = "Chat Tab";
 			sourceTree = "<group>";
@@ -293,12 +279,9 @@
 		C02ADF1F26D2757F00905E3A /* Chat Tab */ = {
 			isa = PBXGroup;
 			children = (
+				C0E492B826DCD60F00C66412 /* ConversationModel.swift */,
 				C0693C3A26DE7FC10023FADF /* Search */,
 				C0693C3926DE7ED40023FADF /* Chat */,
-				C0E90CCD26CAA2680074734C /* LiveChatSessionModel.swift */,
-				C0850D7426CB243A003E782E /* LiveChatSessionPersonInfoModel.swift */,
-				C024F8DF26C833260054A8B3 /* LiveChatSummaryModel.swift */,
-				C0E492B826DCD60F00C66412 /* ConversationModel.swift */,
 			);
 			path = "Chat Tab";
 			sourceTree = "<group>";
@@ -347,8 +330,8 @@
 			isa = PBXGroup;
 			children = (
 				C0DDC55D26C0674700535A06 /* CoconutApp.swift */,
+				C0CDA34D26EA0D9F006F81E2 /* Session.swift */,
 				C0CDA34B26EA0190006F81E2 /* AppDelegate.swift */,
-				C0CDA34D26EA0D9F006F81E2 /* GlobalObjects.swift */,
 				C02ADF1C26D2752000905E3A /* Model */,
 				C02ADF1A26D2750D00905E3A /* View */,
 				C02ADF1B26D2751400905E3A /* ViewModel */,
@@ -371,7 +354,6 @@
 		C0850D7626CB2588003E782E /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				C0850D7726CB25B8003E782E /* PersonInfo.swift */,
 				C0DE3F9E26D5015C00CC1F1C /* UserModel.swift */,
 			);
 			path = Global;
@@ -384,6 +366,24 @@
 				C0850D7A26CB2C12003E782E /* ChatView.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		C08EA5EE26EFBD2A00C16A88 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				C0AFADD526E8B2FA00E43F16 /* SplashView.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		C08EA5EF26EFBDE400C16A88 /* SubViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C024F8E126C8408B0054A8B3 /* LiveChatSessionViewModel.swift */,
+				C0E90CCF26CAACD40074734C /* PersonImageNameStatusViewModel.swift */,
+				C024F8DD26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift */,
+			);
+			path = SubViewModels;
 			sourceTree = "<group>";
 		};
 		C0BB61A026D91E07006F442D /* SubViews */ = {
@@ -438,7 +438,6 @@
 			isa = PBXGroup;
 			children = (
 				C0BC791326DF6ABB00979BCB /* ConversationContentView.swift */,
-				C09F0D2726C6C5E8006BC57B /* LiveChatSessionView.swift */,
 				C09F0D2926C6C8D7006BC57B /* PersonImageNameLastMessageView.swift */,
 				C0198A2626C6D19E00AF1FC8 /* LiveChatSummaryView.swift */,
 			);
@@ -840,15 +839,10 @@
 				C0BB61B126D924E5006F442D /* EmailTextField.swift in Sources */,
 				C0E9333826DAA066005212E3 /* ImagePicker.swift in Sources */,
 				C0BC791F26DF7AAB00979BCB /* SentMessageView.swift in Sources */,
-				C0B9DD5626DBA423005BC51C /* ImageView.swift in Sources */,
-				C024F8E226C8408B0054A8B3 /* LiveChatSessionViewModel.swift in Sources */,
 				C0DDC56026C0674700535A06 /* HomeView.swift in Sources */,
 				C0F08BF426C2E107003F7236 /* ChatRequestContentView.swift in Sources */,
 				C0850D7B26CB2C12003E782E /* ChatView.swift in Sources */,
 				C0BB61AF26D9238D006F442D /* PasswordTextField.swift in Sources */,
-				C0850D7526CB243A003E782E /* LiveChatSessionPersonInfoModel.swift in Sources */,
-				C0E90CCE26CAA2680074734C /* LiveChatSessionModel.swift in Sources */,
-				C0850D7826CB25B8003E782E /* PersonInfo.swift in Sources */,
 				C0AFADD626E8B2FA00E43F16 /* SplashView.swift in Sources */,
 				C0BC791826DF6D5300979BCB /* SearchResultContentView.swift in Sources */,
 				C0E90CD026CAACD40074734C /* PersonImageNameStatusViewModel.swift in Sources */,
@@ -867,7 +861,7 @@
 				C0DE3F9F26D5015C00CC1F1C /* UserModel.swift in Sources */,
 				C0BB61B526D92569006F442D /* PasswordTextField.swift in Sources */,
 				C0E2087626DA177A000B905C /* Encodeable+extension.swift in Sources */,
-				C0CDA34E26EA0D9F006F81E2 /* GlobalObjects.swift in Sources */,
+				C0CDA34E26EA0D9F006F81E2 /* Session.swift in Sources */,
 				C0B9DD5826DBB6E6005BC51C /* String+extension.swift in Sources */,
 				C02ADF2326D277C000905E3A /* SettingTabView.swift in Sources */,
 				C0BB61A726D91ECB006F442D /* SignupProfileImageView.swift in Sources */,
@@ -885,11 +879,9 @@
 				C0E2087826DA792C000B905C /* Error+extension.swift in Sources */,
 				C0CDA34C26EA0190006F81E2 /* AppDelegate.swift in Sources */,
 				C024F8DE26C8277D0054A8B3 /* LiveChatSummaryViewModel.swift in Sources */,
-				C024F8E026C833260054A8B3 /* LiveChatSummaryModel.swift in Sources */,
 				C0FEFDAD26C1A3E9008F362B /* List+extension.swift in Sources */,
 				C0E492B726DC0B6D00C66412 /* SearchResultModel.swift in Sources */,
 				C0BB61B426D92569006F442D /* EmailTextField.swift in Sources */,
-				C09F0D2826C6C5E8006BC57B /* LiveChatSessionView.swift in Sources */,
 				C0EC668426D7E86A00CB2BBB /* ChatViewModel.swift in Sources */,
 				C0BC791426DF6ABB00979BCB /* ConversationContentView.swift in Sources */,
 				C0E492B926DCD60F00C66412 /* ConversationModel.swift in Sources */,
@@ -1054,7 +1046,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Coconut/Coconut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"Coconut/Preview Content\"";
 				DEVELOPMENT_TEAM = P7PPJZH7GM;
 				ENABLE_PREVIEWS = YES;
@@ -1079,7 +1071,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Coconut/Coconut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"Coconut/Preview Content\"";
 				DEVELOPMENT_TEAM = P7PPJZH7GM;
 				ENABLE_PREVIEWS = YES;

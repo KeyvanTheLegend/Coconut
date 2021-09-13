@@ -11,7 +11,7 @@ import SwiftUI
 struct SignupView: View {
     
     @StateObject var viewModel = SignupViewModel()
-    @EnvironmentObject var globalObjects: GlobalObjects
+    @EnvironmentObject var session: Session
 
     var body: some View {
         VStack{
@@ -25,12 +25,13 @@ struct SignupView: View {
                     SingUpButton(viewModel: viewModel)
                         .onChange(of: viewModel.isPresentedHomeTabView, perform: { value in
                             if value {
-                                globalObjects.isSignedIn = true
+                                session.isSignedIn = true
                             }
                         })
                 }
                 Group{
                     Spacer()
+                    EULA()
                     Spacer()
                 }
                 .alert(isPresented: $viewModel.showAlert) {
@@ -53,6 +54,7 @@ struct SignupView: View {
             }
         }
         .ignoresSafeArea(.all, edges: .top)
+        .background(Color.background)
         
         
     }
@@ -62,4 +64,23 @@ struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignupView()
     }
+}
+struct EULA : View {
+    
+    var body: some View {
+        VStack(alignment : .center,spacing : 0){
+            Text("By Signing up you are acception the ")
+                .font(.footnote)
+                .foregroundColor(.white)
+                .padding(.vertical , 8)
+            Link(destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!, label: {
+                Text("License Agreement")                    .foregroundColor(.primery)
+                    .font(.footnote.weight(.semibold))
+            })
+        }
+        .padding(.horizontal , 32)
+        .padding(.bottom ,48)
+
+    }
+    
 }

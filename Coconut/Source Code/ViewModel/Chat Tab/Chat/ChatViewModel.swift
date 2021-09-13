@@ -12,6 +12,7 @@ class ChatViewModel : ObservableObject  {
     
     /// - sub ViewModels :
     @Published private(set) var messages : [MessageModel] = []
+    @Published private(set) var isTyping : Bool = false
     private(set) var conversationID : String? = nil
     private(set) var otherUser : UserModel? = nil
     
@@ -42,6 +43,7 @@ class ChatViewModel : ObservableObject  {
         if let sharedConversationId = otherUser.sharedConversastion {
             print("HI shared is \(sharedConversationId)")
             setConverationID(convesationID: sharedConversationId)
+            observeConversationIsTyping(with: sharedConversationId)
         }else {
             setConverationID(convesationID: conversationIDIfExsit(with: otherUser))
         }
@@ -112,6 +114,18 @@ class ChatViewModel : ObservableObject  {
             print("HI \(message)")
             self?.messages += message
         }
+    }
+    private func observeConversationIsTyping(with conversationID : String){
+        guard let otherUserEmail = otherUser?.email else {
+            return
+        }
+        DatabaseManager.shared.observeIsTypingInConverstion(with: conversationID, for:  otherUserEmail.safeString()) { isTyping in
+            DispatchQueue.main.async {
+                self.isTyping = isTyping
+            }
+        }
+
+
     }
     /// get all messages for conversation **ONCE**
     /// - Parameter conversationID: conversationID

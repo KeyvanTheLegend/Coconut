@@ -11,12 +11,16 @@ import SwiftUI
 
 struct SplashView: View {
     
-    @EnvironmentObject var globalObjects : GlobalObjects
+    @EnvironmentObject var session : Session
+    
+    init (){
+        setNavBarAppearence(to: .clear)
+    }
     
     var body: some View {
         VStack{
             SignInView()
-                .opacity(globalObjects.isSignedIn ? 0:1)
+                .opacity(session.isSignedIn ? 0:1)
         }
         .background(Color.background.ignoresSafeArea())
     }

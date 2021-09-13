@@ -2,23 +2,17 @@
 //  MessageView.swift
 //  Coconut
 //
-//  Created by sh on 8/11/21.
+//  Created by Keyvan Yaghoubian on 8/11/21.
 //
 
 import SwiftUI
 struct ChatTabView: View {
     
-    @StateObject var viewModel = ChatTabViewModel()
-    
-    @State var isClosed :Bool = true
-    @State var hasLiveChatSession = false
-    @State var listShoudAnimate : Bool = false
-    
     @State var navigateToChatView = false
     @State var navigateToSearchView = false
     
-    @State var selectedUser : UserModel?
-    @State var selectedConversationId : String?
+    @EnvironmentObject var session : Session
+    @StateObject var viewModel = ChatTabViewModel()
     
     init(){
         UITableView.appearance().backgroundColor = UIColor(named: "BackgroundColor")
@@ -28,156 +22,86 @@ struct ChatTabView: View {
         
         NavigationView {
             ZStack{
+                // MARK: Converastion List
                 List{
-                    ForEach(viewModel.conversations) {item in
-                        ZStack{
-                            SearchResultContentView(
-                                profileImage: item.picture,
-                                name: item.name,
-                                isOnline: true
-                            )
-                            .frame(height: 88, alignment: .center)
-                            .frame(maxWidth : .infinity)
-                            .background(Color.background)
-                            .onTapGesture {
-                                print("SELECTED IS \(item)")
-                                print("SELECTED CONV IS \(item.userToken)")
-                                let user = UserModel(
-                                    name: item.name,
-                                    email: item.email,
-                                    picture: item.picture,
-                                    userToken: item.userToken,
-                                    sharedConversastion: item.conversationId
+                    ForEach(viewModel.conversations) { conversation in
+                        if !viewModel.blockedEmails.contains(
+                            conversation.email.safeString()
+                        ) {
+                            ZStack{
+                                ConversationContentView(
+                                    profileImage: conversation.picture,
+                                    name: conversation.name,
+                                    isOnline: true
                                 )
-                                selectedUser = user
-                                navigateToChatView = true
-                                
+                                .frame(height: 88, alignment: .center)
+                                .frame(maxWidth : .infinity)
+                                .background(Color.background)
+                                .onTapGesture {
+                                    viewModel.setSelectedConversation(conversation: conversation)
+                                    navigateToChatView = true
+                                }
                             }
+                            .listRowBackground(Color.background)
                         }
-                        .listRowBackground(Color.background)
-
                     }
                 }
                 .padding(0)
-                NavigationLink(
-                    destination:
-                        ChatView(withUser: $selectedUser)
-                        .navigationBarTitleDisplayMode(.inline),
-                    isActive: $navigateToChatView
-                ){EmptyView()}
-                .buttonStyle(PlainButtonStyle())
-                .frame(width:0)
-                .opacity(0)
-                
-                NavigationLink(
-                    destination:
-                        SearchView()
-                        .navigationBarTitleDisplayMode(.inline),
-                    isActive: $navigateToSearchView
-                ){EmptyView()}
-                .buttonStyle(PlainButtonStyle())
-                .frame(width:0)
-                .opacity(0)
-                .navigationBarItems(trailing: Button(action: {
-                    navigateToSearchView = true
-                }, label: {
-                    HStack{
-                        Spacer()
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .frame(width: 20,
-                                   height: 20,
-                                   alignment: .center
-                            )
-                    }
-                    .frame(width: 48, height: 48, alignment: .center)
-                }))
+                // MARK: Navigation Links
+                Group{
+                    NavigationLink(
+                        destination:
+                            ChatView(withUser: $viewModel.selectedUser)
+                            .navigationBarTitleDisplayMode(.inline),
+                        isActive: $navigateToChatView
+                    ){EmptyView()}
+                    .buttonStyle(PlainButtonStyle())
+                    .frame(width:0)
+                    .opacity(0)
+                    
+                    NavigationLink(
+                        destination:
+                            SearchView()
+                            .navigationBarTitleDisplayMode(.inline),
+                        isActive: $navigateToSearchView
+                    ){EmptyView()}
+                    .buttonStyle(PlainButtonStyle())
+                    .frame(width:0)
+                    .opacity(0)
+                }
             }
             .padding(0)
-
-            //                            if hasLiveChatSession{
-            //                                withAnimation(Animation.easeInOut(duration: 10)) {
-            //                                    LiveChatSessionView(viewModel: viewModel.liveChatSessionViewModel)
-            //                                        .frame(height: 120, alignment: .center)
-            //                                        .listRowBackground(Color.background)
-            //                                        .listRowInsets(.init(top: 8,
-            //                                                             leading: 16,
-            //                                                             bottom: 8,
-            //                                                             trailing: -16))
-            //                                }
-            //
-            //
-            //                            }
-            //                            if !isClosed {
-            //                                withAnimation {
-            //                                    MessageInMessagesListContentView(profileImage: "profile3", name: "Faati Ghasemi" , message: "Keyvan Tara karet dare" , messageNumber: 10, isClosed: $isClosed)
-            //                                        .frame(height: 88, alignment: .center)
-            //                                        .listRowBackground(Color.background)
-            //                                        .listRowInsets(.init(top: 4,
-            //                                                             leading: 16,
-            //                                                             bottom: 4,
-            //                                                             trailing: -16))
-            //
-            //                                }
-            //                            }
-            //                            MissedMessageRequestInMessagesListContentView(profileImage: "profile5", name: "Mehdi", messageNumber: 2)
-            //                                .frame(width: geometry.size.width, height: 88, alignment: .center)
-            //                                .listRowBackground(Color.background)
-            
-            
-            //                            MessageViewContentView(profileImage: "profile5", name: "Mehdi Falahati", isOnline: false)
-            //                                .listRowBackground(Color.background)
-            //                                .listRowInsets(.init(top: 0,
-            //                                                     leading: 16,
-            //                                                     bottom: 0,
-            //                                                     trailing: 0))
-            //                                .frame(height: 88, alignment: .center)
-            //
-            //                        }
-            //                        .frame(alignment: .top)
-            //                        .onChange(of: viewModel.hasLiveSesssion) { newValue in
-            //                            withAnimation {
-            //                                print("HI NEW VALUE \(newValue)")
-            //                                hasLiveChatSession = newValue
-            //
-            //                            }
-            //                        }
-            
-            //                        Group{
-            //                            /// - NavigationLinks
-            
-            //                        }
-            
-            //                    }
-            //                    .onAppear(perform: {
-            //                        UINavigationBar.appearance().prefersLargeTitles = true
-            //                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            //                            withAnimation {
-            //                                isClosed = false
-            //                                listShoudAnimate = true
-            //                            }
-            //                        }
-            //                    })
-            .showTabBar()
-            .navigationTitle("Chat")
-            
-            //
-            //
-            //            }
-            //            .background(Color.background
-            //                            .ignoresSafeArea())
-            
         }
         .hasScrollEnabled(true)
+        .showTabBar()
+        
         .background(Color.background)
         .ignoresSafeArea(.keyboard)
+        
+        .navigationTitle("Chat")
+        .navigationViewStyle(StackNavigationViewStyle())
+        
+        // MARK: Navigation Bar Item :
+        .navigationBarItems(trailing: Button(action: {
+            navigateToSearchView = true
+        }, label: {
+            HStack{
+                Spacer()
+                Image(systemName: "magnifyingglass")
+                    .resizable()
+                    .frame(width: 20,
+                           height: 20,
+                           alignment: .center
+                    )
+            }
+            .frame(width: 48, height: 48, alignment: .center)
+        }))
+        
         // MARK: - onAppear :
         .onAppear(perform: {
             viewModel.getAllConversations()
-            DatabaseManager.shared.log(logText: "\(Date())  | action : chatTab appeared")
+            viewModel.observeBlockedEmails()
         })
-        .navigationViewStyle(StackNavigationViewStyle())
-
     }
     
 }
@@ -187,6 +111,10 @@ struct MessageView_Previews: PreviewProvider {
         ChatTabView()
     }
 }
+
+
+
+
 //struct MessageInMessagesListContentView : View {
 //
 //    var profileImage : String

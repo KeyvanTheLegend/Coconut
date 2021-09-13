@@ -18,9 +18,11 @@ class SearchViewModel : ObservableObject {
     /// serach for user by name
     /// - Parameter searchText: user serach text
     func search(with searchText : String) {
+        if !searchText.isEmpty{
             DatabaseManager.shared.searchUser(withText: searchText) { [weak self] searchResult in
                 DispatchQueue.main.async {self?.searchResult = searchResult}
             }
+        }
         
     }
     /// clear serach list

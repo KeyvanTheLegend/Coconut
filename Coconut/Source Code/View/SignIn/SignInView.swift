@@ -10,7 +10,7 @@ import SwiftUI
 struct SignInView: View {
     
     @StateObject var viewModel = SigninViewModel()
-    @EnvironmentObject var globalObject: GlobalObjects
+    @EnvironmentObject var session: Session
     
     init() {
         setNavBarAppearence(to: .clear)
@@ -66,20 +66,23 @@ struct SignInView: View {
             }
             .onAppear(perform: {
                 viewModel.presentHomeTabView = false
+                setNavBarAppearence(to: .clear)
+
             })
             .onChange(of: viewModel.presentHomeTabView) { presentHomeTabView in
                 if presentHomeTabView {
-                    globalObject.isSignedIn = true
+                    session.update()
                     // this should be removed
-                    DatabaseManager.shared.log(logText: "\(Date())  | action : changing loginState to \(presentHomeTabView)")
+                    print("HI IM HERE BRO")
                 }
             }
-            .fullScreenCover(isPresented: $globalObject.isSignedIn, content: {
+            .fullScreenCover(isPresented: $session.isSignedIn, content: {
                 HomeView()
             })
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarHidden(true)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

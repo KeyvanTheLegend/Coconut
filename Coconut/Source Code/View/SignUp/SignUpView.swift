@@ -23,11 +23,6 @@ struct SignupView: View {
                     EmailTextField(email: $viewModel.email)
                     PasswordTextField(password: $viewModel.password)
                     SingUpButton(viewModel: viewModel)
-                        .onChange(of: viewModel.isPresentedHomeTabView, perform: { value in
-                            if value {
-                                session.isSignedIn = true
-                            }
-                        })
                 }
                 Group{
                     Spacer()
@@ -36,15 +31,22 @@ struct SignupView: View {
                 }
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(
-                        title: Text(viewModel.errorSignup?.title ?? "error"),
-                        message: Text(viewModel.errorSignup?.description ?? "error"),
+                        title: Text(viewModel
+                                        .errorSignup?
+                                        .title ?? "error"),
+                        message: Text(viewModel
+                                        .errorSignup?
+                                        .description ?? "error"),
                         dismissButton: .default(
                             Text("Dismiss")
                         )
                     )
                 }
                 .popover(isPresented: $viewModel.showImagePicker) {
-                    ImagePicker(selectedImage: $viewModel.selectedImage, didSet: $viewModel.isImageSelected)
+                    ImagePicker(
+                        selectedImage: $viewModel.selectedImage,
+                        didSet: $viewModel.isImageSelected
+                    )
                 }
             }
             .background(Color.background.ignoresSafeArea())

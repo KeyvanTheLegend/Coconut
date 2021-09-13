@@ -135,6 +135,7 @@ class SignupViewModel : ObservableObject {
                 UserDefaults.standard.set(user.picture, forKey: "ProfilePictureUrl")
                 UserDefaults.standard.set(user.userToken, forKey: "FCMToken")
                 self.isPresentedHomeTabView = true
+                Session.shared.update()
             }else{
                 self.stateSignup = .FAILED
             }

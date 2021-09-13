@@ -69,11 +69,6 @@ struct SignInView: View {
                 print("HI IM HERE BRO")
                 viewModel.presentHomeTabView = false
             })
-            .onChange(of: viewModel.presentHomeTabView) { presentHomeTabView in
-                if presentHomeTabView {
-                    session.update()
-                }
-            }
             .fullScreenCover(isPresented: $session.isSignedIn, content: {
                 HomeView()
             })

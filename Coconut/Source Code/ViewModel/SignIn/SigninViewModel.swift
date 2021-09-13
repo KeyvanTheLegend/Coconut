@@ -56,15 +56,16 @@ class SigninViewModel : ObservableObject{
                 return
             }
             UserDefaults.standard.setValue(email, forKey: "Email")
-            DatabaseManager.shared.getUser(withEmail: email.safeString()) { test in
-                print(test)
-                UserDefaults.standard.setValue(test.picture , forKey: "ProfilePictureUrl")
-                UserDefaults.standard.setValue(test.name , forKey: "Name")
+            DatabaseManager.shared.getUser(withEmail: email.safeString()) { user in
+                UserDefaults.standard.setValue(user.picture , forKey: "ProfilePictureUrl")
+                UserDefaults.standard.setValue(user.name , forKey: "Name")
                 if let token = UserDefaults.standard.string(forKey: "FCMToken"){
                     DatabaseManager.shared.updateUserToken(withEmail: email, to: token)
                 }
                 self.stateSignin = .SUCCESS
                 self.presentHomeTabView = true
+                /// update session
+                Session.shared.update()
             }
         }
     }

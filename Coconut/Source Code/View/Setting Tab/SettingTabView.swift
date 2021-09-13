@@ -2,7 +2,7 @@
 //  SettingTabView.swift
 //  Coconut
 //
-//  Created by sh on 8/22/21.
+//  Created by Keyvan Yaghoubian on 8/22/21.
 //
 
 import SwiftUI
@@ -17,69 +17,6 @@ struct SettingTabView: View {
                 VStack {
                     SettingTabHeaderView()
                     Divider()
-                    
-//                    HStack(alignment : .center){
-//                        VStack (alignment : .center){
-//                        Image("memoji1")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .foregroundColor(.primery)
-//                            .frame(width: 45, height: 45, alignment: .center)
-//                        }
-//                        .frame(width: 50, height: 50, alignment: .center)
-//                        .background(Color.gray.opacity(0.2))
-//                        .cornerRadius(12)
-//                        .padding(.horizontal , 16)
-//                        .padding(.vertical , 4)
-//
-//                        Text("Avatar")
-//                            .font(.title3)
-//                            .foregroundColor(.whiteColor)
-//                        Spacer()
-//                    }
-//                    Divider()
-//                    HStack(alignment : .center){
-//                        VStack (alignment : .center){
-//                        Image(systemName: "person.2.fill")
-//                            .resizable()
-//                            .foregroundColor(.primery)
-//                            .imageScale(/*@START_MENU_TOKEN@*/.medium/*@END_MENU_TOKEN@*/)
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(width: 30, height: 30, alignment: .center)
-//                        }
-//                        .frame(width: 50, height: 50, alignment: .center)
-//                        .background(Color.gray.opacity(0.2))
-//                        .cornerRadius(12)
-//                        .padding(.horizontal , 16)
-//                        .padding(.vertical , 4)
-//
-//                        Text("Friends")
-//                            .font(.title3)
-//                            .foregroundColor(.whiteColor)
-//                        Spacer()
-//                    }
-//                    Divider()
-//                    HStack(alignment : .center){
-//                        VStack (alignment : .center){
-//                        Image(systemName: "hand.thumbsup.fill")
-//                            .resizable()
-//                            .foregroundColor(.primery)
-//                            .imageScale(/*@START_MENU_TOKEN@*/.medium/*@END_MENU_TOKEN@*/)
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(width: 22, height: 22, alignment: .center)
-//                        }
-//                        .frame(width: 50, height: 50, alignment: .center)
-//                        .background(Color.gray.opacity(0.2))
-//                        .cornerRadius(12)
-//                        .padding(.horizontal , 16)
-//                        .padding(.vertical , 4)
-//
-//                        Text("Interests")
-//                            .font(.title3)
-//                            .foregroundColor(.whiteColor)
-//                        Spacer()
-//                    }
-//                    Divider()
                     HStack(alignment : .center){
                         VStack (alignment : .center){
                         Image(systemName: "arrow.left.square")
@@ -232,12 +169,70 @@ struct SettingTabHeaderView : View {
                 }
             }
         })
-
-//        .onAppear(perform: {
-//            profilePictureUrl = UserDefaults.standard.string(forKey: "ProfilePictureUrl") ?? ""
-//            print("HIIII \(profilePictureUrl)")
-//            print("ASDI \(UserDefaults.standard.string(forKey: "ProfilePictureUrl"))")
-//            print("ASDI \(profilePictureUrl)")
-//        })
     }
 }
+
+
+
+//                    HStack(alignment : .center){
+//                        VStack (alignment : .center){
+//                        Image("memoji1")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .foregroundColor(.primery)
+//                            .frame(width: 45, height: 45, alignment: .center)
+//                        }
+//                        .frame(width: 50, height: 50, alignment: .center)
+//                        .background(Color.gray.opacity(0.2))
+//                        .cornerRadius(12)
+//                        .padding(.horizontal , 16)
+//                        .padding(.vertical , 4)
+//
+//                        Text("Avatar")
+//                            .font(.title3)
+//                            .foregroundColor(.whiteColor)
+//                        Spacer()
+//                    }
+//                    Divider()
+//                    HStack(alignment : .center){
+//                        VStack (alignment : .center){
+//                        Image(systemName: "person.2.fill")
+//                            .resizable()
+//                            .foregroundColor(.primery)
+//                            .imageScale(/*@START_MENU_TOKEN@*/.medium/*@END_MENU_TOKEN@*/)
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 30, height: 30, alignment: .center)
+//                        }
+//                        .frame(width: 50, height: 50, alignment: .center)
+//                        .background(Color.gray.opacity(0.2))
+//                        .cornerRadius(12)
+//                        .padding(.horizontal , 16)
+//                        .padding(.vertical , 4)
+//
+//                        Text("Friends")
+//                            .font(.title3)
+//                            .foregroundColor(.whiteColor)
+//                        Spacer()
+//                    }
+//                    Divider()
+//                    HStack(alignment : .center){
+//                        VStack (alignment : .center){
+//                        Image(systemName: "hand.thumbsup.fill")
+//                            .resizable()
+//                            .foregroundColor(.primery)
+//                            .imageScale(/*@START_MENU_TOKEN@*/.medium/*@END_MENU_TOKEN@*/)
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 22, height: 22, alignment: .center)
+//                        }
+//                        .frame(width: 50, height: 50, alignment: .center)
+//                        .background(Color.gray.opacity(0.2))
+//                        .cornerRadius(12)
+//                        .padding(.horizontal , 16)
+//                        .padding(.vertical , 4)
+//
+//                        Text("Interests")
+//                            .font(.title3)
+//                            .foregroundColor(.whiteColor)
+//                        Spacer()
+//                    }
+//                    Divider()

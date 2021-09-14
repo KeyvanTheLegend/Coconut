@@ -14,7 +14,6 @@ struct SearchView: View {
     @State var navigateToChatView = false
     @State var selectedUser : UserModel? = nil
     
-    // MARK: - VIEWMODEL
     @StateObject var viewModel = SearchViewModel()
     
     var body: some View {
@@ -55,18 +54,18 @@ struct SearchView: View {
             .listRowInsets(EdgeInsets())
             .background(Color.background)
             .listStyle(InsetListStyle())
-            NavigationLink(
-                destination:
-                    ChatView(withUser : $selectedUser)
-                    .navigationBarTitleDisplayMode(.inline),
-                isActive: $navigateToChatView
-            ){EmptyView()}
-            .buttonStyle(PlainButtonStyle())
-            .frame(width:0)
-            .opacity(0)
         }
         .padding(.top , 16)
         .background(Color.background)
+        NavigationLink(
+            destination:
+                ChatView(withUser : $selectedUser)
+                .navigationBarTitleDisplayMode(.inline),
+            isActive: $navigateToChatView
+        ){EmptyView()}
+        .buttonStyle(PlainButtonStyle())
+        .frame(width:0)
+        .opacity(0)
     }
 }
 

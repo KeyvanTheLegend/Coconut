@@ -75,7 +75,6 @@ struct ChatTabView: View {
             .padding(0)
             .showTabBar()
             .navigationTitle("Chat")
-            
             // MARK: Navigation Bar Items :
             .navigationBarItems(trailing: Button(action: {
                 navigateToSearchView = true
@@ -102,6 +101,14 @@ struct ChatTabView: View {
             viewModel.getAllConversations()
             viewModel.observeBlockedEmails()
         })
+        .onChange(of: navigateToSearchView) { isNavigated in
+            if isNavigated {
+                DatabaseManager.shared.removeConversationsObserver(for: session.user?.email ?? "")
+            }
+            else{
+                viewModel.getAllConversations()
+            }
+        }
         
     }
     

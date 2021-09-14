@@ -108,10 +108,11 @@ class ChatViewModel : ObservableObject  {
             // create conversation with message
             DatabaseManager.shared.createConversation(with: otherUser, and: user, message: message) { [weak self] conversationID in
                 print("CREATED \(conversationID)")
-                
-                self?.conversationID = conversationID
-                self?.observeMessagesForConversation(with: conversationID)
-                self?.getMessagesForConversation(with: conversationID)
+                DispatchQueue.main.async{
+                    self?.conversationID = conversationID
+                    self?.observeMessagesForConversation(with: conversationID)
+                    self?.getMessagesForConversation(with: conversationID)
+                }
 
             }
         }

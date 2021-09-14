@@ -2,7 +2,7 @@
 //  DatabaseManager.swift
 //  Coconut
 //
-//  Created by sh on 8/26/21.
+//  Created by Keyvan Yaghoubian on 8/26/21.
 //
 
 import Foundation
@@ -290,7 +290,11 @@ extension DatabaseManager {
         ,message : MessageModel) {
         let json = message.dictionary
         database.child(conversationId).child("messages").childByAutoId().setValue(json!)
-    }    
+    }
+    func removeConversationsObserver(for email : String ){
+
+        database.child(email.safeString()).child("conversations").removeAllObservers()
+    }
 }
 // MARK: - Enums
 ///  Network request state such as firebase database changes
@@ -331,7 +335,4 @@ enum NetworkRequestState {
 //}
 //
 //
-//    func removeMessageObserver(for conversationId : String ){
-//
-//        database.child(conversationId).child("messages").removeAllObservers()
-//    }
+

@@ -17,7 +17,10 @@ class ChatTabViewModel : ObservableObject  {
     func getAllConversations(){
         guard let userEmail = Session.shared.user?.email else { return }
         DatabaseManager.shared.observeUserConversations(with: userEmail.safeString()) { [weak self] conversations in
-                self?.conversations = conversations}
+            DispatchQueue.main.async {
+                self?.conversations = conversations
+            }
+        }
     }
     /// observe user blocklist
     func observeBlockedEmails(){

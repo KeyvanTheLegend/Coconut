@@ -362,8 +362,8 @@
 		C0850D7C26CB8FFF003E782E /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				C0BC791926DF7A4600979BCB /* SubViews */,
 				C0850D7A26CB2C12003E782E /* ChatView.swift */,
+				C0BC791926DF7A4600979BCB /* SubViews */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1056,7 +1056,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.CoconutChat.CoconutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1082,7 +1082,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.CoconutChat.CoconutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

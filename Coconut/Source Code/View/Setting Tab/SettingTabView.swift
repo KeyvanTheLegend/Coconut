@@ -11,6 +11,10 @@ struct SettingTabView: View {
     
     @EnvironmentObject var session : Session
     
+    init(){
+        setNavBarAppearence(to: .defualt)
+    }
+    
     var body: some View {
         NavigationView{
             ScrollView {
@@ -40,8 +44,8 @@ struct SettingTabView: View {
                     .onTapGesture {
                         let domain = Bundle.main.bundleIdentifier!
                         UserDefaults.standard.removePersistentDomain(forName: domain)
-                        setNavBarAppearence(to: .clear)
                         session.update()
+                        setNavBarAppearence(to: .clear)
                     }
                     Divider()
 

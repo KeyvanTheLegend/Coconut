@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     
     init() {
-        setNavBarAppearence(to: .defualt)
         setTabBarAppearence(to: .defualt)
     }
     

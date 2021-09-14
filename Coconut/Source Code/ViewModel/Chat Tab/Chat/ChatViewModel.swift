@@ -27,7 +27,6 @@ class ChatViewModel : ObservableObject  {
         }
         self.conversationID = convesationID
         DatabaseManager.shared.observeMessagesForConversation(conversationId: convesationID) { [weak self] message in
-            print("HI 3\(message)")
             self?.messages += message
         }
     }
@@ -148,8 +147,8 @@ class ChatViewModel : ObservableObject  {
             }
         }
     }
-    func removeObserver(){
-        DatabaseManager.shared.removeMessageObserver(for: self.conversationID ?? "")
-    }
+//    func removeObserver(){
+//        DatabaseManager.shared.removeMessageObserver(for: self.conversationID ?? "")
+//    }
 }
 

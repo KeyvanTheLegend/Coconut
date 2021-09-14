@@ -16,6 +16,7 @@ struct ChatTabView: View {
     
     init(){
         UITableView.appearance().backgroundColor = UIColor(named: "BackgroundColor")
+        setNavBarAppearence(to: .defualt)
     }
     
     var body: some View {
@@ -74,33 +75,32 @@ struct ChatTabView: View {
             .padding(0)
             .showTabBar()
             .navigationTitle("Chat")
+            
+            // MARK: Navigation Bar Items :
+            .navigationBarItems(trailing: Button(action: {
+                navigateToSearchView = true
+            }, label: {
+                HStack{
+                    Spacer()
+                    Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .frame(width: 20,
+                               height: 20,
+                               alignment: .center
+                        )
+                }
+                .frame(width: 48, height: 48, alignment: .center)
+            }))
         }
         .hasScrollEnabled(true)
         .background(Color.background)
         .ignoresSafeArea(.keyboard)
         .navigationViewStyle(StackNavigationViewStyle())
         
-        // MARK: Navigation Bar Items :
-        .navigationBarItems(trailing: Button(action: {
-            navigateToSearchView = true
-        }, label: {
-            HStack{
-                Spacer()
-                Image(systemName: "magnifyingglass")
-                    .resizable()
-                    .frame(width: 20,
-                           height: 20,
-                           alignment: .center
-                    )
-            }
-            .frame(width: 48, height: 48, alignment: .center)
-        }))
-        
         // MARK: - onAppear :
         .onAppear(perform: {
             viewModel.getAllConversations()
             viewModel.observeBlockedEmails()
-            DatabaseManager.shared.log(logText: "\(Date())  | action : chatTab appeared")
         })
         
     }

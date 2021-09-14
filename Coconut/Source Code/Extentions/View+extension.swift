@@ -26,7 +26,7 @@ extension View {
             /// Title Text Color
             appearence.titleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
             appearence.largeTitleTextAttributes = [.foregroundColor: UIColor(named : "WhiteColor") ?? .white]
-            
+            break
         case .clear:
             /// TODO - add light style
             appearence.configureWithTransparentBackground()
@@ -39,7 +39,7 @@ extension View {
             break
             /// TODO - add dark style
         }
-        
+        print("HI IM HERE SADDLY \(style)")
         UINavigationBar.appearance().standardAppearance = appearence
         UINavigationBar.appearance().scrollEdgeAppearance = appearence
         UINavigationBar.appearance().compactAppearance = appearence
@@ -134,7 +134,6 @@ struct Tool {
     static func showTabBar() {
         UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.allSubviews().forEach({ (v) in
             if let view = v as? UITabBar {
-                print("HI IM HERE GOOOz")
                 view.alpha = 1
             }
         })

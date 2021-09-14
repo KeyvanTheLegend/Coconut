@@ -105,9 +105,7 @@ extension AppDelegate: MessagingDelegate {
         guard let userFcmToken  = fcmToken else {return}
         UserDefaults.standard.setValue(userFcmToken, forKey: "FCMToken")
         if let userEmail = UserDefaults.standard.string(forKey: "Email") {
-            print(userFcmToken)
             DispatchQueue.global().async {
-                DatabaseManager.shared.log(logText: "TOKEN IS : \(userFcmToken)")
                 DatabaseManager.shared.updateUserToken(withEmail: userEmail, to: userFcmToken)
             }
         }

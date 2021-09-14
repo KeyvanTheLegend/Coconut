@@ -1,5 +1,5 @@
 //
-//  GlobalObjects.swift
+//  Session.swift
 //  Coconut
 //
 //  Created by Keyvan Yaghoubian on 9/9/21.
@@ -22,8 +22,8 @@ class Session: ObservableObject {
     
     /// update Session
     func update(){
-        checkIsUserSignedIn()
         updateUser()
+        checkIsUserSignedIn()
     }
     
     /// check if any user is sigenedIn
@@ -44,6 +44,7 @@ class Session: ObservableObject {
             let name = UserDefaults.standard.string(forKey: "Name"),
             let picture = UserDefaults.standard.string(forKey: "ProfilePictureUrl") else{
             self.user = nil
+
             return
         }
         guard let userToken = UserDefaults.standard.string(forKey: "FCMToken") else {

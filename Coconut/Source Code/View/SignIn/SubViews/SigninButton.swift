@@ -11,6 +11,9 @@ struct SigninButton : View {
     
     @ObservedObject var viewModel : SigninViewModel
     
+    @Binding var email : String
+    @Binding var password : String
+    
     var body: some View{
         ZStack(alignment: .center){
             /// loading image
@@ -35,7 +38,7 @@ struct SigninButton : View {
             /// singup button
             Button(action: {
                 hideKeyboard()
-                viewModel.signIn(email: viewModel.email, password: viewModel.password)
+                viewModel.signIn(email: email, password: password)
             }, label: {
                 Text("Signin")
                     .fontWeight(.medium)

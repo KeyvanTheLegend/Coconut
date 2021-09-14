@@ -26,6 +26,14 @@ class Session: ObservableObject {
         checkIsUserSignedIn()
     }
     
+    /// update user default with user information
+    /// - Parameter user: fetched user
+    func updateUserDefaults(withUser user : UserModel){
+        UserDefaults.standard.setValue(user.picture , forKey: "ProfilePictureUrl")
+        UserDefaults.standard.setValue(user.name , forKey: "Name")
+        UserDefaults.standard.setValue(user.email, forKey: "Email")
+    }
+
     /// check if any user is sigenedIn
     private func checkIsUserSignedIn(){
         guard

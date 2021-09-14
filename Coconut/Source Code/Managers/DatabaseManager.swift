@@ -42,19 +42,19 @@ extension DatabaseManager {
     /// - TODO: change compeltion to Result (UserModel,Error)
     func getUser(
         withEmail email: String,
-        compeltion : @escaping ((UserModel)->Void)) {
+        compeltion : @escaping ((Result<UserModel,RemoteDatabaseError>)->Void)) {
         database.child(email.safeString()).observeSingleEvent(of: .value, with: { snapshot in
             guard let value = snapshot.value as? [String:Any] else {
-                print("ERROR")
+                compeltion(.failure(.NOT_VALID_SNAPSHOT))
                 return
             }
             let decoder = JSONDecoder()
             let jsonData = try! JSONSerialization.data(withJSONObject:value)
             guard let user = try? decoder.decode(UserModel.self, from: jsonData) else{
-                print("ERROR DECODING")
+                compeltion(.failure(.DECODING_ERROR))
                 return
             }
-            compeltion(user)
+            compeltion(.success(user))
         })
     }
     
@@ -336,3 +336,46 @@ enum NetworkRequestState {
 //
 //
 
+// MARK: - Singin Errors
+enum RemoteDatabaseError : Int , Error {
+    case NOT_VALID_SNAPSHOT
+    case DECODING_ERROR
+    case EMAIL_INVALID = 17008
+    case WRONG_PASSWORD = 17009
+    case USER_NOT_FOUND = 17011
+    case TEMPORARILY_DISABLED = 17010
+    /// this is shown on alret **title**
+    var title : String {
+        switch self {
+        case .NOT_VALID_SNAPSHOT:
+            return "NOT VALID SNAPSHOT"
+        case .DECODING_ERROR:
+            return "Decoding Error"
+        case .WRONG_PASSWORD:
+            return "Wrong Password"
+        case .USER_NOT_FOUND:
+            return "User dose not exist"
+        case .EMAIL_INVALID:
+            return "Invalid email"
+        case .TEMPORARILY_DISABLED:
+            return "Temporarily Disabled"
+        }
+    }
+    /// this is shown on alret **message**
+    var description : String {
+        switch self {
+        case .NOT_VALID_SNAPSHOT:
+            return "Snapshot error"
+        case .DECODING_ERROR:
+            return "Decoding Error"
+        case .WRONG_PASSWORD:
+            return "Please enter the correct password"
+        case .USER_NOT_FOUND:
+            return "Please check if the entered email is correct"
+        case .EMAIL_INVALID:
+            return "Please enter a valid email"
+        case .TEMPORARILY_DISABLED:
+            return "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
+        }
+    }
+}

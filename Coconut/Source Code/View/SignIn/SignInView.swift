@@ -10,12 +10,14 @@ import SwiftUI
 struct SignInView: View {
     
     @StateObject var viewModel = SigninViewModel()
+    
     @EnvironmentObject var session: Session
     
-    init() {
-        setNavBarAppearence(to: .clear)
-    }
-
+    @State var showSignUpView : Bool = false
+    
+    @State var email : String = ""
+    @State var password : String = ""
+    
     var body: some View {
         NavigationView{
             VStack {
@@ -34,17 +36,21 @@ struct SignInView: View {
                 Spacer()
                 Group
                 {
-                    EmailTextField(email: $viewModel.email)
-                    PasswordTextField(password: $viewModel.password)
-                    SigninButton(viewModel: viewModel)
+                    EmailTextField(email: $email)
+                    PasswordTextField(password: $password)
+                    SigninButton(
+                        viewModel: viewModel,
+                        email: $email,
+                        password: $password
+                    )
                 }
                 Group
                 {
                     Spacer()
-                    SignupViewGroup(showSignUpView: $viewModel.showSignUpView)
+                    SignupViewGroup(showSignUpView: $showSignUpView)
                     NavigationLink(
                         destination: SignupView(),
-                        isActive: $viewModel.showSignUpView,
+                        isActive: $showSignUpView,
                         label: {EmptyView()})
                     Spacer()
                 }
@@ -66,14 +72,18 @@ struct SignInView: View {
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(
                     title:
-                        Text(viewModel.errorSignin?.title ?? "error"),
+                        Text(viewModel
+                                .errorSignin?
+                                .title ?? "error"),
                     message:
-                        Text(viewModel.errorSignin?.description ?? "error"),
-                    dismissButton: .default(Text("Dismiss"))
+                        Text(viewModel
+                                .errorSignin?
+                                .description ?? "error"),
+                    dismissButton:
+                        .default(Text("Dismiss"))
                 )
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
@@ -84,6 +94,7 @@ struct SignInView_Previews: PreviewProvider {
             .previewDevice("iPhone 8")
     }
 }
+
 struct SignupViewGroup : View {
     @Binding var showSignUpView : Bool
     var body: some View {

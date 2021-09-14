@@ -10,88 +10,127 @@ import SwiftUI
 struct ChatView: View {
     
     @State var messageText : String = ""
+    
     @State var safeAreaBottonInset :CGFloat = 0
+    
     @State var keyboardDidOpen : Bool = false
     @State var keyboardWillOpen : Bool = false
+    
     @State var showActionSheet : Bool = false
     @State var showAlert : Bool = false
+    
     @State var userIsTyping : Bool = false
-
+    
     let userTypingSemaphore = DispatchSemaphore(value: 0)
-
-
+    
+    
     @StateObject var viewModel = ChatViewModel()
+    @EnvironmentObject var session : Session
+    
     @Binding var withUser :UserModel?
     
     var body: some View {
         VStack(alignment :  .leading , spacing: 0){
+            
+            // MARK: Chat Header:
             ZStack{
-                ChatHeaderView(user: $withUser , viewModel:  viewModel)
-                    .background(Color.background.opacity(0.95))
-                    .padding(0)
+                ChatHeaderView(
+                    user: $withUser,
+                    viewModel: viewModel
+                )
+                .background(Color.background.opacity(0.95))
+                .padding(0)
             }
             .background(
-                BlurView().ignoresSafeArea(.container, edges: .top)
+                BlurView()
+                    .ignoresSafeArea(
+                        .container,
+                        edges: .top
+                    )
             )
             .zIndex(2)
             Divider()
                 .zIndex(2)
+            
+            // MARK: Messages List :
             ScrollViewReader { scrollViewReader in
                 List{
-                    if let userEmail = viewModel.userEmail {
-                        ForEach(viewModel.messages) { item in
-                            if userEmail == item.senderEmail {
-                                SentMessageView(messsage: item.text)
-                                    .id(item.id)
-                                
-                            }else{
-                                RecivedTextMessage(messsage: item.text)
-                                    .id(item.id)
-                                    .listRowBackground(Color.background)
-                            }
+                    ForEach(viewModel.messages) { message in
+                        
+                        if viewModel.isSentMessage(message: message) {
+                            SentMessageView(messsage: message.text)
+                                .id(message.id)
+                            
+                        } else{
+                            RecivedTextMessage(messsage: message.text)
+                                .id(message.id)
+                                .listRowBackground(Color.background)
                         }
                     }
                 }
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: .infinity,
+                    alignment: .leading
+                )
                 .hasScrollEnabled(true)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .listRowBackground(Color.background)
                 .background(Color.background)
+                
+                
+                // MARK: .onChange Keyboard
                 .onChange(of: keyboardDidOpen, perform: { value in
                     withAnimation {
                         if viewModel.messages.count > 0 {
-                            scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1].id,anchor: .bottom)
-                        }
-                    }
-                })
-                .onChange(of: viewModel.messages.count, perform: { value in
-                    withAnimation{
-                        if viewModel.messages.count > 0 {
-                            print("onchange viewmodel message \(viewModel.messages.count)")
-                            print("ID \(viewModel.messages[viewModel.messages.count - 1 ].id)")
-                            scrollViewReader.scrollTo(viewModel.messages[viewModel.messages.count - 1 ].id, anchor: .bottom)
+                            scrollViewReader.scrollTo(
+                                viewModel
+                                    .messages[viewModel.messages.count - 1]
+                                    .id,
+                                anchor: .bottom
+                            )
                         }
                     }
                 })
                 
+                // MARK: .onChange Messages
+                .onChange(of: viewModel.messages.count, perform: { value in
+                    withAnimation{
+                        if viewModel.messages.count > 0 {
+                            scrollViewReader.scrollTo(
+                                viewModel
+                                    .messages[viewModel.messages.count - 1]
+                                    .id,
+                                anchor: .bottom
+                            )
+                        }
+                    }
+                })
             }
-
+            
+            // MARK: Send Message
             SendMessageView(viewModel: viewModel,text: $messageText)
                 .background(Color.background, alignment: .bottom)
         }
         .background(Color.background.ignoresSafeArea())
+        
         .onTapGesture {
             hideKeyboard()
         }
-        .onAppear(perform: {
-            UITextView.appearance().backgroundColor = .clear
-
-        })
-        // MARK: - onAppear
+        .padding(.bottom, keyboardWillOpen ? 0: -safeAreaBottonInset)
+        
+        // MARK: - .onAppear
         .onAppear(perform: {
             viewModel.setOtherUser(user : withUser)
+            UITextView.appearance().backgroundColor = .clear
         })
+        
+        // MARK: - onDisappear
+        .onDisappear(perform: {
+            //            viewModel.removeObserver()
+        })
+        
+        // MARK: - .onRecive Keyboard Notifications :
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification)) { notifictation in
-            
             keyboardWillOpen = true
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification)) { notifictation in
@@ -100,21 +139,16 @@ struct ChatView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.keyboardDidShowNotification)) { notifictation in
             keyboardDidOpen = true
-            
         }
         .introspectTabBarController { (UITabBarController) in
-            
-//                print("TABBAR : ENTERED ")
-                let tabBarHeight = UITabBarController.tabBar.bounds.height
-//                print("TABBAR : tabBarHeight : \(tabBarHeight)")
-                if let window = UIApplication.shared.windows.first{
-                    let phoneSafeAreaBottonInsets = window.safeAreaInsets.bottom
-                    safeAreaBottonInset = tabBarHeight - phoneSafeAreaBottonInsets
-
-//                    print("TABBAR : safeAreaBottonInset : \(safeAreaBottonInset)")
+            let tabBarHeight = UITabBarController.tabBar.bounds.height
+            if let window = UIApplication.shared.windows.first {
+                let phoneSafeAreaBottonInsets = window.safeAreaInsets.bottom
+                safeAreaBottonInset = tabBarHeight - phoneSafeAreaBottonInsets
             }
             UITabBarController.tabBar.alpha = 0
         }
+        // MARK: Navigation Bar Items :
         .navigationBarItems(trailing: Button(action: {
             showActionSheet = true
         }, label: {
@@ -128,6 +162,7 @@ struct ChatView: View {
             }
             .frame(width: 48, height: 48, alignment: .center)
         }))
+        // MARK: Action Sheet :
         .actionSheet(isPresented: $showActionSheet) {
             ActionSheet(
                 title: Text(withUser?.email ?? ""),
@@ -149,6 +184,7 @@ struct ChatView: View {
                 ]
             )
         }
+        // MARK: Alerts :
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Reported"),
@@ -164,31 +200,19 @@ struct ChatView: View {
             }
             if !userIsTyping {
                 guard let conversationID = viewModel.conversationID else{return}
-            DatabaseManager.shared.userIsTyping(with: UserDefaults.standard.string(forKey: "Email")!.safeString(), in: conversationID, isTyping: true)
+                DatabaseManager.shared.userIsTyping(with: UserDefaults.standard.string(forKey: "Email")!.safeString(), in: conversationID, isTyping: true)
                 userIsTyping = true
             }
-
+            
             DispatchQueue.global().async {
                 let result =  userTypingSemaphore.wait(timeout: DispatchTime.now() + 0.5)
                 if result == .timedOut && userIsTyping {
                     userIsTyping = false
                     DatabaseManager.shared.userIsTyping(with: UserDefaults.standard.string(forKey: "Email")!.safeString(), in: viewModel.conversationID ?? "", isTyping: false)
                 }
-
             }
-        
         })
-        
-        // MARK: - onDisappear
-        .onDisappear(perform: {
-//            viewModel.removeObserver()
-        })
-        .padding(.bottom, keyboardWillOpen ? 0: -safeAreaBottonInset)
-        .colorScheme(.dark)
-        
-
     }
-    
 }
 
 //struct ChatHeaderView : View {

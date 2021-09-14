@@ -57,8 +57,7 @@ struct SignupView: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.background)
-        
-        
+   
     }
 }
 

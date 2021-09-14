@@ -49,6 +49,16 @@ class ChatViewModel : ObservableObject  {
         }
     }
     
+    /// check if the message is recived or sent
+    /// - Parameter message: message
+    /// - Returns: true if message is sent
+    func isSentMessage(message : MessageModel) -> Bool{
+        guard let userEmail = Session.shared.user?.email else {
+            return false
+        }
+        return userEmail == message.senderEmail
+    }
+    
     /// check if user has a existing conversation (shared) with other user
     /// - Parameter otherUser: other user
     /// - Returns: shared **conversationID** if exist

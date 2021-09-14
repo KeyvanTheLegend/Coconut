@@ -37,6 +37,7 @@ struct SendMessageView : View {
                             .disabled(true)
 
                     }
+
                 Image(systemName: "arrow.up")
                     .frame(width: 40,
                            height: 40,

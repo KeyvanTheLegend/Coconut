@@ -25,7 +25,57 @@ struct HomeView: View {
                     Text("chat")
                 }
                 .tag(0)
-            
+
+            SettingTabView()
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text("setting")
+                }
+                .tag(1)
+        }
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}
+
+struct StartChatWithStrangerView : View {
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Text("START CHAT WITH STRANGER")
+                .frame(width: abs(geometry.size.width), height: abs(geometry.size.height), alignment: .center)
+                .background(Color.primery)
+                .cornerRadius(12)
+                .font(.title3.italic().weight(.semibold))
+                .foregroundColor(Color.background)
+                .shadow(color: .primery, radius: 2, x: 0, y: 0.0)
+        }
+    }
+}
+struct TitleView : View {
+    var title : String = ""
+    var color : Color = Color.white
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.title2.weight(.medium))
+                .foregroundColor(color)
+            Spacer()
+            Button(action: {}, label: {
+                Text("See More")
+            })
+        }
+        
+    }
+}
+
+
+
+
 //            GeometryReader { geometry in
 //                NavigationView {
 //                    ScrollView {
@@ -117,49 +167,3 @@ struct HomeView: View {
 //            }
 //            .tag(1)
 //
-            SettingTabView()
-                .tabItem {
-                    Image(systemName: "gearshape.fill")
-                    Text("setting")
-                }
-                .tag(1)
-        }
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
-
-struct StartChatWithStrangerView : View {
-    
-    var body: some View {
-        GeometryReader { geometry in
-            Text("START CHAT WITH STRANGER")
-                .frame(width: abs(geometry.size.width), height: abs(geometry.size.height), alignment: .center)
-                .background(Color.primery)
-                .cornerRadius(12)
-                .font(.title3.italic().weight(.semibold))
-                .foregroundColor(Color.background)
-                .shadow(color: .primery, radius: 2, x: 0, y: 0.0)
-        }
-    }
-}
-struct TitleView : View {
-    var title : String = ""
-    var color : Color = Color.white
-    var body: some View {
-        HStack {
-            Text(title)
-                .font(.title2.weight(.medium))
-                .foregroundColor(color)
-            Spacer()
-            Button(action: {}, label: {
-                Text("See More")
-            })
-        }
-        
-    }
-}

@@ -48,33 +48,32 @@ struct SignInView: View {
                         label: {EmptyView()})
                     Spacer()
                 }
-                /// Alert
-                .alert(isPresented: $viewModel.showAlert) {
-                    Alert(
-                        title:
-                            Text(viewModel.errorSignin?.title ?? "error"),
-                        message:
-                            Text(viewModel.errorSignin?.description ?? "error"),
-                        dismissButton: .default(Text("Dismiss"))
-                    )
-                }
             }
             .background(Color.background.ignoresSafeArea())
             .ignoresSafeArea(.container)
             .onTapGesture {
                 hideKeyboard()
             }
+            // MARK: .onAppear :
             .onAppear(perform: {
                 setNavBarAppearence(to: .clear)
-                print("HI IM HERE BRO")
-                viewModel.presentHomeTabView = false
             })
+            // MARK: .screenCover
             .fullScreenCover(isPresented: $session.isSignedIn, content: {
                 HomeView()
             })
+            // MARK: Alert :
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(
+                    title:
+                        Text(viewModel.errorSignin?.title ?? "error"),
+                    message:
+                        Text(viewModel.errorSignin?.description ?? "error"),
+                    dismissButton: .default(Text("Dismiss"))
+                )
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }

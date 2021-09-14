@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SettingTabView: View {
+    
     @EnvironmentObject var session : Session
     
     var body: some View {
         NavigationView{
             ScrollView {
-                
                 VStack {
                     SettingTabHeaderView()
                     Divider()

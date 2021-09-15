@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import ARKit
+import UIKit
 
-
-class ChatViewModel : ObservableObject  {
+class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
     
     /// - sub ViewModels :
     @Published private(set) var messages : [MessageModel] = []
@@ -81,12 +82,13 @@ class ChatViewModel : ObservableObject  {
         guard
             let userEmail = UserDefaults.standard.string(forKey: "Email"),
             let userName = UserDefaults.standard.string(forKey: "Name"),
-            let userToken = UserDefaults.standard.string(forKey: "FCMToken"),
             let otherUser = otherUser else {
-            print("ERRORRRRR")
             return
         }
+        
         let userPicture = UserDefaults.standard.string(forKey: "ProfilePictureUrl") ?? ""
+        let userToken = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+        
         let user = UserModel(
             name: userName,
             email: userEmail,
@@ -99,21 +101,18 @@ class ChatViewModel : ObservableObject  {
             senderEmail: userEmail,
             sentDate: Date()
         )
-        print("token is :\(otherUser.userToken)")
+        
         PushNotificationSender.shared.sendPushNotification(to: otherUser.userToken, title: user.name, body: message.text)
         if let conversationId = self.conversationID {
-            print("HAVE ID")
             DatabaseManager.shared.sendMessage(conversationId: conversationId,message: message)
         }else {
             // create conversation with message
             DatabaseManager.shared.createConversation(with: otherUser, and: user, message: message) { [weak self] conversationID in
-                print("CREATED \(conversationID)")
                 DispatchQueue.main.async{
                     self?.conversationID = conversationID
                     self?.observeMessagesForConversation(with: conversationID)
                     self?.getMessagesForConversation(with: conversationID)
                 }
-
             }
         }
     }
@@ -125,6 +124,8 @@ class ChatViewModel : ObservableObject  {
             self?.messages += message
         }
     }
+    /// observe if other user is typing or now
+    /// - Parameter conversationID: conversationID
     private func observeConversationIsTyping(with conversationID : String){
         guard let otherUserEmail = otherUser?.email else {
             return
@@ -134,8 +135,6 @@ class ChatViewModel : ObservableObject  {
                 self.isTyping = isTyping
             }
         }
-
-
     }
     /// get all messages for conversation **ONCE**
     /// - Parameter conversationID: conversationID
@@ -144,12 +143,59 @@ class ChatViewModel : ObservableObject  {
             print("HI MESSAGES IS \(messages)")
             DispatchQueue.main.async {
                 self?.messages = messages
-
             }
         }
     }
+    
+    
+    private var arView: ARSCNView?
+    private var isSmiling = false
+
+    func setARView(_ arView: ARSCNView) {
+        self.arView = arView
+        
+        let configuration = ARFaceTrackingConfiguration()
+        arView.session.run(configuration)
+        
+        arView.delegate = self
+        
+    }
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        let anchor = ARFaceAnchor(anchor: anchor)
+        if (
+            anchor.blendShapes[.mouthSmileLeft] as? Double ?? 0 > 0.7 ||
+                anchor.blendShapes[.mouthSmileRight] as? Double ?? 0 > 0.7 ) {
+            sendSmileMessage()
+            isSmiling = true
+        }else {
+            isSmiling = false
+        }
+        
+    }
+    
+    func sendSmileMessage(){
+        guard let converastionID = conversationID else{return}
+        if !isSmiling{
+            
+            let message = MessageModel(
+                id:UUID(),
+                text: "\(Session.shared.user?.name ?? "") STARTED SMILING",
+                senderEmail: Session.shared.user?.email ?? "" ,
+                sentDate: Date()
+            )
+            
+            DatabaseManager.shared.sendMessage(conversationId: converastionID, message: message)
+        }
+    }
+    func pauseAR(){
+        arView?.session.pause()
+    }
+}
+
+
+
+
 //    func removeObserver(){
 //        DatabaseManager.shared.removeMessageObserver(for: self.conversationID ?? "")
 //    }
-}
 

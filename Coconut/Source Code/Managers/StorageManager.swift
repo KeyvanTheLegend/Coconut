@@ -18,14 +18,19 @@ final class StorageManager {
 
 extension StorageManager {
     
-    public func uploadProfilePicture(with imageData : Data , fileName : String , completion : @escaping (Result<String,Error>) -> Void) {
+    public func uploadProfilePicture(with image : UIImage , fileName : String , completion : @escaping (Result<String,StorageManagerError>) -> Void) {
+        guard let imageData = image.pngData() else {
+            completion(.failure(.NOT_VALID_IMAGE))
+            return
+        }
         storage.child("image/\(fileName)").putData(imageData, metadata: nil) { metadata, error in
             guard error == nil else {
-                completion(.failure(error!))
+                completion(.failure(.UNABLE_TO_UPLOAD_IMAGE))
                 return
             }
             self.storage.child("image/\(fileName)").downloadURL { url, error in
                 guard error == nil else{
+                    completion(.failure(.UNABLE_TO_FETCH_IMAGE_URL))
                     return
                 }
                 guard let downloadUrl = url?.absoluteString else {return}
@@ -34,3 +39,11 @@ extension StorageManager {
         }
     }
 }
+
+enum StorageManagerError : Error {
+    case NOT_VALID_IMAGE
+    case UNABLE_TO_UPLOAD_IMAGE
+    case UNABLE_TO_FETCH_IMAGE_URL
+    
+}
+

@@ -39,7 +39,6 @@ extension DatabaseManager {
     /// - Parameters:
     ///   - email: email is used as user primary key
     ///   - compeltion: compeltion
-    /// - TODO: change compeltion to Result (UserModel,Error)
     func getUser(
         withEmail email: String,
         compeltion : @escaping ((Result<UserModel,RemoteDatabaseError>)->Void)) {
@@ -198,8 +197,8 @@ extension DatabaseManager {
         database.child(conversationId.key!).child("lastMessage").childByAutoId().setValue(json!)
         database.child(conversationId.key!).child("messages").childByAutoId().setValue(json!)
         
-        database.child(me.safeEmail).child("conversations").childByAutoId().setValue(conversationForOtherPerson.dictionary!)
-        database.child(otherPerson.safeEmail).child("conversations").childByAutoId().setValue(conversationForMe.dictionary!) { err, _ in
+        database.child(me.email.safeString()).child("conversations").childByAutoId().setValue(conversationForOtherPerson.dictionary!)
+        database.child(otherPerson.email.safeString()).child("conversations").childByAutoId().setValue(conversationForMe.dictionary!) { err, _ in
             
             compelition(conversationId.key!)
         }
@@ -309,34 +308,7 @@ enum NetworkRequestState {
     }
 }
 
-
-
-//func checkConversationExist(for user : UserModel , with otherUser : UserModel , compelition : @escaping (String?)->Void)
-//{
-//    database.child(user.safeEmail).child("conversations").observeSingleEvent(of: .value) { snapshot in
-//        guard let conversations = snapshot.value as? [String:Any] else {
-//            compelition(nil)
-//            return
-//        }
-//        let decoder = JSONDecoder()
-//        for conversation in conversations {
-//            let jsonData = try! JSONSerialization.data(withJSONObject:conversation.value)
-//            let conversationModel = try! decoder.decode(ConversationModel.self, from: jsonData)
-//            if conversationModel.email == otherUser.email {
-//                print("FOUNDD")
-//                compelition(conversationModel.conversationId)
-//                break
-//            }
-//
-//        }
-//        compelition(nil)
-//
-//    }
-//}
-//
-//
-
-// MARK: - Singin Errors
+// MARK: - RemoteDatabase Errors
 enum RemoteDatabaseError : Int , Error {
     case NOT_VALID_SNAPSHOT
     case DECODING_ERROR
@@ -379,3 +351,31 @@ enum RemoteDatabaseError : Int , Error {
         }
     }
 }
+
+
+
+
+//func checkConversationExist(for user : UserModel , with otherUser : UserModel , compelition : @escaping (String?)->Void)
+//{
+//    database.child(user.safeEmail).child("conversations").observeSingleEvent(of: .value) { snapshot in
+//        guard let conversations = snapshot.value as? [String:Any] else {
+//            compelition(nil)
+//            return
+//        }
+//        let decoder = JSONDecoder()
+//        for conversation in conversations {
+//            let jsonData = try! JSONSerialization.data(withJSONObject:conversation.value)
+//            let conversationModel = try! decoder.decode(ConversationModel.self, from: jsonData)
+//            if conversationModel.email == otherUser.email {
+//                print("FOUNDD")
+//                compelition(conversationModel.conversationId)
+//                break
+//            }
+//
+//        }
+//        compelition(nil)
+//
+//    }
+//}
+//
+//

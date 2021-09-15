@@ -14,15 +14,10 @@ struct UserModel : Identifiable , Codable {
     let email : String
     var picture : String = ""
     var userToken : String = ""
-
-    var safeEmail : String {
-        return email.safeString()
-    }
     var pictureFileName : String {
-        return safeEmail + "\(Date())" + ".png"
+        return email.safeString() + "\(Date())" + ".png"
     }
     var conversation : [ConversationModel] = []
-    
     var sharedConversastion : String? = nil
 
     enum CodingKeys : String, CodingKey {

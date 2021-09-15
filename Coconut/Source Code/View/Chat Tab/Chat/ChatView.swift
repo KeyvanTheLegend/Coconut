@@ -25,6 +25,7 @@ struct ChatView: View {
     
     
     @StateObject var viewModel = ChatViewModel()
+
     @EnvironmentObject var session : Session
     
     @Binding var withUser :UserModel?
@@ -34,6 +35,9 @@ struct ChatView: View {
             
             // MARK: Chat Header:
             ZStack{
+                ARView(arDelegate: viewModel)
+                    .opacity(0)
+                    .frame(width: 1, height: 1, alignment: .center)
                 ChatHeaderView(
                     user: $withUser,
                     viewModel: viewModel
@@ -126,6 +130,7 @@ struct ChatView: View {
         
         // MARK: - onDisappear
         .onDisappear(perform: {
+            viewModel.pauseAR()
             //            viewModel.removeObserver()
         })
         
@@ -242,3 +247,17 @@ struct ChatView: View {
 //        .zIndex(2)
 //    }
 //}
+import ARKit
+struct ARView: UIViewRepresentable {
+    let arDelegate:ChatViewModel
+    
+    func makeUIView(context: Context) -> some UIView {
+        let arView = ARSCNView(frame: .zero)
+        arDelegate.setARView(arView)
+        return arView
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        
+    }
+}

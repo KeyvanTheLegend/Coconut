@@ -12,22 +12,10 @@ class SignupViewModel : ObservableObject {
     
     // MARK: - Published Variables
     
-    @Published var name : String = ""
-    @Published var email : String = ""
-    @Published var password : String = ""
-    @Published var profilePictureUrl : String = ""
-
-    @Published var isImageSelected: Bool = false
-    @Published var showImagePicker: Bool = false
-    @Published var selectedImage: UIImage? = nil
-    
     /// user singup **State**
-    @Published var stateSignup : NetworkRequestState = .UNDEFINED
+    @Published var state : NetworkRequestState = .UNDEFINED
     @Published var errorSignup : SignupError? = nil
     @Published var showAlert : Bool = false
-    @Published var isPresentedHomeTabView = false
-    
-    
     
     // MARK: - Functions :
 
@@ -39,9 +27,13 @@ class SignupViewModel : ObservableObject {
     ///   - email: user email
     ///   - password: user email
     ///- TODO: separate auth step form user information database create
-    func signUp(name : String , email: String , password: String , profilePicture : UIImage?) {
-        stateSignup = .LOADING
-        do{
+    func signUp(
+        name : String,
+        email: String,
+        password: String,
+        profilePicture : UIImage?) {
+        updateView(with : .LOADING)
+        do {
             try isNameValid(name: name)
             try isEmailValid(email: email)
             try isPasswordValid(password:password)
@@ -50,94 +42,94 @@ class SignupViewModel : ObservableObject {
                 withEmail: email,
                 password: password) { _ , error in
                 if let error = error {
-                    self.stateSignup = .FAILED
-                    self.errorSignup = SignupError(rawValue: error.code)
-                    print(error.code)
-                    
-                    self.showAlert = true
+                    let errorSignup = SignupError(rawValue: error.code)
+                    self.updateView(error : errorSignup)
                     return
                 }
                 /// Database
                 self.createUser(
                     name: name,
                     email: email,
-                    profilePicture: profilePicture
-                )
+                    profilePicture: profilePicture)
             }
         }
         catch {
             guard let error = error as? SignupError else {
-                self.stateSignup = .FAILED
+                updateView(error : .UNKNOWEN)
                 return
             }
-            self.stateSignup = .FAILED
-            self.errorSignup = error
-            self.showAlert = true
+            updateView(error : error)
             return
         }
     }
     
+    /// create user model then call **inserUser** function,
+    /// if user have profile picture , it will  upload the picture and then call inserUser
+    /// - Parameters:
+    ///   - name: user name
+    ///   - email: user email
+    ///   - profilePicture: user profile picture
     private func createUser(
         name : String,
         email : String,
         profilePicture: UIImage?) {
-        let userToken = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
         
-        var user = UserModel(name: name, email: email,picture: "",userToken: userToken)
+        var user = UserModel(name: name, email: email)
         
         guard let profilePicture = profilePicture else{
             self.insertUser(user)
             return
         }
-        uploadProfilePicture(
-            picture:profilePicture,
-            for: user) { result in
-            
+        
+        StorageManager.shared.uploadProfilePicture(
+            with: profilePicture,
+            fileName: user.pictureFileName) { result in
             switch result {
-            
-            case .success(let profilePictureUrl):
-                user.picture = profilePictureUrl
+            case .success(let uploadedPictureUrl):
+                user.picture = uploadedPictureUrl
                 self.insertUser(user)
                 return
             case .failure(_):
-                self.errorSignup = .UNABLE_TO_UPLOAD_PICTURE
-                self.stateSignup = .FAILED
+                self.updateView(error: .UNABLE_TO_UPLOAD_PICTURE)
                 return
             }
         }
     }
-    private func uploadProfilePicture(
-        picture : UIImage,
-        for user: UserModel,
-        completion : @escaping (Result<String,Error>)  -> Void) {
-        
-        StorageManager.shared.uploadProfilePicture(
-            with: picture.pngData()!,
-            fileName: user.pictureFileName){ result in
-            
-            switch result {
-            
-            case .success(let url):
-                completion(.success(url))
-            case .failure(let error):
-                print(error)
-                break
-            }
+    
+    /// insert user into database
+    /// - Parameter user: user data
+    private func insertUser(_ user: UserModel){
+        DatabaseManager.shared.insertUser(user: user) { success in
+            if success {
+                Session.shared.updateUserDefaults(withUser: user)
+                Session.shared.update()
+                self.updateView(with: .SUCCESS)
+            } else{ self.updateView(error : .UNABLE_TO_INSERT_USER) }
         }
     }
-    private func insertUser(_ user: UserModel){
-        
-        DatabaseManager.shared.insertUser(user: user) { result in
-            if result {
-                self.stateSignup = .SUCCESS
-                UserDefaults.standard.set(user.name, forKey: "Name")
-                UserDefaults.standard.set(user.email, forKey: "Email")
-                UserDefaults.standard.set(user.picture, forKey: "ProfilePictureUrl")
-                UserDefaults.standard.set(user.userToken, forKey: "FCMToken")
-                self.isPresentedHomeTabView = true
-                Session.shared.update()
-            }else{
-                self.stateSignup = .FAILED
+    
+    /// update view with current state
+    /// - Parameters:
+    ///   - state: signup state
+    ///   - error: error if exist
+    private func updateView(
+        with state: NetworkRequestState = .FAILED,
+        error : SignupError? = nil) {
+        DispatchQueue.main.async {
+            switch state {
+            case .SUCCESS:
+                self.state = state
+                break
+            case .FAILED:
+                self.errorSignup = error
+                self.state = state
+                self.showAlert = true
+                break
+            case .LOADING :
+                self.state = state
+                break
+            default :
+                break
             }
         }
     }
@@ -180,40 +172,56 @@ enum SignupError : Int , Error {
     case EMPTY_PASSWORD
     case WEAK_PASSWORD = 17026
     case USER_EXIST = 17007
+    case INVALID_EMAIL = 17008
     case UNABLE_TO_UPLOAD_PICTURE
+    case UNABLE_TO_INSERT_USER
+    case UNKNOWEN
+
 
     /// this is shown on alret **title**
     var title : String {
         switch self {
         case .EMPTY_NAME:
-            return "Empty Name"
+            return "Empty Name."
         case .EMPTY_EMAIL:
-            return "Empty Email"
+            return "Empty Email."
         case .EMPTY_PASSWORD:
-            return "Empty Password"
+            return "Empty Password."
         case .WEAK_PASSWORD:
-            return "Weak Password"
+            return "Weak Password."
         case .USER_EXIST:
-            return "User exist"
+            return "User exist."
         case .UNABLE_TO_UPLOAD_PICTURE:
-            return "Unable to upload"
+            return "Unable to upload."
+        case .UNABLE_TO_INSERT_USER:
+            return "Unable to create user."
+        case .UNKNOWEN:
+            return "Error."
+        case .INVALID_EMAIL:
+            return "Invalid Email."
         }
     }
     /// this is shown on alret **message**
     var description : String {
         switch self {
         case .EMPTY_NAME:
-            return "Please enter your name"
+            return "Please enter your name."
         case .EMPTY_EMAIL:
-            return "Please enter your email"
+            return "Please enter your email."
         case .EMPTY_PASSWORD:
-            return "Please enter your password"
+            return "Please enter your password."
         case .WEAK_PASSWORD:
             return "The password must be 6 characters long or more."
         case .UNABLE_TO_UPLOAD_PICTURE:
-            return "Unable to upload profile picture please try again"
+            return "Unable to upload profile picture please try again."
         case .USER_EXIST:
-            return "This email already exist, please use an other email"
+            return "This email already exist, please use an other email."
+        case .UNABLE_TO_INSERT_USER:
+            return "please try again."
+        case .UNKNOWEN:
+            return "please try again."
+        case .INVALID_EMAIL:
+            return "Please enter a vaild email address."
         }
     }
 }

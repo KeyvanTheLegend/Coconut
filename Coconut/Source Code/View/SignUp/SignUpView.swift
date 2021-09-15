@@ -11,23 +11,45 @@ import SwiftUI
 struct SignupView: View {
     
     @StateObject var viewModel = SignupViewModel()
+    
     @EnvironmentObject var session: Session
+    
+    @State var name : String = ""
+    @State var email : String = ""
+    @State var password : String = ""
+    @State var profilePictureUrl : String = ""
+    
+    @State var isImageSelected: Bool = false
+    @State var showImagePicker: Bool = false
+    @State var selectedImage: UIImage? = nil
 
     var body: some View {
         VStack{
             VStack{
                 Spacer()
-                SignupProfileImageView(viewModel: viewModel)
+                SignupProfileImageView(
+                    viewModel: viewModel,
+                    isImageSelected: $isImageSelected,
+                    showImagePicker: $showImagePicker,
+                    selectedImage: $selectedImage
+                )
                 Group{
-                    NameTextField(name: $viewModel.name)
-                    EmailTextField(email: $viewModel.email)
-                    PasswordTextField(password: $viewModel.password)
-                    SingUpButton(viewModel: viewModel)
+                    NameTextField(name: $name)
+                    EmailTextField(email: $email)
+                    PasswordTextField(password: $password)
+                    SingUpButton(
+                        viewModel: viewModel,
+                        name: $name,
+                        email: $email,
+                        password: $password,
+                        selectedImage: $selectedImage
+                    )
                 }
                 Group{
                     Spacer()
-                    EULA()
                     Spacer()
+                    EULA()
+                        .padding(.bottom,16)
                 }
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(
@@ -42,10 +64,10 @@ struct SignupView: View {
                         )
                     )
                 }
-                .popover(isPresented: $viewModel.showImagePicker) {
+                .popover(isPresented: $showImagePicker) {
                     ImagePicker(
-                        selectedImage: $viewModel.selectedImage,
-                        didSet: $viewModel.isImageSelected
+                        selectedImage: $selectedImage,
+                        didSet: $isImageSelected
                     )
                 }
             }
@@ -75,7 +97,8 @@ struct EULA : View {
                 .foregroundColor(.white)
                 .padding(.vertical , 8)
             Link(destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!, label: {
-                Text("License Agreement")                    .foregroundColor(.primery)
+                Text("License Agreement")
+                    .foregroundColor(.primery)
                     .font(.footnote.weight(.semibold))
             })
         }

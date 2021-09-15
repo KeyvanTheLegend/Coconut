@@ -158,7 +158,7 @@ struct SettingTabHeaderView : View {
                 let userEmail = UserDefaults.standard.string(forKey: "Email")!
                 let userName = UserDefaults.standard.string(forKey: "Name")!
                 let user = UserModel(name: userName, email: userEmail)
-                StorageManager.shared.uploadProfilePicture(with: selectedImage.pngData()!, fileName: user.pictureFileName) { result in
+                StorageManager.shared.uploadProfilePicture(with: selectedImage, fileName: user.pictureFileName) { result in
                     switch result {
                     
                     case .success(let url):

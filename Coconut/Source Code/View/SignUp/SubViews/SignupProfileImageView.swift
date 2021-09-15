@@ -10,11 +10,14 @@ import SwiftUI
 struct SignupProfileImageView : View{
     
     @ObservedObject var viewModel : SignupViewModel
+    @Binding var isImageSelected : Bool
+    @Binding var showImagePicker : Bool
+    @Binding var selectedImage : UIImage?
     
     var body: some View {
         ZStack(alignment : .top){
-            if viewModel.isImageSelected {
-                if let image = viewModel.selectedImage {
+            if isImageSelected {
+                if let image = selectedImage {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -43,7 +46,7 @@ struct SignupProfileImageView : View{
                 .padding(.leading , 115)
         }
         .onTapGesture {
-            viewModel.showImagePicker = true
+            showImagePicker = true
         }
         .padding(.top,32)
         .padding(.bottom,32)

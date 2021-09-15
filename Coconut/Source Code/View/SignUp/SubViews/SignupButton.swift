@@ -13,6 +13,11 @@ struct SingUpButton : View {
     /// injected viewModel
     @ObservedObject var viewModel : SignupViewModel
     
+    @Binding var name : String
+    @Binding var email : String
+    @Binding var password : String
+    @Binding var selectedImage : UIImage?
+    
     var body: some View{
         ZStack(alignment: .center){
             /// loading image
@@ -21,23 +26,28 @@ struct SingUpButton : View {
                 .frame(width: 30, height: 30, alignment: .center)
                 .foregroundColor(.white)
                 .zIndex(
-                    viewModel.stateSignup.isLoading() ? 2:0
+                    viewModel.state.isLoading() ? 2:0
                 )
                 .rotationEffect(
-                    viewModel.stateSignup.isLoading() ? Angle(degrees: 360) : .zero,
+                    viewModel.state.isLoading() ? Angle(degrees: 360) : .zero,
                     anchor: .center
                 )
                 .animation(
-                    viewModel.stateSignup.isLoading() ?
-                        .easeIn(duration: 1).repeatForever() : .linear(duration: 0)
+                    viewModel.state.isLoading() ?
+                        .easeIn(duration: 1).repeatForever(autoreverses : false) : .linear(duration: 0)
                 )
                 .opacity(
-                    viewModel.stateSignup.isLoading() ? 1:0
+                    viewModel.state.isLoading() ? 1:0
                 )
             /// singup button
             Button(action: {
                 hideKeyboard()
-                viewModel.signUp(name: viewModel.name, email: viewModel.email, password: viewModel.password, profilePicture: viewModel.selectedImage)
+                viewModel.signUp(
+                    name:name,
+                    email:email,
+                    password:password,
+                    profilePicture:selectedImage
+                )
             }, label: {
                 Text("Signup")
                     .fontWeight(.medium)
@@ -46,7 +56,7 @@ struct SingUpButton : View {
             .foregroundColor(.black)
             .clipped()
             .opacity(
-                viewModel.stateSignup == .LOADING ? 0:1
+                viewModel.state == .LOADING ? 0:1
             )
         }
         .padding(EdgeInsets(top: 12, leading: 64, bottom: 12, trailing: 64))

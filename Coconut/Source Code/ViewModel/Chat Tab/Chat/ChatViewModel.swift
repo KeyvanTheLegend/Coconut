@@ -16,6 +16,13 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
     @Published private(set) var isTyping : Bool = false
     private(set) var conversationID : String? = nil
     private(set) var otherUser : UserModel? = nil
+    @Published private(set) var otherUserEmpotion : Emotion = .UNDEFIND
+    private(set) var userEmotion : Emotion = .UNDEFIND
+
+    var encodedSubscribedMyModels : Data? {
+        let encoder = JSONEncoder()
+        return try? encoder.encode(conversationID)
+    }
     
     let userEmail : String?  = UserDefaults.standard.string(forKey: "Email")!
 
@@ -162,33 +169,65 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
     }
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         let anchor = ARFaceAnchor(anchor: anchor)
-        if (
+
+        if (anchor.blendShapes[.tongueOut] as! Double > 0.4 ){
+           sendEmotion(.TONGUE_OUT)
+       }
+        else if ( anchor.blendShapes[.mouthPucker] as! Double > 0.45 ) {
+            sendEmotion(.KISS)
+        }
+        else if (
             anchor.blendShapes[.mouthSmileLeft] as? Double ?? 0 > 0.7 ||
                 anchor.blendShapes[.mouthSmileRight] as? Double ?? 0 > 0.7 ) {
-            sendSmileMessage()
-            isSmiling = true
-        }else {
-            isSmiling = false
+            sendEmotion(.SMILING)
+
+        } else if (anchor.blendShapes[.eyeBlinkLeft] as! Double >= 0.5 || (anchor.blendShapes[.eyeBlinkRight] as! Double > 0.5)){
+            sendEmotion(.WINK)
+        } else if (anchor.blendShapes[.browDownLeft] as! Double >= 0.4 || anchor.blendShapes[.browDownRight] as! Double >= 0.4 &&
+                    (0.05 >= anchor.blendShapes[.eyeBlinkLeft] as! Double   && (  0.05 >= anchor.blendShapes[.eyeBlinkRight] as! Double ))){
+            sendEmotion(.ANGRY)
+        } else if (anchor.blendShapes[.jawOpen] as! Double >= 0.5 && (anchor.blendShapes[.browInnerUp] as! Double > 0.1)){
+            sendEmotion(.SHOCKED)
+        }
+        else {
+            sendEmotion(.UNDEFIND)
         }
         
     }
-    
-    func sendSmileMessage(){
-        guard let converastionID = conversationID else{return}
-        if !isSmiling{
-            
-            let message = MessageModel(
-                id:UUID(),
-                text: "\(Session.shared.user?.name ?? "") STARTED SMILING",
-                senderEmail: Session.shared.user?.email ?? "" ,
-                sentDate: Date()
-            )
-            
-            DatabaseManager.shared.sendMessage(conversationId: converastionID, message: message)
-        }
+    func sendEmotion(_ empotion : Emotion){
+        if self.userEmotion != empotion{
+            self.userEmotion = empotion
+            print("HI IM HERE \(empotion)")
+            print("userEmotion : \(userEmotion)")
+            print("emotion : \(empotion)")
+
+            guard let converastionID = conversationID else{return}
+            guard let userEmail = Session.shared.user?.email  else {
+                return
+            }
+            DatabaseManager.shared.setUserEmotionForConversation(
+                conversationID: converastionID,
+                for: userEmail,
+                emotion: empotion)
+                print("HI Updated Emption  \(empotion)")
+
+            }
+        
     }
     func pauseAR(){
         arView?.session.pause()
+    }
+    func observeOtherUserEmpotion(){
+        guard let conversationID = self.conversationID ,
+              let otherUserEmail = self.otherUser?.email else {
+            return
+        }
+        DatabaseManager.shared.observeUserEmotionInConversation(conversationID: conversationID, for: otherUserEmail.safeString()) { empotion in
+            DispatchQueue.main.async {
+                print("RECIVED EMPTION \(empotion)")
+                self.otherUserEmpotion = empotion
+            }
+        }
     }
 }
 

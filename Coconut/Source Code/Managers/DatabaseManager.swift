@@ -211,7 +211,7 @@ extension DatabaseManager {
     func getMessagesForConversation(
         conversationId id :String,
         compelition : @escaping ([MessageModel]) -> Void ) {
-        database.child(id).child("messages").observeSingleEvent(of: .value) { snapshot in
+        database.child(id).child("messages").queryLimited(toLast: 30).observeSingleEvent(of: .value) { snapshot in
             var messages : [MessageModel] = []
             guard let value = snapshot.value as? [String:Any] else {return}
             let decoder = JSONDecoder()
@@ -254,6 +254,28 @@ extension DatabaseManager {
             compelition(value)
         })
     }
+
+    func observeUserEmotionInConversation(
+        conversationID: String,
+        for user: String,
+        compelition : @escaping (Emotion) -> Void){
+        print("START OBSERVING \(user) , \(conversationID)")
+        database.child(conversationID).child("\(user.safeString())_emotion").observe(.value, with: { snapshot in
+            guard let value = snapshot.value as? String else {
+                print("ERROR")
+                compelition(.UNDEFIND)
+                return
+            }
+            compelition(Emotion(rawValue: value) ?? .UNDEFIND)
+        })
+    }
+    func setUserEmotionForConversation(
+        conversationID: String,
+        for user: String,
+        emotion : Emotion){
+        print(emotion.rawValue)
+        database.child(conversationID).child("\(user.safeString())_emotion").setValue(emotion.rawValue)
+    }
     
     /// observe messages adding to conversation
     /// - Parameters:
@@ -262,7 +284,7 @@ extension DatabaseManager {
     func observeMessagesForConversation(
         conversationId id :String,
         compelition : @escaping ([MessageModel]) -> Void ) {
-        database.child(id).child("messages").observe(.childAdded) { snapshot in
+        database.child(id).child("messages").queryLimited(toLast: 30).observe(.childAdded) { snapshot in
             guard let value = snapshot.value as? [String:Any] else {
                 compelition([])
                 return

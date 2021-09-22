@@ -46,6 +46,7 @@
 		C0C8086226D79C0900D249E4 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8086126D79C0900D249E4 /* MessageModel.swift */; };
 		C0CDA34C26EA0190006F81E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDA34B26EA0190006F81E2 /* AppDelegate.swift */; };
 		C0CDA34E26EA0D9F006F81E2 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDA34D26EA0D9F006F81E2 /* Session.swift */; };
+		C0CFB13526F3559400A741F2 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CFB13426F3559400A741F2 /* ARView.swift */; };
 		C0DDC55E26C0674700535A06 /* CoconutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55D26C0674700535A06 /* CoconutApp.swift */; };
 		C0DDC56026C0674700535A06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDC55F26C0674700535A06 /* HomeView.swift */; };
 		C0DDC56226C0674900535A06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DDC56126C0674900535A06 /* Assets.xcassets */; };
@@ -137,6 +138,7 @@
 		C0C8086126D79C0900D249E4 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		C0CDA34B26EA0190006F81E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0CDA34D26EA0D9F006F81E2 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		C0CFB13426F3559400A741F2 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		C0DDC55A26C0674700535A06 /* Coconut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coconut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DDC55D26C0674700535A06 /* CoconutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoconutApp.swift; sourceTree = "<group>"; };
 		C0DDC55F26C0674700535A06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				C0BC791A26DF7A5F00979BCB /* SendMessageView.swift */,
 				C0BC791C26DF7A8B00979BCB /* RecivedMessageView.swift */,
 				C0BC791E26DF7AAB00979BCB /* SentMessageView.swift */,
+				C0CFB13426F3559400A741F2 /* ARView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -868,6 +871,7 @@
 				C0C5058126D40451008081D9 /* SignupView.swift in Sources */,
 				C09F0D2A26C6C8D7006BC57B /* PersonImageNameLastMessageView.swift in Sources */,
 				C0C8086026D7862E00D249E4 /* DatabaseManager.swift in Sources */,
+				C0CFB13526F3559400A741F2 /* ARView.swift in Sources */,
 				C0A41F6926CFC88C008C273B /* TextField+extension.swift in Sources */,
 				C0BC791B26DF7A5F00979BCB /* SendMessageView.swift in Sources */,
 				C0BB61A526D91E67006F442D /* NameTextField.swift in Sources */,

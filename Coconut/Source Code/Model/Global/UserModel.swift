@@ -28,3 +28,38 @@ struct UserModel : Identifiable , Codable {
     }
 
 }
+
+enum Emotion : String {
+    case SMILING = "Smiling"
+    case ANGRY = "Angry"
+    case SAD = "Sad"
+    case WINK = "Winked"
+    case SHOCKED = "Shocked"
+    case TONGUE_OUT = "Showing tongue"
+    case KISS = "Kissing you"
+
+    case UNDEFIND = ""
+    
+    var emoji :String {
+        switch self {
+
+        case .SMILING:
+            return "😁"
+        case .ANGRY:
+            return "😠"
+        case .SAD:
+            return "☹️"
+        case .WINK:
+            return "😉"
+        case .SHOCKED:
+            return "😮"
+        case .KISS:
+            return "😚"
+        case .TONGUE_OUT:
+            return "👅"
+        case .UNDEFIND:
+            return ""
+
+        }
+    }
+}

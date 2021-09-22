@@ -8,7 +8,8 @@
 import Firebase
 
 // needed implementation of appdelegate for push notification
-final class AppDelegate: NSObject, UIApplicationDelegate {
+final class AppDelegate: NSObject, UIApplicationDelegate  {
+    
     let gcmMessageIDKey = "gcm.message_id"
     
     func application(_ application: UIApplication,

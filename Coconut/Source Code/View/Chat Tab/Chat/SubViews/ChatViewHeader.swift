@@ -15,14 +15,41 @@ struct ChatHeaderView : View {
     
     var body: some View {
         HStack(alignment : .top){
-            WebImage(url: URL(string: user?.picture ?? ""))
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80, alignment: .center)
+            if user?.picture != ""{
+                WebImage(url: URL(string: user?.picture ?? ""))
+                    .resizable()
+                    .scaledToFill()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 70,
+                           height: 70,
+                           alignment: .center)
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(12)
+                    .padding([.horizontal],16)
+                    .padding([.bottom],16)
+                    .padding([.top],8)
+                    .clipped()
+            }
+            else {
+                ZStack(alignment: .center){
+                    Image("cocoImage")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 35, height: 35, alignment: .center)
+                }
+                .frame(width: 70,
+                       height: 70,
+                       alignment: .center)
+                .background(Color.gray.opacity(0.2))
                 .cornerRadius(12)
-                .clipped()
-                .aspectRatio(contentMode: .fit)
-                .padding([.all],16)
+                .padding([.horizontal],16)
+                .padding([.bottom],16)
+                .padding([.top],8)
+                
+            }
+            
+
+
 //                .hiddenTabBar()
             VStack (alignment: .leading, spacing: 8, content: {
 
@@ -53,10 +80,29 @@ struct ChatHeaderView : View {
                     }
                 }
                 Spacer()
-            })
-            .padding(.top,32)
-            Spacer()
 
-        }.frame(height : 100)
+                    
+            })
+            .padding(.top,16)
+            Spacer()
+            ZStack(alignment:.center){
+                Text("AR")
+                    
+                    .font(.title3.weight(.semibold))
+                    .foregroundColor(Color.primery)
+                VStack{
+                    
+                }
+                .frame(width: 40, height: 2, alignment: .center)
+                .background(Color.primery)
+                .cornerRadius(1)
+
+
+            }
+            .frame(width: 50, height: 50, alignment: .center)
+            .padding(.horizontal,16)
+            .padding(.vertical , 16)
+            
+        }.frame(height : 86)
     }
 }

@@ -20,7 +20,7 @@ struct ChatView: View {
     @State var showAlert : Bool = false
     
     @State var userIsTyping : Bool = false
-    
+    @State var showIsSmiling  = false
     let userTypingSemaphore = DispatchSemaphore(value: 0)
     
     
@@ -42,8 +42,10 @@ struct ChatView: View {
                     user: $withUser,
                     viewModel: viewModel
                 )
+                
                 .background(Color.background.opacity(0.95))
                 .padding(0)
+                
             }
             .background(
                 BlurView()
@@ -52,65 +54,117 @@ struct ChatView: View {
                         edges: .top
                     )
             )
-            .zIndex(2)
-            Divider()
-                .zIndex(2)
-            
-            // MARK: Messages List :
-            ScrollViewReader { scrollViewReader in
-                List{
-                    ForEach(viewModel.messages) { message in
-                        
-                        if viewModel.isSentMessage(message: message) {
-                            SentMessageView(messsage: message.text)
-                                .id(message.id)
+            .zIndex(3)
+            Divider().zIndex(3)
+            ZStack(alignment : .top ) {
+                if viewModel.otherUserEmpotion != .UNDEFIND  {
+
+                VStack(alignment  : .leading , spacing : 0) {
+                    HStack (spacing : 0){
+                        HStack{}
+                            .frame(width : 2 ,height : 20)
+                            .background(Color.primery)
+                            .padding(.vertical , 4)
+                            .padding(.leading , 16)
+                            .cornerRadius(1)
                             
-                        } else{
-                            RecivedTextMessage(messsage: message.text)
-                                .id(message.id)
-                                .listRowBackground(Color.background)
-                        }
+                        Text("\(withUser?.name ?? "") is ")
+                            .padding(.leading , 8)
+                            .padding(.vertical , 16)
+                        Text(viewModel.otherUserEmpotion.rawValue)
+                            .foregroundColor(.primery)
+                        
+                        Spacer()
+                        Text(viewModel.otherUserEmpotion.emoji)
+                            .foregroundColor(.primery)
+                            .padding()
+//                        Image(systemName: "xmark")
+//                            .resizable()
+//                            .frame(width: 10, height: 10, alignment: .center)
+//                            .foregroundColor(.gray)
+//                            .padding(.trailing,16)
+                        
                     }
+
+
+                    .frame(maxWidth : .infinity)
+                    .background(Color.background.opacity(0.95))
+                    
+
+                    Divider()
+                    
+                    
+                    
                 }
-                .frame(
-                    maxWidth: .infinity,
-                    maxHeight: .infinity,
-                    alignment: .leading
-                )
-                .hasScrollEnabled(true)
-                .listRowBackground(Color.background)
-                .background(Color.background)
-                
-                
-                // MARK: .onChange Keyboard
-                .onChange(of: keyboardDidOpen, perform: { value in
-                    withAnimation {
-                        if viewModel.messages.count > 0 {
-                            scrollViewReader.scrollTo(
-                                viewModel
-                                    .messages[viewModel.messages.count - 1]
-                                    .id,
-                                anchor: .bottom
-                            )
+                .frame(maxWidth : .infinity)
+
+
+//
+//                .background(
+//                    BlurView()
+//                )
+                .background(
+                BlurView())
+
+                .transition(.move(edge: .top))
+                .animation(.linear(duration: 0.3))
+                    .zIndex(2)
+                }
+                // MARK: Messages List :
+                ScrollViewReader { scrollViewReader in
+                    List{
+                        ForEach(viewModel.messages) { message in
+                            
+                            if viewModel.isSentMessage(message: message) {
+                                SentMessageView(messsage: message.text)
+                                    .id(message.id)
+                                
+                            } else{
+                                RecivedTextMessage(messsage: message.text)
+                                    .id(message.id)
+                                    .listRowBackground(Color.background)
+                            }
                         }
                     }
-                })
-                
-                // MARK: .onChange Messages
-                .onChange(of: viewModel.messages.count, perform: { value in
-                    withAnimation{
-                        if viewModel.messages.count > 0 {
-                            scrollViewReader.scrollTo(
-                                viewModel
-                                    .messages[viewModel.messages.count - 1]
-                                    .id,
-                                anchor: .bottom
-                            )
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity,
+                        alignment: .leading
+                    )
+                    .hasScrollEnabled(true)
+                    .listRowBackground(Color.background)
+                    .background(Color.background)
+                    
+                    
+                    // MARK: .onChange Keyboard
+                    .onChange(of: keyboardDidOpen, perform: { value in
+                        withAnimation {
+                            if viewModel.messages.count > 0 {
+                                scrollViewReader.scrollTo(
+                                    viewModel
+                                        .messages[viewModel.messages.count - 1]
+                                        .id,
+                                    anchor: .bottom
+                                )
+                            }
                         }
-                    }
-                })
+                    })
+                    
+                    // MARK: .onChange Messages
+                    .onChange(of: viewModel.messages.count, perform: { value in
+                        withAnimation{
+                            if viewModel.messages.count > 0 {
+                                scrollViewReader.scrollTo(
+                                    viewModel
+                                        .messages[viewModel.messages.count - 1]
+                                        .id,
+                                    anchor: .bottom
+                                )
+                            }
+                        }
+                    })
+                }
             }
-            
             // MARK: Send Message
             SendMessageView(viewModel: viewModel,text: $messageText)
                 .background(Color.background, alignment: .bottom)
@@ -125,12 +179,17 @@ struct ChatView: View {
         // MARK: - .onAppear
         .onAppear(perform: {
             viewModel.setOtherUser(user : withUser)
+            viewModel.observeOtherUserEmpotion()
             UITextView.appearance().backgroundColor = .clear
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.showIsSmiling = true
+            }
         })
         
         // MARK: - onDisappear
         .onDisappear(perform: {
             viewModel.pauseAR()
+            viewModel.sendEmotion(.UNDEFIND)
             //            viewModel.removeObserver()
         })
         
@@ -247,17 +306,5 @@ struct ChatView: View {
 //        .zIndex(2)
 //    }
 //}
-import ARKit
-struct ARView: UIViewRepresentable {
-    let arDelegate:ChatViewModel
-    
-    func makeUIView(context: Context) -> some UIView {
-        let arView = ARSCNView(frame: .zero)
-        arDelegate.setARView(arView)
-        return arView
-    }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-        
-    }
-}
+
+

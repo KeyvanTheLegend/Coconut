@@ -180,16 +180,17 @@ struct ChatView: View {
         .onAppear(perform: {
             viewModel.setOtherUser(user : withUser)
             viewModel.observeOtherUserEmpotion()
+            viewModel.markAsReadAllMessages()
+
             UITextView.appearance().backgroundColor = .clear
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.showIsSmiling = true
-            }
         })
         
         // MARK: - onDisappear
         .onDisappear(perform: {
             viewModel.pauseAR()
             viewModel.sendEmotion(.UNDEFIND)
+            viewModel.markAsReadAllMessages()
+
             //            viewModel.removeObserver()
         })
         

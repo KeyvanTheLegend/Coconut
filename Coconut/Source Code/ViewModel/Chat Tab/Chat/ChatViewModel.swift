@@ -56,6 +56,13 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
         }
     }
     
+    
+    func markAsReadAllMessages(){
+        guard let conversationID = conversationID else{return}
+        guard let userEmail = Session.shared.user?.email else {return}
+        DatabaseManager.shared.clearNotReadMessagesInConversation(forUser: userEmail.safeString(),conversationID: conversationID)
+
+    }
     /// check if the message is recived or sent
     /// - Parameter message: message
     /// - Returns: true if message is sent
@@ -103,15 +110,16 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
             userToken: userToken
         )
         let message = MessageModel(
-            id:UUID(),
             text: messageText,
             senderEmail: userEmail,
-            sentDate: Date()
+            sentDate: Date(),
+            isRead: false
         )
         
         PushNotificationSender.shared.sendPushNotification(to: otherUser.userToken, title: user.name, body: message.text)
         if let conversationId = self.conversationID {
             DatabaseManager.shared.sendMessage(conversationId: conversationId,message: message)
+            DatabaseManager.shared.addNotReadMessage(with: otherUser.email.safeString(), to: conversationId)
         }else {
             // create conversation with message
             DatabaseManager.shared.createConversation(with: otherUser, and: user, message: message) { [weak self] conversationID in
@@ -119,7 +127,10 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
                     self?.conversationID = conversationID
                     self?.observeMessagesForConversation(with: conversationID)
                     self?.getMessagesForConversation(with: conversationID)
+
                 }
+                DatabaseManager.shared.addNotReadMessage(with: otherUser.email.safeString(), to: conversationID)
+
             }
         }
     }

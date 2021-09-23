@@ -19,6 +19,40 @@ class ChatTabViewModel : ObservableObject  {
         DatabaseManager.shared.observeUserConversations(with: userEmail.safeString()) { [weak self] conversations in
             DispatchQueue.main.async {
                 self?.conversations = conversations
+                _ = conversations.map{
+                    self?.fetchUserProfilePictureForConversation(email: $0.email)
+                    self?.fetchConversationUnreadMesssages(userEmail: userEmail, conversationID: $0.conversationId)
+                }
+            }
+        }
+    }
+    func fetchUserProfilePictureForConversation(email : String){
+        DatabaseManager.shared.getUserProfilePicture(userEmail: email.safeString()) { result  in
+            switch result {
+            case .failure(_):
+                // modifie error
+                break
+            case .success(let picture):
+                let index = self.conversations.firstIndex{ conversation in
+                    return conversation.email == email
+                }
+                guard let index = index else{return}
+                DispatchQueue.main.async {
+                    self.conversations[index].picture = picture
+                }
+            break
+            }
+        }
+    }
+    func fetchConversationUnreadMesssages(userEmail : String , conversationID : String){
+        DatabaseManager.shared.getConversationUnReadMessageCount(forUser: userEmail.safeString(),in: conversationID) { unreadMessage in
+            let index = self.conversations.firstIndex{ conversation in
+                return conversation.conversationId == conversationID
+            }
+            guard let index = index else{return}
+            DispatchQueue.main.async {
+                self.conversations[index].unreadMessageCount = unreadMessage
+                print("conv unread \(unreadMessage)")
             }
         }
     }
@@ -48,4 +82,5 @@ class ChatTabViewModel : ObservableObject  {
             sharedConversastion: conversation.conversationId
         )
     }
+    
 }

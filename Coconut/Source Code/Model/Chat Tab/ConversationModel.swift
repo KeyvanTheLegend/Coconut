@@ -14,6 +14,8 @@ struct ConversationModel : Identifiable , Codable {
     let email : String
     var picture : String = ""
     let conversationId : String
+    var unreadMessageCount : Int? = 0
+    var last_edited : Double? = 0.0
     
     var id: UUID {
         UUID()

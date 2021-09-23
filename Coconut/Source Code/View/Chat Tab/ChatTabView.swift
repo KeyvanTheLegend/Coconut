@@ -33,6 +33,7 @@ struct ChatTabView: View {
                                 ConversationContentView(
                                     profileImage: conversation.picture,
                                     name: conversation.name,
+                                    unreadMessageCount: conversation.unreadMessageCount ?? 0,
                                     isOnline: true
                                 )
                                 .frame(height: 88, alignment: .center)
@@ -100,6 +101,7 @@ struct ChatTabView: View {
         .onAppear(perform: {
             viewModel.getAllConversations()
             viewModel.observeBlockedEmails()
+            
         })
         .onChange(of: navigateToSearchView) { isNavigated in
             if isNavigated {
@@ -109,6 +111,21 @@ struct ChatTabView: View {
                 viewModel.getAllConversations()
             }
         }
+        .onChange(of: navigateToChatView) { isNavigated in
+            if isNavigated {
+                print("HI IM HERE BOROOOOO")
+                DatabaseManager.shared.removeConversationsObserver(for: session.user?.email ?? "")
+                
+                for conversation in viewModel.conversations {
+                    DatabaseManager.shared.removeUnreadObserver(forUser: session.user?.email ?? "", conversationID: conversation.conversationId)
+                }
+
+            }
+            else{
+                viewModel.getAllConversations()
+            }
+        }
+        
         
     }
     

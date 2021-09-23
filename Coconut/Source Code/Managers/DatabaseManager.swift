@@ -150,6 +150,15 @@ extension DatabaseManager {
         database.child("report").childByAutoId().setValue(email.safeString())
         compelition(true)
     }
+    func getUserProfilePicture(userEmail : String , compelition : @escaping (Result<String,RemoteDatabaseError>)->Void){
+        database.child(userEmail.safeString()).child("picture").observe(.value) { snapshot in
+            guard let picture = snapshot.value as? String else {
+                compelition(.failure(.NOT_VALID_SNAPSHOT))
+                return
+            }
+            compelition(.success(picture))
+        }
+    }
 }
 
 
@@ -175,6 +184,9 @@ extension DatabaseManager {
                 let conversationModel = try! decoder.decode(ConversationModel.self, from: jsonData)
                 conversationsModel.append(conversationModel)
             }
+            conversationsModel.sort { conversations1, conversations2 in
+                conversations1.last_edited ?? 0 >= conversations2.last_edited ?? 0
+            }
             compelition(conversationsModel)
         }
     }
@@ -196,9 +208,8 @@ extension DatabaseManager {
         let conversationForOtherPerson = ConversationModel(userToken : otherPerson.userToken ,name: otherPerson.name, email: otherPerson.email, picture: otherPerson.picture, conversationId: conversationId.key!)
         database.child(conversationId.key!).child("lastMessage").childByAutoId().setValue(json!)
         database.child(conversationId.key!).child("messages").childByAutoId().setValue(json!)
-        
-        database.child(me.email.safeString()).child("conversations").childByAutoId().setValue(conversationForOtherPerson.dictionary!)
-        database.child(otherPerson.email.safeString()).child("conversations").childByAutoId().setValue(conversationForMe.dictionary!) { err, _ in
+        database.child(me.email.safeString()).child("conversations").child(conversationId.key!).setValue(conversationForOtherPerson.dictionary!)
+        database.child(otherPerson.email.safeString()).child("conversations").child(conversationId.key!).setValue(conversationForMe.dictionary!) { err, _ in
             
             compelition(conversationId.key!)
         }
@@ -309,12 +320,49 @@ extension DatabaseManager {
     func sendMessage(
         conversationId:String
         ,message : MessageModel) {
-        let json = message.dictionary
-        database.child(conversationId).child("messages").childByAutoId().setValue(json!)
+        var tempMessage = message
+        let messageID = database.childByAutoId()
+        tempMessage.id = messageID.key!
+        let json = tempMessage.dictionary
+        database.child(conversationId).child("messages").child(messageID.key!).setValue(json!)
+
     }
     func removeConversationsObserver(for email : String ){
 
         database.child(email.safeString()).child("conversations").removeAllObservers()
+    }
+    func removeUnreadObserver(forUser email : String,conversationID : String){
+        database.child(email.safeString()).child("conversations").child(conversationID).child("unread").removeAllObservers()
+    }
+    
+    
+    
+    func markAsRead(message messageID : String , in conversationID : String){
+        database.child(conversationID).child("messages").child(messageID).child("isRead").setValue(true)
+    }
+    func addNotReadMessage(with userEmail : String,to conversationID : String){
+        print("ConversationID \(conversationID)    email : \(userEmail)")
+        database.child(userEmail.safeString()).child("conversations").child(conversationID).child("unread").childByAutoId().setValue("")
+        database.child(userEmail.safeString()).child("conversations").child(conversationID).child("last_edited").setValue(Date().timeIntervalSince1970)
+    }
+    func getConversationUnReadMessageCount(forUser email : String,in conversationID : String ,compelition : @escaping (Int) -> Void ){
+        print("USER IS \(email) , conversationID : \(conversationID)")
+        database.child(email.safeString()).child("conversations").child(conversationID).child("unread").observe(.value) { snapshot in
+            print(snapshot)
+            guard let unreadMessages = snapshot.value as?  [String : Any] else {
+                print("ERROR 0")
+                compelition(0)
+                return
+                
+            }
+            compelition(unreadMessages.count)
+            print(unreadMessages.count)
+        }
+    }
+    func clearNotReadMessagesInConversation(forUser email : String,conversationID : String){
+        print(conversationID)
+        print(email)
+        database.child(email.safeString()).child("conversations").child(conversationID).child("unread").setValue([:])
     }
 }
 // MARK: - Enums

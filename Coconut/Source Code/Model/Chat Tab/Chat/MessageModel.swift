@@ -8,8 +8,23 @@
 import Foundation
 
 struct MessageModel : Hashable,Identifiable , Codable {
-    var id: UUID
+    var id: String = ""
+    var internalId : UUID = UUID()
     let text : String
     let senderEmail : String
     let sentDate : Date
+    var isRead = true
+//    
+//    
+//    enum CodingKeys : String, CodingKey {
+//        case id
+//        case text
+//        case senderEmail
+//        case sentDate
+//        case isRead 
+//    }
+}
+enum MessageType : Int , Codable {
+    case text = 1
+    case photo = 2
 }

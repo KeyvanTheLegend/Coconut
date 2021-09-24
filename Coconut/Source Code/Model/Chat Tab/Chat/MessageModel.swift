@@ -14,6 +14,7 @@ struct MessageModel : Hashable,Identifiable , Codable {
     let senderEmail : String
     let sentDate : Date
     var isRead = true
+    var isPhoto : Bool? = false
 //    
 //    
 //    enum CodingKeys : String, CodingKey {

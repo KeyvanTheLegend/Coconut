@@ -116,11 +116,11 @@ struct ChatView: View {
                         ForEach(viewModel.messages) { message in
                             
                             if viewModel.isSentMessage(message: message) {
-                                SentMessageView(isRead: message.isRead, messsage: message.text)
+                                SentMessageView(isRead: message.isRead, messsage: message)
                                     .id(message.id)
                                 
                             } else{
-                                RecivedTextMessage(messsage: message.text)
+                                RecivedTextMessage(messsage: message)
                                     .id(message.id)
                                     .listRowBackground(Color.background)
                             }

@@ -72,6 +72,17 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
             setConverationID(convesationID: conversationIDIfExsit(with: otherUser))
         }
     }
+    func sendPicture(picture : UIImage , to conversationID : String){
+        StorageManager.shared.uploadProfilePicture(with: picture, fileName: "\(conversationID)_\(Date().timeIntervalSince1970)") { result in
+            switch result {
+            case .failure(_):
+            break
+            case .success(let pictureUrl):
+                self.sendMessage(messageText: pictureUrl, to: self.otherUser,type: .photo)
+                break
+            }
+        }
+    }
     
     
     func markAsReadAllMessages(){
@@ -108,7 +119,7 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
     /// - Parameters:
     ///   - message: message text
     ///   - otherUser: user to send message to
-    func sendMessage(messageText:String,to otherUser : UserModel?){
+    func sendMessage(messageText:String,to otherUser : UserModel? , type : MessageType){
 
         guard
             let userEmail = UserDefaults.standard.string(forKey: "Email"),
@@ -130,9 +141,9 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
             text: messageText,
             senderEmail: userEmail,
             sentDate: Date(),
-            isRead: false
+            isRead: false,
+            isPhoto: (type == .photo)
         )
-        
         PushNotificationSender.shared.sendPushNotification(to: otherUser.userToken, title: user.name, body: message.text)
         if let conversationId = self.conversationID {
             DatabaseManager.shared.sendMessage(conversationId: conversationId,message: message)

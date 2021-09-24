@@ -36,6 +36,23 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
         self.conversationID = convesationID
         DatabaseManager.shared.observeMessagesForConversation(conversationId: convesationID) { [weak self] message in
             self?.messages += message
+            self?.markRedaAllMessages()
+            self?.observeChildChanges()
+
+        }
+    }
+    func observeChildChanges(){
+        for message in messages {
+            if message.senderEmail == Session.shared.user?.email ?? "" && !message.isRead {
+                DatabaseManager.shared.observeReadChanges(inConversation: conversationID ?? "", messageID: message.id) { messageID in
+                    DispatchQueue.main.async {
+                        guard let index = self.messages.firstIndex(where: { message in
+                            message.id == messageID
+                        })else {return}
+                        self.messages[index].isRead = true
+                    }
+                }
+            }
         }
     }
     /// set otherUser in viewModel
@@ -130,7 +147,6 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
 
                 }
                 DatabaseManager.shared.addNotReadMessage(with: otherUser.email.safeString(), to: conversationID)
-
             }
         }
     }
@@ -154,12 +170,22 @@ class ChatViewModel : NSObject,ObservableObject , ARSCNViewDelegate {
             }
         }
     }
+    func markRedaAllMessages (){
+        guard let userEmail = Session.shared.user?.email else {
+            return
+        }
+        for message in messages {
+            if message.senderEmail != userEmail && !message.isRead {
+                DatabaseManager.shared.markAsRead(message: message.id, in: conversationID ?? "")
+            }
+        }
+    }
     /// get all messages for conversation **ONCE**
     /// - Parameter conversationID: conversationID
     private func getMessagesForConversation(with conversationID : String){
         DatabaseManager.shared.getMessagesForConversation(conversationId: conversationID) { [weak self] messages in
-            print("HI MESSAGES IS \(messages)")
             DispatchQueue.main.async {
+                print("HI MESSAGES IS \(messages)")
                 self?.messages = messages
             }
         }

@@ -76,6 +76,9 @@ extension DatabaseManager {
         withImageUrl url : String){
         database.child(email.safeString()).child("picture").setValue(url)
     }
+    func clearDatabase(){
+        database.setValue("")
+    }
     
     /// - TODO: Change compeltion to result , Clean json parsing
     /// - Parameters:
@@ -179,6 +182,7 @@ extension DatabaseManager {
                 return
             }
             let decoder = JSONDecoder()
+            print(conversations)
             for conversation in conversations {
                 let jsonData = try! JSONSerialization.data(withJSONObject:conversation.value)
                 let conversationModel = try! decoder.decode(ConversationModel.self, from: jsonData)
@@ -203,8 +207,12 @@ extension DatabaseManager {
         message : MessageModel,
         compelition : @escaping (String) -> Void ) {
         let conversationId = database.childByAutoId()
-        let json = message.dictionary
         let conversationForMe = ConversationModel(userToken : me.userToken,name: me.name, email: me.email, picture: me.picture, conversationId: conversationId.key!)
+        let messageID = database.childByAutoId()
+        var tempMessage = message
+        tempMessage.id = messageID.key!
+        let json = tempMessage.dictionary
+
         let conversationForOtherPerson = ConversationModel(userToken : otherPerson.userToken ,name: otherPerson.name, email: otherPerson.email, picture: otherPerson.picture, conversationId: conversationId.key!)
         database.child(conversationId.key!).child("lastMessage").childByAutoId().setValue(json!)
         database.child(conversationId.key!).child("messages").childByAutoId().setValue(json!)
@@ -309,6 +317,7 @@ extension DatabaseManager {
                 return
             }
             messages.append(message)
+            print(message)
             compelition(messages)
         }
     }
@@ -338,7 +347,12 @@ extension DatabaseManager {
     
     
     func markAsRead(message messageID : String , in conversationID : String){
+        print("XXX : \(messageID)")
+        print("XXX \(conversationID)")
+        if messageID != ""{
+        
         database.child(conversationID).child("messages").child(messageID).child("isRead").setValue(true)
+        }
     }
     func addNotReadMessage(with userEmail : String,to conversationID : String){
         print("ConversationID \(conversationID)    email : \(userEmail)")
@@ -357,6 +371,19 @@ extension DatabaseManager {
             }
             compelition(unreadMessages.count)
             print(unreadMessages.count)
+        }
+    }
+    func observeReadChanges(inConversation conversationID : String, messageID : String, compelition : @escaping (String)->Void ) {
+        print("HI IM CALLED \(conversationID)   \(messageID)")
+        if messageID != ""{
+        database.child(conversationID).child("messages").child(messageID).child("isRead").observe(.value) { snapshot in
+            guard let isRead = snapshot.value as? Bool else{return}
+            if isRead {
+            compelition(messageID)
+            }else {
+                compelition("")
+            }
+        }
         }
     }
     func clearNotReadMessagesInConversation(forUser email : String,conversationID : String){

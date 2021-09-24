@@ -116,7 +116,7 @@ struct ChatView: View {
                         ForEach(viewModel.messages) { message in
                             
                             if viewModel.isSentMessage(message: message) {
-                                SentMessageView(messsage: message.text)
+                                SentMessageView(isRead: message.isRead, messsage: message.text)
                                     .id(message.id)
                                 
                             } else{
@@ -181,6 +181,7 @@ struct ChatView: View {
             viewModel.setOtherUser(user : withUser)
             viewModel.observeOtherUserEmpotion()
             viewModel.markAsReadAllMessages()
+            
 
             UITextView.appearance().backgroundColor = .clear
         })
@@ -190,6 +191,7 @@ struct ChatView: View {
             viewModel.pauseAR()
             viewModel.sendEmotion(.UNDEFIND)
             viewModel.markAsReadAllMessages()
+//            viewModel.observeChildChanges()
 
             //            viewModel.removeObserver()
         })

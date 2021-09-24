@@ -78,7 +78,7 @@ class ChatTabViewModel : ObservableObject  {
             name: conversation.name,
             email: conversation.email,
             picture: conversation.picture,
-            userToken: conversation.userToken,
+            userToken: conversation.userToken ?? "",
             sharedConversastion: conversation.conversationId
         )
     }

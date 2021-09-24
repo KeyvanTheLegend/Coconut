@@ -8,17 +8,36 @@
 import SwiftUI
 
 struct SentMessageView : View {
+    var isRead : Bool 
     var messsage : String
     var body: some View {
-        HStack(alignment :.center) {
-            Spacer()
+        ZStack(alignment :.trailing) {
+            HStack{
+                Spacer()
             Text(messsage)
                 .foregroundColor(.black)
                 .padding(8)
                 .padding([.horizontal],12)
+                .padding([.trailing],14)
                 .font(.subheadline)
                 .background(Color.white)
                 .cornerRadius(30, antialiased: false)
+            }
+            HStack(spacing: 0){
+                if isRead{
+                Image(systemName: "checkmark")
+                    .resizable()
+                    .frame(width: 10, height: 10, alignment: .center)
+                    .foregroundColor(.primery)
+                }
+            Image(systemName: "checkmark")
+                .resizable()
+                .frame(width: 10, height: 10, alignment: .center)
+                .foregroundColor(.primery)
+                .padding(.trailing,10)
+
+            }
+
         }
         .padding(8)
         .padding(.top , 0)
@@ -29,3 +48,4 @@ struct SentMessageView : View {
         .background(Color.background)
     }
 }
+

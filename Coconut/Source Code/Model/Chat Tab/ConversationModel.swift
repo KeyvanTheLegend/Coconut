@@ -9,7 +9,7 @@ import Foundation
 
 struct ConversationModel : Identifiable , Codable {
     
-    var userToken : String  = ""
+    var userToken : String?  = ""
     let name : String
     let email : String
     var picture : String = ""
